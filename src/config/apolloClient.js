@@ -1,8 +1,8 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-const { GRAPHQL_SERVER } = process.env;
+const { REACT_APP_GRAPHQL_SERVER } = process.env;
 
 export const apolloClient = new ApolloClient({
-  uri: GRAPHQL_SERVER,
+  uri: REACT_APP_GRAPHQL_SERVER,
   cache: new InMemoryCache(),
   onError: ({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
