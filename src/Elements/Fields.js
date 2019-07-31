@@ -11,7 +11,7 @@ export const Submit = styled.button.attrs({ type: "submit" })`
   font-size: 14px;
   letter-spacing: 0.05em;
   margin-left: 2em;
-  padding: 0.5em 0.25em;
+  padding: 10px 5px;
   text-transform: uppercase;
 `;
 
@@ -19,16 +19,16 @@ export const Text = styled.input.attrs({ type: "text" })``;
 
 export const Url = styled.input.attrs({ type: "url" })`
   background-image: url('${UrlIcon}');
-  background-position: 0 0.5em;
+  background-position: 0 10px;
   background-repeat: no-repeat;
   background-size: 1em 1em;
   border: 0;
   box-shadow: inset 0 -1px 0 0 ${({ theme }) => theme.white};
   color: #201c29;
-  font-size: 1em;
+  font-size: 20px;
   line-height: normal;
   outline: 0;
-  padding: 0.5em 0.25em;
+  padding: 10px 5px;
   text-indent: 1.25em;
   transition: box-shadow 125ms linear;
 

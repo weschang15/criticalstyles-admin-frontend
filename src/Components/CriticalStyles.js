@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
-import { Textarea, PrimaryButton } from "../Elements";
+import { Textarea, PrimaryButton, LinkButton } from "../Elements";
 
 const CriticalStylesWrapper = styled.div``;
+const Actions = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+
+  button:first-child {
+    margin-right: 0.25em;
+  }
+
+  button:last-child {
+    margin-left: 0.25em;
+  }
+`;
 
 function CriticalStyles({ data }) {
   const [, setState] = useState(false);
@@ -11,9 +24,12 @@ function CriticalStyles({ data }) {
   return (
     <CriticalStylesWrapper>
       <Textarea value={data} readOnly />
-      <CopyToClipboard text={data} onCopy={() => setState(true)}>
-        <PrimaryButton>Copy to Clipboard</PrimaryButton>
-      </CopyToClipboard>
+      <Actions>
+        <LinkButton>Format CSS</LinkButton>
+        <CopyToClipboard text={data} onCopy={() => setState(true)}>
+          <PrimaryButton>Copy to Clipboard</PrimaryButton>
+        </CopyToClipboard>
+      </Actions>
     </CriticalStylesWrapper>
   );
 }

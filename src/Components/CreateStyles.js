@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { animated, useSpring, useTransition } from "react-spring";
+import useMeasure from "use-measure";
 import { Mutation } from "react-apollo";
 
 import CreateStylesForm from "./CreateStylesForm";
@@ -11,6 +12,9 @@ const AnimatedCard = animated(PrimaryCard);
 const AnimatedTextarea = animated(Textarea);
 
 function CreateStyles() {
+  const card = useRef(null);
+  const cardMeasurements = useMeasure(card);
+
   const [data, setData] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -22,12 +26,12 @@ function CreateStyles() {
   // spring configuration
   const { width, height, ...rest } = useSpring({
     from: {
-      width: "22em",
-      height: "4.8em"
+      width: 480,
+      height: 96
     },
     to: {
-      width: open ? "48em" : "22em",
-      height: open ? "48em" : "4.8em"
+      width: open ? 960 : 480,
+      height: open ? 960 : 96
     }
   });
 
@@ -40,7 +44,7 @@ function CreateStyles() {
   return (
     <Mutation mutation={CREATE_CRITICAL_STYLE}>
       {(func, { loading }) => (
-        <AnimatedCard style={{ width, height, ...rest }}>
+        <AnimatedCard style={{ height, width, ...rest }} ref={card}>
           {loading ? (
             <Spinner />
           ) : (

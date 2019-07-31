@@ -10,13 +10,16 @@ const bounce = keyframes`
 `;
 
 const StyledSpinner = styled.div`
+  display: flex;
   margin: 0 auto;
   text-align: center;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
   > div {
     animation: ${bounce} 1.4s infinite ease-in-out both;
     background-color: ${({ bgColor, theme }) => bgColor || theme.white};
     border-radius: 100%;
-    display: inline-block;
     height: 16px;
     width: 16px;
     vertical-align: middle;
