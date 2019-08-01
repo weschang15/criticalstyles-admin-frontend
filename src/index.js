@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrate, render } from "react-dom";
 import { ApolloProvider } from "react-apollo";
 import { apolloClient } from "./config/apolloClient";
 import * as serviceWorker from "./serviceWorker";
@@ -8,12 +8,22 @@ import App from "./App";
 import "normalize.css";
 import "./index.css";
 
-ReactDOM.render(
-  <ApolloProvider client={apolloClient}>
-    <App />
-  </ApolloProvider>,
-  document.getElementById("root")
-);
+const root = document.getElementById("root");
+if (root.hasChildNodes()) {
+  hydrate(
+    <ApolloProvider client={apolloClient}>
+      <App />
+    </ApolloProvider>,
+    root
+  );
+} else {
+  render(
+    <ApolloProvider client={apolloClient}>
+      <App />
+    </ApolloProvider>,
+    root
+  );
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
