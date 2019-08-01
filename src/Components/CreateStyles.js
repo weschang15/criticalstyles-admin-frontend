@@ -1,41 +1,40 @@
 import React, { useState, useRef } from "react";
-import { animated, useSpring, useTransition } from "react-spring";
-import useMeasure from "use-measure";
+import { animated, useSpring, useTransition, config } from "react-spring";
 import { Mutation } from "react-apollo";
+import usePrevious from "use-previous";
 
 import CreateStylesForm from "./CreateStylesForm";
 import { CREATE_CRITICAL_STYLE } from "../Mutations";
-import { PrimaryCard, Spinner, Textarea } from "../Elements";
+import { PrimaryCard, Spinner } from "../Elements";
 import CriticalStyles from "./CriticalStyles";
 
 const AnimatedCard = animated(PrimaryCard);
-const AnimatedTextarea = animated(Textarea);
 
 function CreateStyles() {
   const card = useRef(null);
-  const cardMeasurements = useMeasure(card);
+  const [css, setCSS] = useState("");
+  const prevCSS = usePrevious(css);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [data, setData] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  const set = css => {
-    setData(css);
-    setOpen(open => !open);
+  const handleOutput = output => {
+    setCSS(output);
+    setIsOpen(isOpen => !isOpen);
   };
 
   // spring configuration
   const { width, height, ...rest } = useSpring({
+    config: config.stiff,
     from: {
       width: 480,
       height: 96
     },
     to: {
-      width: open ? 960 : 480,
-      height: open ? 960 : 96
+      width: isOpen ? 960 : 480,
+      height: isOpen ? 960 : 96
     }
   });
 
-  const transitions = useTransition(Boolean(data), null, {
+  const transitions = useTransition(isOpen, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0, display: "none" }
@@ -51,14 +50,18 @@ function CreateStyles() {
             transitions.map(({ item, key, props }) =>
               item ? (
                 <animated.div style={props} key={key}>
-                  <CriticalStyles data={data} />
+                  <CriticalStyles
+                    data={css}
+                    prevData={prevCSS}
+                    updateData={setCSS}
+                  />
                 </animated.div>
               ) : (
                 <animated.div style={props} key={key}>
                   <CreateStylesForm
                     key={key}
                     onSubmit={func}
-                    handleUpdate={set}
+                    onOutput={handleOutput}
                   />
                 </animated.div>
               )

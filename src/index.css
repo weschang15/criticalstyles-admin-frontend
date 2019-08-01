@@ -10,11 +10,14 @@ html {
 }
 
 body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: rgba(242, 239, 223, 1);
+  color: #17141d;
+  font-family: -apple-system, BlinkMacSystemFont, "Open Sans", "Helvetica Neue",
+    sans-serif;
   line-height: 1.5;
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #17141d;
 }
 
 h1,

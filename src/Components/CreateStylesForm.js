@@ -25,7 +25,7 @@ const StyledSubmit = styled(Fields).attrs({
   flex: 1;
 `;
 
-function CreateStylesForm({ onSubmit, handleUpdate }) {
+function CreateStylesForm({ onSubmit, onOutput }) {
   const [url, setUrl] = useState("");
 
   return (
@@ -46,7 +46,7 @@ function CreateStylesForm({ onSubmit, handleUpdate }) {
         } = data;
 
         if (!errors) {
-          handleUpdate(stylesheet.styles);
+          onOutput(stylesheet.styles);
         }
       }}
     >
@@ -62,12 +62,12 @@ function CreateStylesForm({ onSubmit, handleUpdate }) {
 
 CreateStylesForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  handleUpdate: PropTypes.func.isRequired
+  onOutput: PropTypes.func.isRequired
 };
 
 CreateStylesForm.defaultProps = {
   onSubmit: () => null,
-  handleUpdate: () => null
+  onOutput: () => null
 };
 
 export default CreateStylesForm;

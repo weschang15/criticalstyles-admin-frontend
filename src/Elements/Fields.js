@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import UrlIcon from "../images/url-icon.svg";
 import ErrorIcon from "../images/error-icon.svg";
-import { darken, lighten, transparentize } from "polished";
+import { transparentize } from "polished";
 
 export const Submit = styled.button.attrs({ type: "submit" })`
   background-color: transparent;
