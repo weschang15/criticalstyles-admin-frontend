@@ -26,11 +26,11 @@ function CreateStyles() {
     config: config.stiff,
     from: {
       width: 480,
-      height: 96
+      height: 182
     },
     to: {
       width: isOpen ? 960 : 480,
-      height: isOpen ? 960 : 96
+      height: isOpen ? 960 : 182
     }
   });
 

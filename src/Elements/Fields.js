@@ -36,20 +36,14 @@ export const Url = styled.input.attrs({ type: "url" })`
     box-shadow: inset 0 -2px 0 0 ${({ theme }) => theme.teal};
   }
 
-  &:valid + ${Submit}{
-    display: inline-block;
-  }
-
   &:invalid {
     background-image: url('${ErrorIcon}');
     box-shadow: inset 0 -2px 0 0 ${({ theme }) => theme.salmon};
-    + ${Submit} {
-      display: none;
-    }
   }
 
   &::placeholder {
     color: ${({ theme }) => theme.gray};
+    opacity: 0.5;
   }
 `;
 
