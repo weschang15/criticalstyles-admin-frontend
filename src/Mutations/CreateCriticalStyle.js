@@ -5,6 +5,8 @@ export default gql`
     createCriticalStyle(input: $input) {
       stylesheet {
         styles
+        size
+        viewport
       }
       errors {
         path

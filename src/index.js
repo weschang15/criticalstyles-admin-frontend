@@ -1,7 +1,8 @@
 import React from "react";
 import { hydrate, render } from "react-dom";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "@apollo/react-hooks";
 import { apolloClient } from "./config/apolloClient";
+import { UserProvider } from "./Components/UserContext";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 
@@ -12,14 +13,18 @@ const root = document.getElementById("root");
 if (root.hasChildNodes()) {
   hydrate(
     <ApolloProvider client={apolloClient}>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </ApolloProvider>,
     root
   );
 } else {
   render(
     <ApolloProvider client={apolloClient}>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </ApolloProvider>,
     root
   );
