@@ -67,15 +67,17 @@ img {
   height: auto;
 }
 
-@media screen and (min-width: 30em) {
-  html {
-    font-size: calc(16px + (20 - 16) * ((100vw - 480px) / (1024 - 480)));
-  }
+p {
+  margin: 0 0 1em;
 }
 
-@media screen and (min-width: 64em) {
+a {
+  color: inherit;
+}
+
+@media only screen and (min-width: 30em) {
   html {
-    font-size: 20px;
+    font-size: 112.5%;
   }
 
   h1,
@@ -83,5 +85,26 @@ img {
   h3,
   h4 {
     line-height: 1.2;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  html {
+    font-size: 125%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.1;
+  }
+
+  h6,
+  input,
+  textarea,
+  select,
+  option {
+    font-size: 0.75em;
   }
 }
