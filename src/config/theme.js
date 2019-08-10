@@ -5,5 +5,5 @@ export default {
   gray: "rgba(209, 209, 209, 1)",
   teal: "rgba(81, 163, 163, 1)",
   black: "rgba(32, 28, 41, 1)",
-  white: "rgba(242, 239, 223, 1)"
+  white: "rgba(246, 248, 255, 1)"
 };
