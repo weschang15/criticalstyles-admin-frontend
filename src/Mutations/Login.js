@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import gql from "graphql-tag";
 
 export default gql`
   mutation Login($input: LoginInput!) {
@@ -11,10 +11,6 @@ export default gql`
       user {
         firstName
         lastName
-        sites {
-          name
-          url
-        }
         email
       }
     }
