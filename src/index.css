@@ -12,7 +12,7 @@ html {
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  background-color: rgba(242, 239, 223, 1);
+  background-color: #f6f8ff;
   color: #17141d;
   font-family: -apple-system, BlinkMacSystemFont, "Open Sans", "Helvetica Neue",
     sans-serif;
