@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Icons } from "../../Elements";
 import { transparentize } from "polished";
 
 const Nav = styled.nav`
-  background-color: ${({ theme }) => theme.purple};
-  border-radius: 52px;
+  background-color: ${({ theme }) => theme.black};
+  border-radius: 26px;
   box-shadow: 0 6px 26px -2px ${({ theme }) => transparentize(0.3, theme.black)};
   display: inline-block;
+  grid-area: sidebar;
   overflow: hidden;
+  z-index: 5;
 `;
 
 const List = styled.ul`
@@ -20,14 +22,20 @@ const List = styled.ul`
 
 const Item = styled.li`
   display: block;
-
   a {
     display: block;
-    padding: 16px;
+    padding: 16px 22px;
+    &.active {
+      background-color: ${({ theme }) => transparentize(0.85, theme.teal)};
+      border-left: 2px solid ${({ theme }) => theme.teal};
+      svg {
+        fill: ${({ theme }) => theme.white};
+      }
+    }
   }
 
   svg {
-    fill: ${({ theme }) => theme.black};
+    fill: ${({ theme }) => transparentize(0.8, theme.white)};
   }
 
   &:last-of-type {
@@ -42,19 +50,24 @@ function FloatingNavBar() {
     <Nav>
       <List>
         <Item>
-          <Link to="/dashboard/sites">
+          <NavLink to="/dashboard" exact>
+            <Icons width="20px" />
+          </NavLink>
+        </Item>
+        <Item>
+          <NavLink to="/dashboard/sites" exact>
             <Icons icon="window" width="20px" />
-          </Link>
+          </NavLink>
         </Item>
         <Item>
-          <Link to="/dashboard/trash">
+          <NavLink to="/dashboard/trash" exact>
             <Icons icon="trash" width="20px" />
-          </Link>
+          </NavLink>
         </Item>
         <Item>
-          <Link to="/dashboard/logout">
+          <NavLink to="/dashboard/logout" exact>
             <Icons icon="power" width="20px" />
-          </Link>
+          </NavLink>
         </Item>
       </List>
     </Nav>
