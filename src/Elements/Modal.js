@@ -1,59 +1,85 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { animated, useTransition } from "react-spring";
 import Portal from "./Portal";
 
-function Modal(props = {}) {
+const Wrapper = styled.div`
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: 0;
+  padding: 1em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+`;
+
+const ModalCard = styled.div`
+  background-color: #fff;
+  max-width: 480px;
+  position: relative;
+  border-radius: 6px;
+  padding: 1em;
+  margin-top: 15%;
+`;
+
+const AnimatedCard = animated(ModalCard);
+
+function Modal({ animation, close, children, forwardedRef }) {
+  return (
+    <AnimatedCard style={animation} ref={forwardedRef}>
+      {children}
+    </AnimatedCard>
+  );
+}
+
+function ModalWrapper({ children, on, toggle }) {
   const card = useRef(null);
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.removeAttribute("style");
-    };
-  }, []);
-
   const close = e => {
+    // Allow user to click outside of modal to close it
     if (e.target === card.current.parentNode) {
       return toggle();
     }
   };
 
-  const { children, toggle } = props;
+  const transitions = useTransition(on, null, {
+    from: { opacity: 0, transform: "translate3d(0, -40px, 0)" },
+    enter: { opacity: 1, transform: "translate3d(0, 0, 0)" },
+    leave: { opacity: 0, transform: "translate3d(0, -40px, 0)" }
+  });
 
   return (
-    <Portal>
-      <ModalWrapper onClick={close}>
-        <ModalCard ref={card}>{children}</ModalCard>
-      </ModalWrapper>
-    </Portal>
+    on && (
+      <Portal>
+        <Wrapper onClick={close}>
+          {transitions.map(
+            ({ item, key, props: animation }) =>
+              item && (
+                <Modal
+                  key={key}
+                  animation={animation}
+                  close={toggle}
+                  forwardedRef={card}
+                >
+                  {children}
+                </Modal>
+              )
+          )}
+        </Wrapper>
+      </Portal>
+    )
   );
 }
 
-const ModalWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.25);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1em;
-  z-index: 9;
-`;
-
-const ModalCard = styled.div`
-  flex: 1;
-  max-width: 480px;
-  position: relative;
-  border-radius: 3px;
-  padding: 1em;
-`;
-
-Modal.propTypes = {
-  toggle: PropTypes.func.isRequired
+ModalWrapper.propTypes = {
+  toggle: PropTypes.func.isRequired,
+  on: PropTypes.bool.isRequired
 };
 
-export default Modal;
+export default ModalWrapper;
