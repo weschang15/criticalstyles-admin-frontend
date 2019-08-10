@@ -10,7 +10,7 @@ const Nav = styled.nav`
     path.includes("/dashboard") ? theme.white : theme.purple};
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding: 16px 1em;
 
   svg {
     fill: ${({ path, theme }) =>
