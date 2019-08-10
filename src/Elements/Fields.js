@@ -14,8 +14,7 @@ const Generic = styled.input`
   font-size: 16px;
   line-height: normal;
   outline: 0;
-  padding: 0.75em;
-  text-indent: 1.5em;
+  padding: 0.75em 0.75em 0.75em 2.25em;
   transition: box-shadow 125ms linear;
 
   &:focus, &:active, &:valid {
