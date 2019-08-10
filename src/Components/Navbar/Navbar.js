@@ -12,12 +12,11 @@ const Nav = styled.nav`
   justify-content: space-between;
   padding: 16px;
 
-  ${Icons} {
+  svg {
     fill: ${({ path, theme }) =>
-    path.includes("/dashboard") ? theme.purple : theme.white};
+      path.includes("/dashboard") ? theme.purple : theme.white};
   }
 `;
-
 
 const List = styled.ul`
   font-size: 14px;
