@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import UrlIcon from "../images/url-icon.svg";
 import ErrorIcon from "../images/error-icon.svg";
+import EmailIcon from "../images/email-icon.svg";
+import LockIcon from "../images/lock-icon.svg";
+import InformationIcon from "../images/information-icon.svg";
 import { transparentize } from "polished";
 
 const Generic = styled.input`
   border: 0;
-  box-shadow: inset 0 -1px 0 0 ${({ theme }) => theme.white};
+  box-shadow: inset 0 0 0 2px ${({ theme }) => theme.gray};
   background-position: 0.75em center;
   background-repeat: no-repeat;
   background-size: 1em;
@@ -18,17 +21,16 @@ const Generic = styled.input`
   transition: box-shadow 125ms linear;
 
   &:focus, &:active, &:valid {
-    box-shadow: inset 0 -2px 0 0 ${({ theme }) => theme.teal};
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.teal};
   }
 
-  &:invalid {
+  &:invalid:focus {
     background-image: url('${ErrorIcon}');
-    box-shadow: inset 0 -2px 0 0 ${({ theme }) => theme.salmon};
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.salmon};
   }
 
   &::placeholder {
     color: ${({ theme }) => theme.gray};
-    opacity: 0.5;
   }
 `;
 
@@ -43,18 +45,20 @@ export const Submit = styled.button.attrs({ type: "submit" })`
   text-transform: uppercase;
 `;
 
-export const Text = styled(Generic).attrs({ type: "text" })``;
+export const Text = styled(Generic).attrs({ type: "text" })`
+  background-image: url('${InformationIcon}');
+`;
 
 export const Url = styled(Generic).attrs({ type: "url" })`
   background-image: url('${UrlIcon}');  
 `;
 
 export const Email = styled(Generic).attrs({ type: "email" })`
-  background-image: url('${UrlIcon}');  
+  background-image: url('${EmailIcon}');  
 `;
 
 export const Password = styled(Generic).attrs({ type: "password" })`
-  background-image: url('${UrlIcon}');  
+  background-image: url('${LockIcon}');  
 `;
 
 export const Textarea = styled.textarea.attrs({
