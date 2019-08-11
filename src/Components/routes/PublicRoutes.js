@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../UserContext";
-import { Home, Login } from "../../Pages";
+import { Home, Join, Logout } from "../../Pages";
 import Navbar from "../Navbar/Navbar";
 import ProtectedRoute from "../../Elements/ProtectedRoute";
 import AdminRoutes from "./AdminRoutes";
@@ -23,7 +23,8 @@ function PublicRoutes() {
           component={AdminRoutes}
           isAuthenticated={authenticated}
         />
-        <Route path="/join" component={Login} />
+        <Route path="/join" component={Join} />
+        <Route path="/logout" component={Logout} />
       </Switch>
     </Main>
   );
