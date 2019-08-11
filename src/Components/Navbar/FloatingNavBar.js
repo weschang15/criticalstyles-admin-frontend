@@ -65,7 +65,7 @@ function FloatingNavBar() {
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/dashboard/logout" exact>
+          <NavLink to="/logout" exact>
             <Icons icon="power" width="20px" />
           </NavLink>
         </Item>
