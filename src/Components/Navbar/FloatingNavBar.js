@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { Icons } from "../../Elements";
 import { transparentize } from "polished";
+import { Icons } from "../../Elements";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.black};
@@ -46,21 +47,22 @@ const Item = styled.li`
 `;
 
 function FloatingNavBar() {
+  const { accountId } = useContext(AuthContext);
   return (
     <Nav>
       <List>
         <Item>
-          <NavLink to="/dashboard" exact>
+          <NavLink to={`/dashboard?acc=${accountId}`} exact>
             <Icons width="20px" />
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/dashboard/sites" exact>
+          <NavLink to={`/dashboard/sites?acc=${accountId}`} exact>
             <Icons icon="window" width="20px" />
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/dashboard/trash" exact>
+          <NavLink to={`/dashboard/trash?acc=${accountId}`} exact>
             <Icons icon="trash" width="20px" />
           </NavLink>
         </Item>

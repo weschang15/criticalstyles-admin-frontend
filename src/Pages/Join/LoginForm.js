@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
+import { darken } from "polished";
 
 import { LOGIN } from "../../Mutations";
 import { Fields, Spinner } from "../../Elements";
-import { UserContext } from "../../Components/UserContext";
-import { darken } from "polished";
+import { AuthDispatch } from "../../contexts/AuthContext";
+import { LOGIN_USER } from "../../actions";
 
 const Form = styled.form`
   label {
@@ -29,10 +30,15 @@ const Form = styled.form`
   }
 `;
 
+const INITIAL_FIELDS = {
+  email: "",
+  password: ""
+};
+
 function LoginForm() {
-  const { setAuthenticated, setUser } = useContext(UserContext);
+  const dispatch = useContext(AuthDispatch);
   const [errors, setErrors] = useState([]);
-  const [fields, setFields] = useState({ email: "", password: "" });
+  const [fields, setFields] = useState(INITIAL_FIELDS);
 
   const [login, { loading }] = useMutation(LOGIN);
 
@@ -54,9 +60,15 @@ function LoginForm() {
         return setErrors(errors);
       }
 
-      setFields({ email: "", password: "" });
-      setUser(user);
-      setAuthenticated(ok);
+      setFields(INITIAL_FIELDS);
+      dispatch({
+        type: LOGIN_USER,
+        payload: {
+          user,
+          authenticated: ok,
+          accountId: user.accounts[0]._id
+        }
+      });
     }
   };
 

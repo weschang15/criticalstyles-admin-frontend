@@ -5,8 +5,8 @@ import { darken, transparentize } from "polished";
 
 import LoginForm from "./LoginForm";
 import { PageSection, PrimaryCard } from "../../Elements";
-import { UserContext } from "../../Components/UserContext";
 import RegisterForm from "./RegisterForm";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Wrapper = styled(PageSection)`
   padding: 1.5em;
@@ -61,7 +61,7 @@ const FormTab = styled.li`
 function Join() {
   // State for managing whether login tab is showing
   const [showingLogin, toggleTab] = useState(true);
-  const { authenticated } = useContext(UserContext);
+  const { accountId, authenticated } = useContext(AuthContext);
 
   const handleToggle = e => {
     const target = e.target;
@@ -79,7 +79,7 @@ function Join() {
   };
 
   return authenticated ? (
-    <Redirect to="/dashboard" />
+    <Redirect to={`/dashboard/?acc=${accountId}`} />
   ) : (
     <Wrapper bgColor="rgba(59, 53, 97, 1)">
       <FormContainer>

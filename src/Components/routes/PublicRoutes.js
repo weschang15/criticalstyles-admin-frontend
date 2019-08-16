@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../UserContext";
 import { Home, Join, Logout } from "../../Pages";
 import Navbar from "../Navbar/Navbar";
 import ProtectedRoute from "../../Elements/ProtectedRoute";
 import AdminRoutes from "./AdminRoutes";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Main = styled.main`
   position: relative;
 `;
 
 function PublicRoutes() {
-  const { authenticated } = useContext(UserContext);
+  const { authenticated } = useContext(AuthContext);
+
   return (
     <Main>
       <Navbar isAuthenticated={authenticated} />

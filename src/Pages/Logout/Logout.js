@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useMutation } from "react-apollo";
 import { LOGOUT } from "../../Mutations";
-import { UserContext } from "../../Components/UserContext";
+import { AuthDispatch } from "../../contexts/AuthContext";
+import { LOGOUT_USER } from "../../actions";
 
 function Logout() {
-  const { setAuthenticated, setUser } = useContext(UserContext);
+  const dispatch = useContext(AuthDispatch);
   const [logout] = useMutation(LOGOUT);
 
   useEffect(() => {
@@ -14,8 +15,7 @@ function Logout() {
     };
 
     logoutUser();
-    setUser(null);
-    setAuthenticated(false);
+    dispatch({ type: LOGOUT_USER });
   });
 
   return <Redirect to="/" />;

@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { darken } from "polished";
 
 import { Fields, Spinner } from "../../Elements";
-import { UserContext } from "../../Components/UserContext";
-import { CREATE_USER } from "../../Mutations";
+import { CREATE_ACCOUNT } from "../../Mutations";
+import { AuthDispatch } from "../../contexts/AuthContext";
+import { REGISTER_USER } from "../../actions";
 
 const Form = styled.form`
   label {
@@ -29,18 +30,19 @@ const Form = styled.form`
   }
 `;
 
+const INITIAL_FIELDS = {
+  name: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: ""
+};
+
 function RegisterForm() {
-  const { setAuthenticated, setUser } = useContext(UserContext);
+  const dispatch = useContext(AuthDispatch);
   const [errors, setErrors] = useState([]);
-
-  const [fields, setFields] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  });
-
-  const [createUser, { loading }] = useMutation(CREATE_USER);
+  const [fields, setFields] = useState(INITIAL_FIELDS);
+  const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT);
 
   const handleChange = e =>
     setFields({ ...fields, [e.target.name]: e.target.value });
@@ -48,21 +50,32 @@ function RegisterForm() {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const { data } = await createUser({
+    const { name, ...rest } = fields;
+
+    const { data } = await createAccount({
       variables: {
-        input: fields
+        input: {
+          name,
+          user: rest
+        }
       }
     });
 
-    if (data && data.createUser) {
-      const { ok, user, errors } = data.createUser;
+    if (data && data.createAccount) {
+      const { ok, account, errors } = data.createAccount;
       if (!ok) {
         return setErrors(errors);
       }
 
-      setFields({ firstName: "", lastName: "", email: "", password: "" });
-      setUser(user);
-      setAuthenticated(ok);
+      setFields(INITIAL_FIELDS);
+      dispatch({
+        type: REGISTER_USER,
+        payload: {
+          accountId: account._id,
+          authenticated: ok,
+          user: account.owner
+        }
+      });
     }
   };
 
@@ -73,6 +86,16 @@ function RegisterForm() {
       {errors.map((error, i) => (
         <strong key={i}>{error.message}</strong>
       ))}
+      <label>Organization name</label>
+      <Fields
+        type="text"
+        placeholder="WallyDoe"
+        name="name"
+        value={fields.name}
+        onChange={handleChange}
+        autoFocus
+        required
+      />
       <label>First name</label>
       <Fields
         type="text"
