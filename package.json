@@ -10,6 +10,7 @@
     "graphql": "^14.4.2",
     "normalize.css": "^8.0.1",
     "polished": "^3.4.1",
+    "query-string": "^6.8.2",
     "react": "^16.8.6",
     "react-apollo": "^3.0.0",
     "react-copy-to-clipboard": "^5.0.1",
