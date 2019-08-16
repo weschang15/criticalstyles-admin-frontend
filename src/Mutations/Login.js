@@ -12,6 +12,9 @@ export default gql`
         firstName
         lastName
         email
+        accounts {
+          _id
+        }
       }
     }
   }

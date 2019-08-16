@@ -1,3 +1,4 @@
+export { default as CREATE_ACCOUNT } from "./CreateAccount";
 export { default as CREATE_SITE } from "./CreateSite";
 export { default as CREATE_USER } from "./CreateUser";
 export { default as CREATE_CRITICAL_STYLE } from "./CreateCriticalStyle";
