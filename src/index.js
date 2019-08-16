@@ -2,29 +2,29 @@ import React from "react";
 import { hydrate, render } from "react-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { apolloClient } from "./config/apolloClient";
-import { UserProvider } from "./Components/UserContext";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 
 import "normalize.css";
 import "./index.css";
+import { RootContext } from "./contexts/RootContext";
 
 const root = document.getElementById("root");
 if (root.hasChildNodes()) {
   hydrate(
     <ApolloProvider client={apolloClient}>
-      <UserProvider>
+      <RootContext>
         <App />
-      </UserProvider>
+      </RootContext>
     </ApolloProvider>,
     root
   );
 } else {
   render(
     <ApolloProvider client={apolloClient}>
-      <UserProvider>
+      <RootContext>
         <App />
-      </UserProvider>
+      </RootContext>
     </ApolloProvider>,
     root
   );
