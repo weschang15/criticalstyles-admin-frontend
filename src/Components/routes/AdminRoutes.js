@@ -24,10 +24,10 @@ const Container = styled.div`
   padding: 1em;
 `;
 
-function AdminRoutes({ match: { path } }) {
+function AdminRoutes({ match: { path }, location: { pathname } }) {
   return (
     <Container>
-      <TopNavBar />
+      <TopNavBar currentPath={pathname} />
       <FloatingNavBar />
       <Route path={`${path}`} component={Dashboard} exact />
       <Route path={`${path}/sites`} component={Sites} />
