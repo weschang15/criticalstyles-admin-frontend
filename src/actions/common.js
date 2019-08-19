@@ -1,1 +1,1 @@
-export const IS_LOADING = "isLoading";
+export const IS_FETCHING = "isFetching";
