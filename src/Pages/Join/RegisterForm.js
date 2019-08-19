@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
-import { darken } from "polished";
 
 import { Fields, Spinner } from "../../Elements";
 import { CREATE_ACCOUNT } from "../../Mutations";
@@ -10,7 +9,7 @@ import { REGISTER_USER } from "../../actions";
 
 const Form = styled.form`
   label {
-    color: ${({ theme }) => darken(0.5, theme.gray)};
+    color: ${({ theme }) => theme.darkGray};
     font-size: 14px;
     font-weight: 600;
   }
@@ -62,7 +61,7 @@ function RegisterForm() {
     });
 
     if (data && data.createAccount) {
-      const { ok, account, errors } = data.createAccount;
+      const { ok, account, owner, errors } = data.createAccount;
       if (!ok) {
         return setErrors(errors);
       }
@@ -72,8 +71,9 @@ function RegisterForm() {
         type: REGISTER_USER,
         payload: {
           accountId: account._id,
+          accountName: account.name,
           authenticated: ok,
-          user: account.owner
+          user: owner
         }
       });
     }

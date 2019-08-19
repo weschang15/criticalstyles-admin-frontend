@@ -1,22 +1,23 @@
 import gql from "graphql-tag";
 
-export default gql`
-  mutation Login($input: LoginInput!) {
-    login(input: $input) {
+export const AUTH = gql`
+  query Auth {
+    auth {
       ok
       errors {
         path
         message
       }
       auth {
-        user {
-          firstName
-          lastName
-          email
-        }
         account {
           _id
           name
+        }
+        user {
+          _id
+          firstName
+          lastName
+          email
         }
       }
     }

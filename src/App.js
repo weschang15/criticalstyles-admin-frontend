@@ -6,29 +6,32 @@ import PublicRoutes from "./Components/routes/PublicRoutes";
 import theme from "./config/theme";
 import { useQuery } from "react-apollo";
 import { AuthDispatch } from "./contexts/AuthContext";
-import { LOGIN_USER } from "./actions";
-import { CURRENT_USER } from "./Queries";
+import { LOGIN_USER, IS_FETCHING } from "./actions";
+import { AUTH } from "./Queries";
 
 function App() {
   const dispatch = useContext(AuthDispatch);
-  const { data, loading } = useQuery(CURRENT_USER, {
+  const { data, loading } = useQuery(AUTH, {
     onCompleted: () => {
-      if (data && data.currentUser) {
-        const { user, ok: authenticated } = data.currentUser;
-        const payload = authenticated
-          ? {
-              user,
-              authenticated,
-              accountId: user.accounts[0]._id
-            }
-          : {};
+      if (data && data.auth) {
+        const { auth, ok } = data.auth;
+        if (ok) {
+          const payload = {
+            user: auth.user,
+            authenticated: ok,
+            accountId: auth.account._id,
+            accountName: auth.account.name
+          };
 
-        dispatch({ type: LOGIN_USER, payload });
+          dispatch({ type: LOGIN_USER, payload });
+        }
+        dispatch({ type: IS_FETCHING, payload: false });
       }
     }
   });
 
   if (loading) {
+    dispatch({ type: IS_FETCHING, payload: true });
     return null;
   }
 

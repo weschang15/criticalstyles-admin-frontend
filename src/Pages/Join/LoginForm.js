@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
-import { darken } from "polished";
 
 import { LOGIN } from "../../Mutations";
 import { Fields, Spinner } from "../../Elements";
@@ -10,7 +9,7 @@ import { LOGIN_USER } from "../../actions";
 
 const Form = styled.form`
   label {
-    color: ${({ theme }) => darken(0.5, theme.gray)};
+    color: ${({ theme }) => theme.darkGray};
     font-size: 14px;
     font-weight: 600;
   }
@@ -55,7 +54,7 @@ function LoginForm() {
     });
 
     if (data && data.login) {
-      const { ok, user, errors } = data.login;
+      const { ok, auth, errors } = data.login;
       if (!ok) {
         return setErrors(errors);
       }
@@ -64,9 +63,10 @@ function LoginForm() {
       dispatch({
         type: LOGIN_USER,
         payload: {
-          user,
+          user: auth.user,
           authenticated: ok,
-          accountId: user.accounts[0]._id
+          accountId: auth.account._id,
+          accountName: auth.account.name
         }
       });
     }
