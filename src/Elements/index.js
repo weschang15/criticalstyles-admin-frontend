@@ -7,3 +7,8 @@ export { default as Icons } from "./Icons";
 export { default as Toggle } from "./Toggle";
 export { default as Modal } from "./Modal";
 export { default as Portal } from "./Portal";
+export { default as Table } from "./Table/Table";
+export { default as TableBody } from "./Table/TableBody";
+export { default as TableCell } from "./Table/TableCell";
+export { default as TableHeader } from "./Table/TableHeader";
+export { default as TableRow } from "./Table/TableRow";
