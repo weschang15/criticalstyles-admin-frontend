@@ -5,9 +5,14 @@ import PropTypes from "prop-types";
 const ProtectedRoute = ({
   component: Component,
   isAuthenticated,
+  loading,
   redirect: pathname,
   ...rest
 }) => {
+  if (loading) {
+    return null;
+  }
+
   return (
     <Route
       {...rest}
