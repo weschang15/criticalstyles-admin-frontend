@@ -12,7 +12,7 @@ const Main = styled.main`
 `;
 
 function PublicRoutes() {
-  const { authenticated } = useContext(AuthContext);
+  const { authenticated, loading } = useContext(AuthContext);
 
   return (
     <Main>
@@ -23,6 +23,7 @@ function PublicRoutes() {
           path="/dashboard"
           component={AdminRoutes}
           isAuthenticated={authenticated}
+          loading={loading}
         />
         <Route path="/join" component={Join} />
         <Route path="/logout" component={Logout} />
