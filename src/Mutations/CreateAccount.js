@@ -11,11 +11,11 @@ export default gql`
       account {
         _id
         name
-        owner {
-          firstName
-          lastName
-          email
-        }
+      }
+      owner {
+        firstName
+        lastName
+        email
       }
     }
   }
