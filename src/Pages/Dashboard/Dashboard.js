@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
-  padding: 0 1em;
   grid-area: content;
   grid-row: auto / auto;
 `;
@@ -16,10 +15,6 @@ function Dashboard() {
   return (
     <>
       <Section>
-        <Title>Dashboard</Title>
-      </Section>
-      <Section>
-        <Title>Help</Title>
         <p>
           Hey, take a look at the earthlings. Goodbye! This thing comes fully
           loaded. AM/FM radio, reclining bucket seats, and... power windows. God
