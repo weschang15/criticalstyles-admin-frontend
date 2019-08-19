@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { transparentize } from "polished";
 import { Icons } from "../../Elements";
-import { AuthContext } from "../../contexts/AuthContext";
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.black};
@@ -13,9 +12,13 @@ const Nav = styled.nav`
   grid-area: sidebar;
   overflow: hidden;
   z-index: 5;
+  @media only screen and (min-width: 48em) {
+    min-height: 550px;
+  }
 `;
 
 const List = styled.ul`
+  height: 100%;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -47,22 +50,21 @@ const Item = styled.li`
 `;
 
 function FloatingNavBar() {
-  const { accountId } = useContext(AuthContext);
   return (
     <Nav>
       <List>
         <Item>
-          <NavLink to={`/dashboard?acc=${accountId}`} exact>
+          <NavLink to="/dashboard" exact>
             <Icons width="20px" />
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={`/dashboard/sites?acc=${accountId}`} exact>
+          <NavLink to="/dashboard/sites" exact>
             <Icons icon="window" width="20px" />
           </NavLink>
         </Item>
         <Item>
-          <NavLink to={`/dashboard/trash?acc=${accountId}`} exact>
+          <NavLink to="/dashboard/trash" exact>
             <Icons icon="trash" width="20px" />
           </NavLink>
         </Item>
