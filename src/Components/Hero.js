@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { darken } from "polished";
 
 const Container = styled.section`
   position: absolute;
@@ -10,7 +9,7 @@ const Container = styled.section`
 `;
 
 const Title = styled.h1`
-  color: ${({ theme }) => darken(0.1, theme.white)};
+  color: ${({ theme }) => theme.white};
   font-size: 12em;
   font-weight: 900;
   line-height: 0.8;

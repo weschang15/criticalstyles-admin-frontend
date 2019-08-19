@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
-import { darken, transparentize } from "polished";
 
 import LoginForm from "./LoginForm";
 import { PageSection, PrimaryCard } from "../../Elements";
@@ -41,7 +40,7 @@ const FormTabs = styled.ul`
 
 const FormTab = styled.li`
   background-color: #fff;
-  color: ${({ theme }) => transparentize(0.5, darken(0.15, theme.gray))};
+  color: ${({ theme }) => theme.gray};
   cursor: pointer;
   display: inline-block;
   font-size: 12px;
@@ -54,14 +53,14 @@ const FormTab = styled.li`
   }
 
   &.is-active {
-    color: ${({ theme }) => darken(0.5, theme.gray)};
+    color: ${({ theme }) => theme.darkGray};
   }
 `;
 
 function Join() {
   // State for managing whether login tab is showing
   const [showingLogin, toggleTab] = useState(true);
-  const { accountId, authenticated } = useContext(AuthContext);
+  const { authenticated } = useContext(AuthContext);
 
   const handleToggle = e => {
     const target = e.target;
@@ -79,7 +78,7 @@ function Join() {
   };
 
   return authenticated ? (
-    <Redirect to={`/dashboard/?acc=${accountId}`} />
+    <Redirect to="/dashboard" />
   ) : (
     <Wrapper bgColor="rgba(59, 53, 97, 1)">
       <FormContainer>
