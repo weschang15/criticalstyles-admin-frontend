@@ -132,6 +132,8 @@ function RegisterForm() {
         value={fields.password}
         onChange={handleChange}
         autoComplete="current-password"
+        minLength="8"
+        maxLength="1024"
         required
       />
       <Fields type="submit">Sign Up</Fields>
