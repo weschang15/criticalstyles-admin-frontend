@@ -10,7 +10,7 @@ import {
   TableBody
 } from "../../Elements";
 
-function SiteList({ loading, sites, location: { pathname }, subscribeToMore }) {
+function SiteList({ loading, sites, here, subscribeToMore }) {
   useEffect(() => {
     let unsub = null;
     if (!loading) {
@@ -41,7 +41,17 @@ function SiteList({ loading, sites, location: { pathname }, subscribeToMore }) {
               <TableCell>{name}</TableCell>
               <TableCell />
               <TableCell>
-                <Link to={`${pathname}/${slug}`}>View</Link>
+                <Link
+                  to={{
+                    pathname: `${here}/${slug}`,
+                    state: {
+                      siteId: _id,
+                      isSingle: true
+                    }
+                  }}
+                >
+                  View
+                </Link>
               </TableCell>
             </TableRow>
           ))
