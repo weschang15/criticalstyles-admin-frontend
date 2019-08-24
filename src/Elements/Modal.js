@@ -21,10 +21,11 @@ const Wrapper = styled.div`
 
 const ModalCard = styled.div`
   background-color: #fff;
+  cursor: auto;
   max-width: 480px;
+  min-height: 240px;
   position: relative;
-  border-radius: 6px;
-  padding: 1em;
+  border-radius: 3px;
   margin-top: 15%;
 `;
 
@@ -54,26 +55,17 @@ function ModalWrapper({ children, on, toggle }) {
     leave: { opacity: 0, transform: "translate3d(0, -40px, 0)" }
   });
 
-  return (
-    on && (
-      <Portal>
-        <Wrapper onClick={close}>
-          {transitions.map(
-            ({ item, key, props: animation }) =>
-              item && (
-                <Modal
-                  key={key}
-                  animation={animation}
-                  close={toggle}
-                  forwardedRef={card}
-                >
-                  {children}
-                </Modal>
-              )
-          )}
-        </Wrapper>
-      </Portal>
-    )
+  return transitions.map(
+    ({ item, key, props: animation }) =>
+      item && (
+        <Portal key={key}>
+          <Wrapper onClick={close}>
+            <Modal animation={animation} close={toggle} forwardedRef={card}>
+              {children}
+            </Modal>
+          </Wrapper>
+        </Portal>
+      )
   );
 }
 
