@@ -6,10 +6,7 @@ import SiteList from "../../Components/Sites/SiteList";
 import { GET_ACCOUNT } from "../../Queries";
 import gql from "graphql-tag";
 
-const Section = styled.section`
-  grid-area: content;
-  grid-row: auto / auto;
-`;
+const Section = styled.section``;
 
 const ON_SITE_SUBSCRIPTION = gql`
   subscription OnSiteUpdated($accountId: String!) {
@@ -17,7 +14,6 @@ const ON_SITE_SUBSCRIPTION = gql`
       _id
       slug
       name
-      url
     }
   }
 `;
