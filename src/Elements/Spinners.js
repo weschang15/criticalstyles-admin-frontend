@@ -16,12 +16,14 @@ const StyledSpinner = styled.div`
   align-items: center;
   height: 100%;
   justify-content: center;
+  height: 16px;
+  width: 74px;
   > div {
     animation: ${bounce} 1.4s infinite ease-in-out both;
     background-color: ${({ bgColor, theme }) => bgColor || theme.white};
     border-radius: 100%;
-    height: 16px;
-    width: 16px;
+    height: 8px;
+    width: 8px;
     vertical-align: middle;
     margin: 0 2px;
     &:first-child {
