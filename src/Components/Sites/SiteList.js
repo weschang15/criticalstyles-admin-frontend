@@ -28,7 +28,6 @@ function SiteList({ loading, sites, location: { pathname }, subscribeToMore }) {
       <TableHeader>
         <TableRow>
           <th>name</th>
-          <th>url</th>
           <th>created at</th>
           <th>actions</th>
         </TableRow>
@@ -40,7 +39,6 @@ function SiteList({ loading, sites, location: { pathname }, subscribeToMore }) {
           sites.map(({ _id, name, slug, url }) => (
             <TableRow key={_id} className="no-hover">
               <TableCell>{name}</TableCell>
-              <TableCell>{url}</TableCell>
               <TableCell />
               <TableCell>
                 <Link to={`${pathname}/${slug}`}>View</Link>
