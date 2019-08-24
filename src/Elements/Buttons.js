@@ -39,15 +39,11 @@ export const PrimaryButton = styled.button`
 
 export const LinkButton = styled.button`
   background-color: transparent;
-  color: ${({ theme }) => transparentize(0.6, theme.white)};
+  color: ${({ textColor, theme }) =>
+    textColor ? theme[textColor] : theme.black};
   border: 0;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
   line-height: 1;
-  margin: 0.5em 0;
-  text-transform: uppercase;
   display: inline-block;
   text-decoration: underline;
 `;
