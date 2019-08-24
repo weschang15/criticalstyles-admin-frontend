@@ -20,14 +20,6 @@ const Form = styled.form`
     margin: 0 0 1em;
     width: 100%;
   }
-
-  button {
-    background-color: ${({ theme }) => theme.yellow};
-    border-radius: 6px;
-    font-weight: 600;
-    padding: 0.75em 1em;
-    margin: 0;
-  }
 `;
 
 const INITIAL_FIELDS = {

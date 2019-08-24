@@ -141,7 +141,7 @@ function AddSiteModal({ on, toggle }) {
             />
           </Group>
           <Group>
-            <PrimaryButton onClick={cancel} override="gray">
+            <PrimaryButton onClick={cancel} bgColor="gray">
               Cancel
             </PrimaryButton>
             <Fields type="submit">

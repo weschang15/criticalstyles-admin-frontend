@@ -150,10 +150,10 @@ function AddPageModal({ on, toggle }) {
             />
           </Group>
           <Group>
-            <PrimaryButton onClick={cancel} override="gray">
+            <PrimaryButton onClick={cancel} bgColor="gray">
               Cancel
             </PrimaryButton>
-            <Fields type="submit">
+            <Fields type="submit" textColor="white" bgColor="blue">
               {loading ? <Spinner /> : "Create Page"}
             </Fields>
           </Group>

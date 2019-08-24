@@ -2,10 +2,12 @@ import styled from "styled-components";
 import { darken, transparentize } from "polished";
 
 export const PrimaryButton = styled.button`
-  background-color: ${({ override, theme }) =>
-    override ? theme[override] : theme.yellow};
+  background-color: ${({ bgColor, theme }) =>
+    bgColor ? theme[bgColor] : theme.yellow};
   border: 0;
   border-radius: 2px;
+  color: ${({ textColor, theme }) =>
+    textColor ? theme[textColor] : theme.black};
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -19,17 +21,17 @@ export const PrimaryButton = styled.button`
 
   &:focus {
     box-shadow: inset 0 0 0 2px
-      ${({ override, theme }) =>
-        override ? darken(0.25, theme[override]) : darken(0.25, theme.yellow)};
+      ${({ bgColor, theme }) =>
+        bgColor ? darken(0.25, theme[bgColor]) : darken(0.25, theme.yellow)};
     outline: 0;
   }
   &:hover {
-    background-color: ${({ override, theme }) =>
-      override ? darken(0.21, theme[override]) : darken(0.15, theme.yellow)};
+    background-color: ${({ bgColor, theme }) =>
+      bgColor ? darken(0.21, theme[bgColor]) : darken(0.15, theme.yellow)};
   }
   &:active {
-    background-color: ${({ override, theme }) =>
-      override ? darken(0.25, theme[override]) : darken(0.25, theme.yellow)};
+    background-color: ${({ bgColor, theme }) =>
+      bgColor ? darken(0.25, theme[bgColor]) : darken(0.25, theme.yellow)};
     transform: translateY(1px);
     transition: none;
   }
