@@ -31,7 +31,7 @@ const Generic = styled.input`
   }
 
   &::placeholder {
-    color: ${({ theme }) => darken(0.5, theme.gray)};
+    color: ${({ theme }) => darken(0.25, theme.gray)};
   }
 `;
 
