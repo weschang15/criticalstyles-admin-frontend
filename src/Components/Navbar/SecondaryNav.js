@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AddSiteToggle from "../Toggles/AddSiteToggle";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import AddPageToggle from "../Toggles/AddPageToggle";
 
 const Container = styled.div`
   align-items: center;
@@ -10,11 +11,11 @@ const Container = styled.div`
   margin: 0 0 1em;
 `;
 
-function SecondaryNav({ currentPath }) {
+function SecondaryNav({ currentPath, isSingle }) {
   return (
     <Container>
       <Breadcrumbs here={currentPath} />
-      <AddSiteToggle />
+      {isSingle ? <AddPageToggle /> : <AddSiteToggle />}
     </Container>
   );
 }
