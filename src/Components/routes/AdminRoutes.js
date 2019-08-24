@@ -11,16 +11,11 @@ const Container = styled.div`
 `;
 
 function AdminRoutes({ match: { path }, location: { pathname } }) {
-  const parts = pathname.split("/").filter(part => Boolean(part));
-  const here = parts[parts.length - 1];
-  const prev = parts[parts.length - 2];
-  const isSingle = prev === "sites" && here !== "sites";
-
   return (
     <>
       <PrimaryNav />
       <Container>
-        <SecondaryNav currentPath={pathname} isSingle={isSingle} />
+        <SecondaryNav />
         <Route path={`${path}`} component={Dashboard} exact />
         <Route path={`${path}/sites`} component={Sites} exact />
         <Route path={`${path}/sites/:slug`} component={Site} />

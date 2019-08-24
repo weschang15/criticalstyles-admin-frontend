@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import AddSiteToggle from "../Toggles/AddSiteToggle";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -11,13 +12,15 @@ const Container = styled.div`
   margin: 0 0 1em;
 `;
 
-function SecondaryNav({ currentPath, isSingle }) {
+function SecondaryNav({ location: { pathname, state = {} } }) {
+  const { isSingle } = state;
+
   return (
     <Container>
-      <Breadcrumbs here={currentPath} />
+      <Breadcrumbs here={pathname} />
       {isSingle ? <AddPageToggle /> : <AddSiteToggle />}
     </Container>
   );
 }
 
-export default SecondaryNav;
+export default withRouter(SecondaryNav);
