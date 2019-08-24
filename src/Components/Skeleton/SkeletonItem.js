@@ -20,7 +20,7 @@ const Line = styled.span`
   border-radius: 7px;
   position: relative;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.lightGray};
+  background-color: ${({ theme }) => theme.gray};
   &:after {
     position: absolute;
     top: 0;
@@ -30,8 +30,8 @@ const Line = styled.span`
     height: 100%;
     width: 30px;
     background-image: ${({ theme }) =>
-      `linear-gradient(90deg, ${theme.lightGray} 0px, #e8e8e8 40px, ${
-        theme.lightGray
+      `linear-gradient(90deg, ${theme.gray} 0px, ${theme.white} 40px, ${
+        theme.gray
       } 80px)`};
     animation: ${animation} 1.6s infinite linear;
   }

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
+import { darken } from "polished";
 
 import LoginForm from "./LoginForm";
 import { PageSection, PrimaryCard } from "../../Elements";
@@ -53,7 +54,7 @@ const FormTab = styled.li`
   }
 
   &.is-active {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => darken(0.5, theme.gray)};
   }
 `;
 

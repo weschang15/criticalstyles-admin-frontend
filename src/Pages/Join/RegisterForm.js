@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
+import { darken } from "polished";
 
 import { Fields, Spinner } from "../../Elements";
 import { CREATE_ACCOUNT } from "../../Mutations";
@@ -9,7 +10,7 @@ import { REGISTER_USER } from "../../actions";
 
 const Form = styled.form`
   label {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => darken(0.5, theme.gray)};
     font-size: 14px;
     font-weight: 600;
   }

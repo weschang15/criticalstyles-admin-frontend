@@ -6,10 +6,11 @@ import { LOGIN } from "../../Mutations";
 import { Fields, Spinner } from "../../Elements";
 import { AuthDispatch } from "../../contexts/AuthContext";
 import { LOGIN_USER } from "../../actions";
+import { darken } from "polished";
 
 const Form = styled.form`
   label {
-    color: ${({ theme }) => theme.darkGray};
+    color: ${({ theme }) => darken(0.5, theme.gray)};
     font-size: 14px;
     font-weight: 600;
   }

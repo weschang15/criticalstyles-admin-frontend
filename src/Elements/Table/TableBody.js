@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { transparentize } from "polished";
 
 const TableBody = styled.tbody`
   tr {
@@ -8,7 +9,7 @@ const TableBody = styled.tbody`
 
     &:not(.no-hover) {
       &:hover {
-        background-color: ${({ theme }) => theme.hoverGray};
+        background-color: ${({ theme }) => transparentize(0.75, theme.gray)};
         td:last-of-type > * {
           visibility: visible;
         }

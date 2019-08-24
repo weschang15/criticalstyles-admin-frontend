@@ -5,7 +5,8 @@ import ErrorIcon from "../images/error-icon.svg";
 import EmailIcon from "../images/email-icon.svg";
 import LockIcon from "../images/lock-icon.svg";
 import InformationIcon from "../images/information-icon.svg";
-import { transparentize } from "polished";
+import { transparentize, darken } from "polished";
+import { PrimaryButton } from "./Buttons";
 
 const Generic = styled.input`
   border: 0;
@@ -30,20 +31,18 @@ const Generic = styled.input`
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.gray};
+    color: ${({ theme }) => darken(0.5, theme.gray)};
   }
 `;
 
-export const Submit = styled.button.attrs({ type: "submit" })`
-  background-color: transparent;
-  border: 0;
+export const FieldLabel = styled.label`
+  color: ${({ theme }) => darken(0.5, theme.gray)};
   cursor: pointer;
   font-size: 14px;
-  letter-spacing: 0.05em;
-  margin-left: 2em;
-  padding: 10px 5px;
-  text-transform: uppercase;
+  font-weight: 600;
 `;
+
+export const Submit = styled(PrimaryButton).attrs({ type: "submit" })``;
 
 export const Text = styled(Generic).attrs({ type: "text" })`
   background-image: url('${InformationIcon}');
