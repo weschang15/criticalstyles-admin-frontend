@@ -41,7 +41,7 @@ const FormTabs = styled.ul`
 
 const FormTab = styled.li`
   background-color: #fff;
-  color: ${({ theme }) => theme.gray};
+  color: ${({ theme }) => darken(0.25, theme.gray)};
   cursor: pointer;
   display: inline-block;
   font-size: 12px;
