@@ -30,28 +30,21 @@ const Line = styled.span`
     height: 100%;
     width: 30px;
     background-image: ${({ theme }) =>
-      `linear-gradient(90deg, ${theme.gray} 0px, ${theme.white} 40px, ${
-        theme.gray
-      } 80px)`};
+      `linear-gradient(90deg, ${theme.gray} 0px, ${theme.white} 40px, ${theme.gray} 80px)`};
     animation: ${animation} 1.6s infinite linear;
   }
 `;
 
-function SkeletonItem({ size }) {
+function SkeletonItem({ size, colCount }) {
   return (
     <TableRow>
-      <TableCell>
-        <Line size={size} />
-      </TableCell>
-      <TableCell>
-        <Line size={size} />
-      </TableCell>
-      <TableCell>
-        <Line size={size} />
-      </TableCell>
-      <TableCell>
-        <Line size={size} />
-      </TableCell>
+      {Array.from({ length: colCount }, (_, i) => {
+        return (
+          <TableCell key={i}>
+            <Line size={size} />
+          </TableCell>
+        );
+      })}
     </TableRow>
   );
 }

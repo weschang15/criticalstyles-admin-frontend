@@ -6,23 +6,25 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Skeleton({ count }) {
+function Skeleton({ rowCount, colCount }) {
   const items = useMemo(() => {
-    return Array.from({ length: count }, (_, i) => {
+    return Array.from({ length: rowCount }, (_, i) => {
       const size = getRndInteger(40, 75);
-      return <SkeletonItem key={i} size={size} />;
+      return <SkeletonItem key={i} size={size} colCount={colCount} />;
     });
-  }, [count]);
+  }, [rowCount, colCount]);
 
   return <>{items}</>;
 }
 
 Skeleton.propTypes = {
-  count: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
+  colCount: PropTypes.number
 };
 
 Skeleton.defaultProps = {
-  count: 4
+  rowCount: 4,
+  colCount: 3
 };
 
 export default Skeleton;
