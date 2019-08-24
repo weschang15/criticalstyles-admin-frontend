@@ -4,17 +4,30 @@ import { useQuery } from "react-apollo";
 import { AuthContext } from "../../contexts/AuthContext";
 import SiteList from "../../Components/Sites/SiteList";
 import { GET_ACCOUNT } from "../../Queries";
+import gql from "graphql-tag";
 
 const Section = styled.section`
   grid-area: content;
   grid-row: auto / auto;
 `;
 
+const ON_SITE_SUBSCRIPTION = gql`
+  subscription OnSiteUpdated($accountId: String!) {
+    siteAdded(accountId: $accountId) {
+      _id
+      slug
+      name
+      url
+    }
+  }
+`;
+
 function Sites({ location }) {
   const { accountId } = useContext(AuthContext);
   const {
     data: { getAccount },
-    loading
+    loading,
+    subscribeToMore
   } = useQuery(GET_ACCOUNT, {
     variables: {
       input: {
@@ -23,11 +36,41 @@ function Sites({ location }) {
     }
   });
 
+  const subscribe = () => {
+    const unsubscribe = subscribeToMore({
+      document: ON_SITE_SUBSCRIPTION,
+      variables: { accountId },
+      updateQuery: (prevData, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prevData;
+        }
+        const newItem = subscriptionData.data.siteAdded;
+        return {
+          ...prevData,
+          getAccount: {
+            ...prevData.getAccount,
+            account: {
+              ...prevData.getAccount.account,
+              sites: [newItem, ...prevData.getAccount.account.sites]
+            }
+          }
+        };
+      }
+    });
+
+    return unsubscribe;
+  };
+
   const sites = getAccount ? getAccount.account.sites : [];
   return (
     <>
       <Section>
-        <SiteList loading={loading} sites={sites} location={location} />
+        <SiteList
+          loading={loading}
+          sites={sites}
+          location={location}
+          subscribeToMore={subscribe}
+        />
       </Section>
     </>
   );

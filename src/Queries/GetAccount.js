@@ -6,6 +6,7 @@ export const GET_ACCOUNT = gql`
       account {
         sites(sf: $sf) {
           _id
+          slug
           name
           url
         }
