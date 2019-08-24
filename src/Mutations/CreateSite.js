@@ -6,7 +6,6 @@ export default gql`
       ok
       site {
         name
-        url
       }
       errors {
         path
