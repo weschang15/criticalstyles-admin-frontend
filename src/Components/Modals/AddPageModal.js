@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
 import { CREATE_PAGE } from "../../Mutations";
-import ModalImage from "../../images/create-site.svg";
+import ModalImage from "../../images/create-page.svg";
 
 import {
   Fields,
@@ -154,7 +154,7 @@ function AddPageModal({ on, toggle }) {
               Cancel
             </PrimaryButton>
             <Fields type="submit">
-              {loading ? <Spinner /> : "Create Sites"}
+              {loading ? <Spinner /> : "Create Page"}
             </Fields>
           </Group>
         </Form>

@@ -145,7 +145,7 @@ function AddSiteModal({ on, toggle }) {
               Cancel
             </PrimaryButton>
             <Fields type="submit">
-              {loading ? <Spinner /> : "Create Sites"}
+              {loading ? <Spinner /> : "Create Site"}
             </Fields>
           </Group>
         </Form>
