@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
 import { CREATE_PAGE } from "../../Mutations";
@@ -69,7 +70,8 @@ const INITIAL_FIELDS = {
   url: ""
 };
 
-function AddPageModal({ on, toggle }) {
+function AddPageModal({ on, toggle, location: { state = {} } }) {
+  const { siteId } = state;
   const [errors, setErrors] = useState([]);
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const [createSite, { loading }] = useMutation(CREATE_PAGE);
@@ -81,7 +83,7 @@ function AddPageModal({ on, toggle }) {
     e.preventDefault();
     const { data } = await createSite({
       variables: {
-        input: { ...fields }
+        input: { ...fields, siteId }
       }
     });
 
@@ -163,4 +165,4 @@ function AddPageModal({ on, toggle }) {
   );
 }
 
-export default AddPageModal;
+export default withRouter(AddPageModal);
