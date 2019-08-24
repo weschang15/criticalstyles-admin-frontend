@@ -36,7 +36,7 @@ function SiteList({ loading, sites, location: { pathname }, subscribeToMore }) {
         {loading ? (
           <Skeleton />
         ) : (
-          sites.map(({ _id, name, slug, url }) => (
+          sites.map(({ _id, name, slug }) => (
             <TableRow key={_id} className="no-hover">
               <TableCell>{name}</TableCell>
               <TableCell />
