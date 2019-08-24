@@ -128,7 +128,7 @@ function RegisterForm() {
       <label>Password</label>
       <Fields
         type="password"
-        placeholder="password"
+        placeholder="&#11089;&#11089;&#11089;&#11089;&#11089;&#11089;&#11089;&#11089;"
         name="password"
         value={fields.password}
         onChange={handleChange}
