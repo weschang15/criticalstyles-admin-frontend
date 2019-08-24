@@ -18,7 +18,7 @@ const ON_SITE_SUBSCRIPTION = gql`
   }
 `;
 
-function Sites({ location }) {
+function Sites({ location: { pathname } }) {
   const { accountId } = useContext(AuthContext);
   const {
     data: { getAccount },
@@ -64,7 +64,7 @@ function Sites({ location }) {
         <SiteList
           loading={loading}
           sites={sites}
-          location={location}
+          here={pathname}
           subscribeToMore={subscribe}
         />
       </Section>
