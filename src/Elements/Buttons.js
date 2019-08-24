@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken, transparentize } from "polished";
+import { darken } from "polished";
 
 export const PrimaryButton = styled.button`
   background-color: ${({ bgColor, theme }) =>
