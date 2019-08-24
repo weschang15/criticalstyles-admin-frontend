@@ -1,24 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { transparentize } from "polished";
-import { Toggle, Icons } from "../../Elements";
-import AddSiteModal from "../Sites/AddSiteModal";
+import { Toggle, Icons, PrimaryButton } from "../../Elements";
+import AddSiteModal from "../Modals/AddSiteModal";
 
-const Button = styled.button`
-  border: 1px solid ${({ theme }) => theme.blue};
+const Button = styled(PrimaryButton)`
   align-items: center;
   background-color: transparent;
   border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.blue};
   color: ${({ theme }) => theme.blue};
-  cursor: pointer;
   display: inline-flex;
-  padding: 0.75em 1em;
-  font-size: 14px;
-  font-weight: 600;
 
   &:hover,
   &:focus {
     background-color: ${({ theme }) => transparentize(0.9, theme.blue)};
+    box-shadow: none;
+  }
+
+  &:active {
   }
 
   svg {
@@ -28,6 +28,7 @@ const Button = styled.button`
     width: 16px;
   }
 `;
+
 function AddSiteToggle() {
   return (
     <Toggle>

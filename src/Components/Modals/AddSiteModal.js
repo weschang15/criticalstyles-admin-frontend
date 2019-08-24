@@ -109,7 +109,7 @@ function AddSiteModal({ on, toggle }) {
     <Modal toggle={toggle} on={on}>
       <ModalHeader>
         <figure>
-          <img src={ModalImage} alt="Modal for add a new site" />
+          <img src={ModalImage} alt="Modal for adding a new site" />
         </figure>
         <div>
           <h5>Create Site</h5>
@@ -129,7 +129,7 @@ function AddSiteModal({ on, toggle }) {
         )}
         <Form onSubmit={handleSubmit}>
           <Group>
-            <FieldLabel htmlFor="name">Name</FieldLabel>
+            <FieldLabel htmlFor="name">Site Name</FieldLabel>
             <Fields
               type="text"
               id="name"
