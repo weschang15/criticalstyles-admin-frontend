@@ -12,16 +12,14 @@ const TableHeader = styled.thead`
     font-weight: 700;
     text-transform: uppercase;
     text-align: left;
-    &:first-of-type {
-      width: 20%;
-    }
 
-    &:nth-of-type(2) {
-      width: 40%;
+    &:nth-last-of-type(2) {
+      width: 30%;
     }
 
     &:last-of-type {
       text-align: center;
+      width: 20%;
     }
   }
 `;
