@@ -10,7 +10,8 @@ const Nav = styled.nav`
     path.includes("/dashboard") ? theme.white : theme.purple};
   display: flex;
   justify-content: space-between;
-  padding: 16px 1em;
+  padding: ${({ isAuthenticated }) =>
+    isAuthenticated ? "1em 1em 1em calc(66px + 1em)" : "16px 1em"};
 
   svg {
     fill: ${({ path, theme }) =>

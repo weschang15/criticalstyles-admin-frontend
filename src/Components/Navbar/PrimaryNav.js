@@ -6,15 +6,14 @@ import { Icons } from "../../Elements";
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.black};
-  border-radius: 26px;
-  box-shadow: 0 6px 26px -2px ${({ theme }) => transparentize(0.3, theme.black)};
   display: inline-block;
-  grid-area: sidebar;
   overflow: hidden;
   z-index: 5;
-  @media only screen and (min-width: 48em) {
-    min-height: 550px;
-  }
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
 `;
 
 const List = styled.ul`
@@ -30,8 +29,6 @@ const Item = styled.li`
     display: block;
     padding: 16px 22px;
     &.active {
-      background-color: ${({ theme }) => transparentize(0.85, theme.teal)};
-      border-left: 2px solid ${({ theme }) => theme.teal};
       svg {
         fill: ${({ theme }) => theme.white};
       }
@@ -41,15 +38,9 @@ const Item = styled.li`
   svg {
     fill: ${({ theme }) => transparentize(0.8, theme.white)};
   }
-
-  &:last-of-type {
-    a {
-      border-top: 1px solid ${({ theme }) => theme.black};
-    }
-  }
 `;
 
-function FloatingNavBar() {
+function PrimaryNav() {
   return (
     <Nav>
       <List>
@@ -59,7 +50,7 @@ function FloatingNavBar() {
           </NavLink>
         </Item>
         <Item>
-          <NavLink to="/dashboard/sites" exact>
+          <NavLink to="/dashboard/sites">
             <Icons icon="window" width="20px" />
           </NavLink>
         </Item>
@@ -78,4 +69,4 @@ function FloatingNavBar() {
   );
 }
 
-export default FloatingNavBar;
+export default PrimaryNav;

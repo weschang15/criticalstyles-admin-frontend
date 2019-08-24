@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { transparentize } from "polished";
 import { Toggle, Icons } from "../../Elements";
 import AddSiteModal from "../Sites/AddSiteModal";
 
 const Button = styled.button`
-  border: 1px solid ${({ theme }) => theme.darkGray};
+  border: 1px solid ${({ theme }) => theme.blue};
   align-items: center;
   background-color: transparent;
   border-radius: 16px;
-  color: ${({ theme }) => theme.darkGray};
+  color: ${({ theme }) => theme.blue};
   cursor: pointer;
   display: inline-flex;
   padding: 0.75em 1em;
@@ -17,17 +18,17 @@ const Button = styled.button`
 
   &:hover,
   &:focus {
-    background-color: ${({ theme }) => theme.hoverGray};
+    background-color: ${({ theme }) => transparentize(0.9, theme.blue)};
   }
 
   svg {
-    fill: ${({ theme }) => theme.darkGray};
+    fill: ${({ theme }) => theme.blue};
     height: 16px;
     margin-right: 0.5em;
     width: 16px;
   }
 `;
-function ToggleBar() {
+function AddSiteToggle() {
   return (
     <Toggle>
       {({ on, toggle }) => {
@@ -45,4 +46,4 @@ function ToggleBar() {
   );
 }
 
-export default ToggleBar;
+export default AddSiteToggle;
