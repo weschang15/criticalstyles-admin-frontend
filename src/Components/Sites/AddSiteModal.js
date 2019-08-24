@@ -66,8 +66,7 @@ const ModalHeader = styled.header`
 `;
 
 const INITIAL_FIELDS = {
-  name: "",
-  url: ""
+  name: ""
 };
 
 function AddSiteModal({ on, toggle }) {
@@ -138,16 +137,6 @@ function AddSiteModal({ on, toggle }) {
               onChange={handleChange}
               value={fields.name}
               name="name"
-              required
-            />
-            <FieldLabel htmlFor="url">URL</FieldLabel>
-            <Fields
-              type="url"
-              id="url"
-              placeholder="https://criticalstyles.com"
-              onChange={handleChange}
-              value={fields.url}
-              name="url"
               required
             />
           </Group>
