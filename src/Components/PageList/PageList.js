@@ -6,9 +6,9 @@ import {
   Table,
   TableRow,
   TableCell,
-  TableBody,
-  LinkButton
+  TableBody
 } from "../../Elements";
+import TogglePageDetails from "../Toggles/TogglePageDetails";
 
 function PageList({ loading, pages, subscribeToMore }) {
   useEffect(() => {
@@ -36,12 +36,12 @@ function PageList({ loading, pages, subscribeToMore }) {
         {loading ? (
           <Skeleton />
         ) : (
-          pages.map(({ _id, name }) => (
-            <TableRow key={_id}>
-              <TableCell>{name}</TableCell>
+          pages.map(page => (
+            <TableRow key={page._id}>
+              <TableCell>{page.name}</TableCell>
               <TableCell />
               <TableCell>
-                <LinkButton>View</LinkButton>
+                <TogglePageDetails {...page} />
               </TableCell>
             </TableRow>
           ))
