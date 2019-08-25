@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { animated, useTransition } from "react-spring";
-import Portal from "./Portal";
+import Portal from "../Portal";
 
-const Wrapper = styled.div`
+const ModalWrapper = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   z-index: 9;
 `;
 
-const ModalCard = styled.div`
+const Card = styled.div`
   background-color: #fff;
   cursor: auto;
   max-width: 480px;
@@ -29,9 +29,9 @@ const ModalCard = styled.div`
   margin-top: 15%;
 `;
 
-const AnimatedCard = animated(ModalCard);
+const AnimatedCard = animated(Card);
 
-function Modal({ animation, close, children, forwardedRef }) {
+function ModalCard({ animation, children, forwardedRef }) {
   return (
     <AnimatedCard style={animation} ref={forwardedRef}>
       {children}
@@ -39,7 +39,7 @@ function Modal({ animation, close, children, forwardedRef }) {
   );
 }
 
-function ModalWrapper({ children, on, toggle }) {
+function PrimaryModal({ children, on, toggle }) {
   const card = useRef(null);
 
   const close = e => {
@@ -59,19 +59,19 @@ function ModalWrapper({ children, on, toggle }) {
     ({ item, key, props: animation }) =>
       item && (
         <Portal key={key}>
-          <Wrapper onClick={close}>
-            <Modal animation={animation} close={toggle} forwardedRef={card}>
+          <ModalWrapper onClick={close}>
+            <ModalCard animation={animation} close={toggle} forwardedRef={card}>
               {children}
-            </Modal>
-          </Wrapper>
+            </ModalCard>
+          </ModalWrapper>
         </Portal>
       )
   );
 }
 
-ModalWrapper.propTypes = {
+PrimaryModal.propTypes = {
   toggle: PropTypes.func.isRequired,
   on: PropTypes.bool.isRequired
 };
 
-export default ModalWrapper;
+export default PrimaryModal;
