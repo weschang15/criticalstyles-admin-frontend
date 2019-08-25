@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
 import { darken } from "polished";
+import React, { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import styled from "styled-components";
+import { FieldLabel, PrimaryButton } from "../../Elements";
 import Icons from "../../Elements/Icons";
 import Accordion from "../Accordion/Accordion";
-
-const Wrapper = styled.div``;
 
 const Header = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.gray};
@@ -24,9 +24,50 @@ const Header = styled.header`
   }
 `;
 
-function Page({ _id, name, url, stylesheet }) {
+const Labels = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+`;
+
+const Sublabel = styled(FieldLabel)`
+  color: ${({ theme }) => theme.blue};
+  display: block;
+  cursor: auto;
+`;
+
+const CollapsibleTextarea = styled.textarea`
+  background-color: ${({ theme }) => theme.gray};
+  border-radius: 6px;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  padding: 0.5em;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 14px;
+  resize: none;
+`;
+
+const Actions = styled.div`
+  margin-top: 1em;
+  button {
+    font-size: 14px;
+    svg {
+      display: inline-block;
+      margin-right: 0.5em;
+      vertical-align: text-bottom;
+    }
+  }
+`;
+
+function Page({ name, url, stylesheet }) {
+  const { stats } = stylesheet;
+  const [toggled, toggle] = useState(false);
+  const [, copy] = useState(false);
+
   return (
-    <Wrapper>
+    <div>
       <Header>
         <h3>{name}</h3>
         <p>
@@ -34,8 +75,29 @@ function Page({ _id, name, url, stylesheet }) {
           {url}
         </p>
       </Header>
-      <Accordion stylesheet={stylesheet} />
-    </Wrapper>
+      <Labels>
+        <FieldLabel htmlFor="css" onClick={() => toggle(!toggled)}>
+          Critical CSS
+        </FieldLabel>
+        <Sublabel>{stats.minifiedSize * 0.001}KB Minified</Sublabel>
+      </Labels>
+      <Accordion toggled={toggled}>
+        <CollapsibleTextarea id="css" value={stylesheet.styles} readOnly />
+      </Accordion>
+      <Actions>
+        <CopyToClipboard text={stylesheet.styles} onCopy={() => copy(true)}>
+          <PrimaryButton>
+            <Icons
+              icon="clipboard"
+              width="18px"
+              style={{ display: "inline-block" }}
+              fill="currentColor"
+            />
+            Copy
+          </PrimaryButton>
+        </CopyToClipboard>
+      </Actions>
+    </div>
   );
 }
 
