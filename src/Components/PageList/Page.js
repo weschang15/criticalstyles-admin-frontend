@@ -1,10 +1,10 @@
 import { darken } from "polished";
 import React, { useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import styled from "styled-components";
-import { FieldLabel, PrimaryButton } from "../../Elements";
+import { FieldLabel } from "../../Elements";
 import Icons from "../../Elements/Icons";
 import Accordion from "../Accordion/Accordion";
+import Copier from "../Copier/Copier";
 
 const Header = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.gray};
@@ -51,20 +51,11 @@ const CollapsibleTextarea = styled.textarea`
 
 const Actions = styled.div`
   margin-top: 1em;
-  button {
-    font-size: 14px;
-    svg {
-      display: inline-block;
-      margin-right: 0.5em;
-      vertical-align: text-bottom;
-    }
-  }
 `;
 
 function Page({ name, url, stylesheet }) {
   const { stats } = stylesheet;
   const [toggled, toggle] = useState(false);
-  const [, copy] = useState(false);
 
   return (
     <div>
@@ -85,17 +76,7 @@ function Page({ name, url, stylesheet }) {
         <CollapsibleTextarea id="css" value={stylesheet.styles} readOnly />
       </Accordion>
       <Actions>
-        <CopyToClipboard text={stylesheet.styles} onCopy={() => copy(true)}>
-          <PrimaryButton>
-            <Icons
-              icon="clipboard"
-              width="18px"
-              style={{ display: "inline-block" }}
-              fill="currentColor"
-            />
-            Copy
-          </PrimaryButton>
-        </CopyToClipboard>
+        <Copier copyText={stylesheet.styles} />
       </Actions>
     </div>
   );
