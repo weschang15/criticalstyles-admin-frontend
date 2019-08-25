@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import styled from "styled-components";
 import gql from "graphql-tag";
+import React, { useContext } from "react";
+import styled from "styled-components";
 import PageList from "../../Components/PageList/PageList";
-import { GET_SITE_PAGES } from "../../Queries/GetSitePages";
 import { AuthContext } from "../../contexts/AuthContext";
+import { GET_PAGES } from "../../Queries";
 
 const Section = styled.section``;
 
@@ -14,22 +14,25 @@ const ON_PAGE_ADDED_SUBSCRIPTION = gql`
       _id
       name
       url
+      createdAt
+      stylesheet {
+        styles
+        stats {
+          originalSize
+          minifiedSize
+        }
+      }
     }
   }
 `;
 
-function Site({
-  match: {
-    params: { slug }
-  },
-  location: { state = {} }
-}) {
+function Site({ location: { state = {} } }) {
   const { siteId } = state;
   const { accountId } = useContext(AuthContext);
-  const { data, loading, subscribeToMore } = useQuery(GET_SITE_PAGES, {
+  const { data, loading, subscribeToMore } = useQuery(GET_PAGES, {
     variables: {
       input: {
-        slug
+        siteId
       }
     }
   });
@@ -45,12 +48,9 @@ function Site({
         const newItem = subscriptionData.data.pageAdded;
         return {
           ...prevData,
-          getSite: {
-            ...prevData.getSite,
-            site: {
-              ...prevData.getSite.site,
-              pages: [newItem, ...prevData.getSite.site.pages]
-            }
+          pages: {
+            ...prevData.pages,
+            documents: [newItem, ...prevData.pages.documents]
           }
         };
       }
@@ -59,7 +59,7 @@ function Site({
     return unsubscribe;
   };
 
-  const pages = data && data.getSite ? data.getSite.site.pages : [];
+  const pages = data && data.pages ? data.pages.documents : [];
 
   return (
     <>

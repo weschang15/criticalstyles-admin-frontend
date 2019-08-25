@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import Skeleton from "../Skeleton/Skeleton";
+import React, { useEffect } from "react";
 import {
-  TableHeader,
   Table,
-  TableRow,
+  TableBody,
   TableCell,
-  TableBody
+  TableHeader,
+  TableRow
 } from "../../Elements";
+import Skeleton from "../Skeleton/Skeleton";
 import TogglePageDetails from "../Toggles/TogglePageDetails";
 
 function PageList({ loading, pages, subscribeToMore }) {
@@ -39,7 +39,7 @@ function PageList({ loading, pages, subscribeToMore }) {
           pages.map(page => (
             <TableRow key={page._id}>
               <TableCell>{page.name}</TableCell>
-              <TableCell />
+              <TableCell>{new Date(page.createdAt).toLocaleString()}</TableCell>
               <TableCell>
                 <TogglePageDetails {...page} />
               </TableCell>
