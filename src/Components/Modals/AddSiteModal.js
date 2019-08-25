@@ -7,10 +7,10 @@ import ModalImage from "../../images/create-site.svg";
 
 import {
   Fields,
-  Modal,
   Spinner,
   FieldLabel,
-  PrimaryButton
+  PrimaryButton,
+  PrimaryModal
 } from "../../Elements";
 
 const Form = styled.form`
@@ -106,7 +106,7 @@ function AddSiteModal({ on, toggle }) {
   };
 
   return (
-    <Modal toggle={toggle} on={on}>
+    <PrimaryModal toggle={toggle} on={on}>
       <ModalHeader>
         <figure>
           <img src={ModalImage} alt="Modal for adding a new site" />
@@ -150,7 +150,7 @@ function AddSiteModal({ on, toggle }) {
           </Group>
         </Form>
       </>
-    </Modal>
+    </PrimaryModal>
   );
 }
 

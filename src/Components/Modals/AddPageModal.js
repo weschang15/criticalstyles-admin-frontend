@@ -7,7 +7,7 @@ import ModalImage from "../../images/create-page.svg";
 
 import {
   Fields,
-  Modal,
+  PrimaryModal,
   Spinner,
   FieldLabel,
   PrimaryButton
@@ -107,7 +107,7 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
   };
 
   return (
-    <Modal toggle={toggle} on={on}>
+    <PrimaryModal toggle={toggle} on={on}>
       <ModalHeader>
         <figure>
           <img src={ModalImage} alt="Modal for adding a new page" />
@@ -161,7 +161,7 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
           </Group>
         </Form>
       </>
-    </Modal>
+    </PrimaryModal>
   );
 }
 
