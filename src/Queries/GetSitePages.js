@@ -13,6 +13,13 @@ export const GET_SITE_PAGES = gql`
           _id
           name
           url
+          stylesheet {
+            styles
+            stats {
+              originalSize
+              minifiedSize
+            }
+          }
         }
       }
     }
