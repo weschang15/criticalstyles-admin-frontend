@@ -1,7 +1,7 @@
+import { transparentize } from "polished";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { transparentize } from "polished";
 import { Icons } from "../../Elements";
 
 const Nav = styled.nav`
@@ -26,11 +26,32 @@ const List = styled.ul`
 const Item = styled.li`
   display: block;
   a {
-    display: block;
+    display: inline-block;
     padding: 16px 22px;
+    text-align: center;
+
     &.active {
       svg {
         fill: ${({ theme }) => theme.white};
+      }
+    }
+  }
+
+  &:first-of-type {
+    a {
+      padding: 16px 17px;
+    }
+    svg {
+      fill: ${({ theme }) => theme.white};
+    }
+  }
+
+  &:not(:first-of-type) {
+    a {
+      &:hover {
+        svg {
+          fill: ${({ theme }) => transparentize(0.5, theme.white)};
+        }
       }
     }
   }
@@ -44,6 +65,11 @@ function PrimaryNav() {
   return (
     <Nav>
       <List>
+        <Item>
+          <NavLink to="/" exact>
+            <Icons icon="logo" width="32px" height="32px" />
+          </NavLink>
+        </Item>
         <Item>
           <NavLink to="/dashboard" exact>
             <Icons width="20px" />

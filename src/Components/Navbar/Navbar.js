@@ -1,6 +1,6 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Icons } from "../../Elements";
 
@@ -9,13 +9,19 @@ const Nav = styled.nav`
   background-color: ${({ path, theme }) =>
     path.includes("/dashboard") ? theme.white : theme.purple};
   display: flex;
-  justify-content: space-between;
-  padding: ${({ isAuthenticated }) =>
-    isAuthenticated ? "1em 1em 1em calc(66px + 1em)" : "16px 1em"};
+  justify-content: ${({ path }) =>
+    path.includes("/dashboard") ? "flex-end" : "space-between"};
+
+  padding: ${({ path }) =>
+    path.includes("/dashboard") ? "1em 1em 1em calc(66px + 1em)" : "16px 1em"};
 
   svg {
     fill: ${({ path, theme }) =>
       path.includes("/dashboard") ? theme.purple : theme.white};
+  }
+
+  .logo {
+    display: ${({ path }) => (path.includes("/dashboard") ? "none" : "block")};
   }
 `;
 
@@ -39,7 +45,7 @@ const List = styled.ul`
 function Navbar({ isAuthenticated, location, ...rest }) {
   return (
     <Nav path={location.pathname} isAuthenticated>
-      <Link to="/">
+      <Link to="/" className="logo">
         <Icons icon="logo" width="48px" height="48px" />
       </Link>
 
