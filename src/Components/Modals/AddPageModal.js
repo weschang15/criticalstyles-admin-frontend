@@ -1,17 +1,16 @@
+import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { useMutation } from "@apollo/react-hooks";
 import styled from "styled-components";
-import { CREATE_PAGE } from "../../Mutations";
-import ModalImage from "../../images/create-page.svg";
-
 import {
-  Fields,
-  PrimaryModal,
-  Spinner,
   FieldLabel,
-  PrimaryButton
+  Fields,
+  PrimaryButton,
+  PrimaryModal,
+  Spinner
 } from "../../Elements";
+import ModalImage from "../../images/create-page.svg";
+import { CREATE_PAGE } from "../../Mutations";
 
 const Form = styled.form`
   display: flex;
@@ -30,7 +29,8 @@ const Group = styled.div`
   padding: 1em;
   &:last-of-type {
     display: flex;
-    justify-content: flex-end;
+    flex-flow: row-reverse;
+    justify-content: flex-start;
     background-color: ${({ theme }) => theme.gray};
     margin: 0;
     padding: 0.5em 1em;
@@ -39,7 +39,7 @@ const Group = styled.div`
 
   button {
     margin-right: 1em;
-    &:last-of-type {
+    &:first-of-type {
       margin-right: 0;
     }
   }
@@ -152,12 +152,12 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
             />
           </Group>
           <Group>
-            <PrimaryButton onClick={cancel} bgColor="gray">
-              Cancel
-            </PrimaryButton>
             <Fields type="submit" textColor="white" bgColor="blue">
               {loading ? <Spinner /> : "Create Page"}
             </Fields>
+            <PrimaryButton onClick={cancel} bgColor="gray">
+              Cancel
+            </PrimaryButton>
           </Group>
         </Form>
       </>

@@ -1,17 +1,16 @@
-import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../../contexts/AuthContext";
-import { CREATE_SITE } from "../../Mutations";
-import ModalImage from "../../images/create-site.svg";
-
 import {
-  Fields,
-  Spinner,
   FieldLabel,
+  Fields,
   PrimaryButton,
-  PrimaryModal
+  PrimaryModal,
+  Spinner
 } from "../../Elements";
+import ModalImage from "../../images/create-site.svg";
+import { CREATE_SITE } from "../../Mutations";
 
 const Form = styled.form`
   display: flex;
@@ -30,7 +29,8 @@ const Group = styled.div`
   padding: 1em;
   &:last-of-type {
     display: flex;
-    justify-content: flex-end;
+    flex-flow: row-reverse;
+    justify-content: flex-start;
     background-color: ${({ theme }) => theme.gray};
     margin: 0;
     padding: 0.5em 1em;
@@ -39,7 +39,7 @@ const Group = styled.div`
 
   button {
     margin-right: 1em;
-    &:last-of-type {
+    &:first-of-type {
       margin-right: 0;
     }
   }
@@ -141,12 +141,12 @@ function AddSiteModal({ on, toggle }) {
             />
           </Group>
           <Group>
-            <PrimaryButton onClick={cancel} bgColor="gray">
-              Cancel
-            </PrimaryButton>
             <Fields type="submit">
               {loading ? <Spinner /> : "Create Site"}
             </Fields>
+            <PrimaryButton onClick={cancel} bgColor="gray">
+              Cancel
+            </PrimaryButton>
           </Group>
         </Form>
       </>
