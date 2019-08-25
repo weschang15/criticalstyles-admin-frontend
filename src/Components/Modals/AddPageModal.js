@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import styled from "styled-components";
 import {
   FieldLabel,
   Fields,
@@ -11,59 +10,7 @@ import {
 } from "../../Elements";
 import ModalImage from "../../images/create-page.svg";
 import { CREATE_PAGE } from "../../Mutations";
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  input[type="text"],
-  input[type="url"] {
-    background-color: ${({ theme }) => theme.gray};
-    box-shadow: none;
-    margin: 0 0 1em;
-    width: 100%;
-  }
-`;
-
-const Group = styled.div`
-  padding: 1em;
-  &:last-of-type {
-    display: flex;
-    flex-flow: row-reverse;
-    justify-content: flex-start;
-    background-color: ${({ theme }) => theme.gray};
-    margin: 0;
-    padding: 0.5em 1em;
-    width: 100%;
-  }
-
-  button {
-    margin-right: 1em;
-    &:first-of-type {
-      margin-right: 0;
-    }
-  }
-`;
-
-const ModalHeader = styled.header`
-  align-items: flex-end;
-  display: flex;
-  padding: 1em 1em 0;
-  figure {
-    margin: 0 1em 0 0;
-    flex: 1 0 120px;
-    img {
-      display: block;
-    }
-  }
-  h5 {
-    margin-top: 0;
-  }
-  p {
-    font-size: 16px;
-    margin: 0;
-  }
-`;
+import { ModalForm, ModalFormGroup, ModalHeader } from "./Modals";
 
 const INITIAL_FIELDS = {
   name: "",
@@ -128,8 +75,8 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
             ))}
           </ul>
         )}
-        <Form onSubmit={handleSubmit}>
-          <Group>
+        <ModalForm onSubmit={handleSubmit}>
+          <ModalFormGroup>
             <FieldLabel htmlFor="name">Page Name</FieldLabel>
             <Fields
               type="text"
@@ -150,16 +97,16 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
               name="url"
               required
             />
-          </Group>
-          <Group>
-            <Fields type="submit" textColor="white" bgColor="blue">
+          </ModalFormGroup>
+          <ModalFormGroup>
+            <Fields type="submit">
               {loading ? <Spinner /> : "Create Page"}
             </Fields>
             <PrimaryButton onClick={cancel} bgColor="gray">
               Cancel
             </PrimaryButton>
-          </Group>
-        </Form>
+          </ModalFormGroup>
+        </ModalForm>
       </>
     </PrimaryModal>
   );

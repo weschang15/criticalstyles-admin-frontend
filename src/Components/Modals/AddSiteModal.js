@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
   FieldLabel,
@@ -11,59 +10,7 @@ import {
 } from "../../Elements";
 import ModalImage from "../../images/create-site.svg";
 import { CREATE_SITE } from "../../Mutations";
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  input[type="text"],
-  input[type="url"] {
-    background-color: ${({ theme }) => theme.gray};
-    box-shadow: none;
-    margin: 0 0 1em;
-    width: 100%;
-  }
-`;
-
-const Group = styled.div`
-  padding: 1em;
-  &:last-of-type {
-    display: flex;
-    flex-flow: row-reverse;
-    justify-content: flex-start;
-    background-color: ${({ theme }) => theme.gray};
-    margin: 0;
-    padding: 0.5em 1em;
-    width: 100%;
-  }
-
-  button {
-    margin-right: 1em;
-    &:first-of-type {
-      margin-right: 0;
-    }
-  }
-`;
-
-const ModalHeader = styled.header`
-  align-items: flex-end;
-  display: flex;
-  padding: 1em 1em 0;
-  figure {
-    margin: 0 1em 0 0;
-    flex: 1 0 120px;
-    img {
-      display: block;
-    }
-  }
-  h5 {
-    margin-top: 0;
-  }
-  p {
-    font-size: 16px;
-    margin: 0;
-  }
-`;
+import { ModalForm, ModalFormGroup, ModalHeader } from "./Modals";
 
 const INITIAL_FIELDS = {
   name: ""
@@ -127,8 +74,8 @@ function AddSiteModal({ on, toggle }) {
             ))}
           </ul>
         )}
-        <Form onSubmit={handleSubmit}>
-          <Group>
+        <ModalForm onSubmit={handleSubmit}>
+          <ModalFormGroup>
             <FieldLabel htmlFor="name">Site Name</FieldLabel>
             <Fields
               type="text"
@@ -139,16 +86,16 @@ function AddSiteModal({ on, toggle }) {
               name="name"
               required
             />
-          </Group>
-          <Group>
+          </ModalFormGroup>
+          <ModalFormGroup>
             <Fields type="submit">
               {loading ? <Spinner /> : "Create Site"}
             </Fields>
             <PrimaryButton onClick={cancel} bgColor="gray">
               Cancel
             </PrimaryButton>
-          </Group>
-        </Form>
+          </ModalFormGroup>
+        </ModalForm>
       </>
     </PrimaryModal>
   );
