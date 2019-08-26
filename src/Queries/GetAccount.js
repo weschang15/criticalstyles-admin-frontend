@@ -8,6 +8,7 @@ export const GET_ACCOUNT = gql`
           _id
           slug
           name
+          createdAt
         }
         name
       }

@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
-import { useQuery } from "react-apollo";
-import { AuthContext } from "../../contexts/AuthContext";
-import SiteList from "../../Components/Sites/SiteList";
-import { GET_ACCOUNT } from "../../Queries";
 import gql from "graphql-tag";
+import React, { useContext } from "react";
+import { useQuery } from "react-apollo";
+import styled from "styled-components";
+import SiteList from "../../Components/Sites/SiteList";
+import { AuthContext } from "../../contexts/AuthContext";
+import { GET_ACCOUNT } from "../../Queries";
 
 const Section = styled.section``;
 
@@ -14,6 +14,7 @@ const ON_SITE_SUBSCRIPTION = gql`
       _id
       slug
       name
+      createdAt
     }
   }
 `;

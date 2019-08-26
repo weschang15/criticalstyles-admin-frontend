@@ -1,14 +1,14 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import Skeleton from "../Skeleton/Skeleton";
 import {
-  TableHeader,
   Table,
-  TableRow,
+  TableBody,
   TableCell,
-  TableBody
+  TableHeader,
+  TableRow
 } from "../../Elements";
+import Skeleton from "../Skeleton/Skeleton";
 
 function SiteList({ loading, sites, here, subscribeToMore }) {
   useEffect(() => {
@@ -36,10 +36,10 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
         {loading ? (
           <Skeleton />
         ) : (
-          sites.map(({ _id, name, slug }) => (
+          sites.map(({ createdAt, _id, name, slug }) => (
             <TableRow key={_id} className="no-hover">
               <TableCell>{name}</TableCell>
-              <TableCell />
+              <TableCell>{new Date(createdAt).toLocaleString()}</TableCell>
               <TableCell>
                 <Link
                   to={{
