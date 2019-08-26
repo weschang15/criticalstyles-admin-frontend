@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { Home, Join, Logout } from "../../Pages";
-import Navbar from "../Navbar/Navbar";
-import ProtectedRoute from "../../Elements/ProtectedRoute";
-import AdminRoutes from "./AdminRoutes";
 import { AuthContext } from "../../contexts/AuthContext";
+import ProtectedRoute from "../../Elements/ProtectedRoute";
+import { Home, Join, Logout } from "../../Pages";
+import AdminRoutes from "./AdminRoutes";
 
 const Main = styled.main`
   position: relative;
@@ -16,7 +15,6 @@ function PublicRoutes() {
 
   return (
     <Main>
-      <Navbar isAuthenticated={authenticated} />
       <Switch>
         <Route path="/" component={Home} exact />
         <ProtectedRoute

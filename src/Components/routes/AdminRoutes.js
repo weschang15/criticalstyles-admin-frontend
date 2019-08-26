@@ -1,9 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import styled from "styled-components";
-
+import { Dashboard, Site, Sites } from "../../Pages";
 import PrimaryNav from "../Navbar/PrimaryNav";
-import { Sites, Site, Dashboard } from "../../Pages";
 import SecondaryNav from "../Navbar/SecondaryNav";
 
 const Container = styled.div`

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
@@ -12,8 +11,7 @@ const Nav = styled.nav`
   justify-content: ${({ path }) =>
     path.includes("/dashboard") ? "flex-end" : "space-between"};
 
-  padding: ${({ path }) =>
-    path.includes("/dashboard") ? "1em 1em 1em calc(66px + 1em)" : "16px 1em"};
+  padding: 1em;
 
   svg {
     fill: ${({ path, theme }) =>
@@ -42,32 +40,19 @@ const List = styled.ul`
   }
 `;
 
-function Navbar({ isAuthenticated, location, ...rest }) {
+function Navbar({ location, ...rest }) {
   return (
-    <Nav path={location.pathname} isAuthenticated>
+    <Nav path={location.pathname}>
       <Link to="/" className="logo">
         <Icons icon="logo" width="48px" height="48px" />
       </Link>
-
-      {isAuthenticated ? (
-        <Icons icon="user" width="32px" />
-      ) : (
-        <List>
-          <li>
-            <Link to="/join">Sign Up Now</Link>
-          </li>
-        </List>
-      )}
+      <List>
+        <li>
+          <Link to="/join">Sign Up Now</Link>
+        </li>
+      </List>
     </Nav>
   );
 }
-
-Navbar.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
-};
-
-Navbar.defaultProps = {
-  isAuthenticated: false
-};
 
 export default withRouter(Navbar);

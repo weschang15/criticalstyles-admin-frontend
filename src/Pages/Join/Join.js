@@ -1,12 +1,12 @@
+import { darken } from "polished";
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
-import { darken } from "polished";
-
-import LoginForm from "./LoginForm";
-import { PageSection, PrimaryCard } from "../../Elements";
-import RegisterForm from "./RegisterForm";
+import Navbar from "../../Components/Navbar/Navbar";
 import { AuthContext } from "../../contexts/AuthContext";
+import { PageSection, PrimaryCard } from "../../Elements";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 const Wrapper = styled(PageSection)`
   padding: 1.5em;
@@ -81,22 +81,25 @@ function Join() {
   return authenticated ? (
     <Redirect to="/dashboard" />
   ) : (
-    <Wrapper bgColor="rgba(59, 53, 97, 1)">
-      <FormContainer>
-        <FormTabs>
-          <FormTab
-            onClick={handleToggle}
-            className={showingLogin && "is-active"}
-          >
-            My account
-          </FormTab>
-          <FormTab onClick={handleToggle}>Register a new account</FormTab>
-        </FormTabs>
-        <FormWrapper>
-          {showingLogin ? <LoginForm /> : <RegisterForm />}
-        </FormWrapper>
-      </FormContainer>
-    </Wrapper>
+    <>
+      <Navbar />
+      <Wrapper bgColor="rgba(59, 53, 97, 1)">
+        <FormContainer>
+          <FormTabs>
+            <FormTab
+              onClick={handleToggle}
+              className={showingLogin && "is-active"}
+            >
+              My account
+            </FormTab>
+            <FormTab onClick={handleToggle}>Register a new account</FormTab>
+          </FormTabs>
+          <FormWrapper>
+            {showingLogin ? <LoginForm /> : <RegisterForm />}
+          </FormWrapper>
+        </FormContainer>
+      </Wrapper>
+    </>
   );
 }
 
