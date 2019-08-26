@@ -1,9 +1,9 @@
-import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-client";
 import { from, split } from "apollo-link";
+import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
-import { onError } from "apollo-link-error";
 import { getMainDefinition } from "apollo-utilities";
 
 const { REACT_APP_GRAPHQL_SERVER, REACT_APP_WEBSOCKET_SERVER } = process.env;

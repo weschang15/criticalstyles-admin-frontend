@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import DemoVideoThumbnail from "../../assets/critical-styles-demo-thumbnail.png";
 import DemoVideo from "../../assets/Critical_Styles_Demo.mp4";
-import Navbar from "../../Components/Navbar/Navbar";
+import { PublicLayout } from "../../Components/Layouts/Layouts";
 import { PageSection } from "../../Elements";
-import Footer from "../../Elements/Footer/Footer";
 
 const HeroSection = styled(PageSection)`
   background-color: ${({ theme }) => theme.purple};
@@ -11,6 +11,9 @@ const HeroSection = styled(PageSection)`
   text-align: center;
   color: ${({ theme }) => theme.white};
   z-index: 1;
+  p {
+    margin-bottom: 2em;
+  }
 `;
 
 const Headline = styled.h1`
@@ -62,22 +65,21 @@ const ProductSection = styled(PageSection)`
   }
 `;
 
-function Home() {
+function Home(props = {}) {
   return (
-    <>
-      <Navbar />
+    <PublicLayout>
       <HeroSection>
         <Headline>Critical CSS in 1 Click</Headline>
         <p>Faster page loads, increased conversions, and improved SEO.</p>
         <VideoWrapper>
           <VideoPlayer
             controlsList="nodownload noremoteplayback nofullscreen"
-            preload="auto"
+            preload="none"
+            poster={DemoVideoThumbnail}
             disablePictureInPicture
             disableRemotePlayback
             controls
             muted
-            autoPlay
           >
             <source src={DemoVideo} type="video/mp4" />
           </VideoPlayer>
@@ -94,12 +96,7 @@ function Home() {
           <strong>More details to come...</strong>
         </p>
       </ProductSection>
-      <Footer>
-        Designed, Developed and Deployed by {` `}
-        <a href="https://wesleychang.me">Wesley Chang</a> &copy;{" "}
-        {new Date().getFullYear()}
-      </Footer>
-    </>
+    </PublicLayout>
   );
 }
 

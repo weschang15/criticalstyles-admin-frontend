@@ -2,7 +2,7 @@ import { darken } from "polished";
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
-import Navbar from "../../Components/Navbar/Navbar";
+import { PublicLayout } from "../../Components/Layouts/Layouts";
 import { AuthContext } from "../../contexts/AuthContext";
 import { PageSection, PrimaryCard } from "../../Elements";
 import LoginForm from "./LoginForm";
@@ -81,8 +81,7 @@ function Join() {
   return authenticated ? (
     <Redirect to="/dashboard" />
   ) : (
-    <>
-      <Navbar />
+    <PublicLayout>
       <Wrapper bgColor="rgba(59, 53, 97, 1)">
         <FormContainer>
           <FormTabs>
@@ -99,7 +98,7 @@ function Join() {
           </FormWrapper>
         </FormContainer>
       </Wrapper>
-    </>
+    </PublicLayout>
   );
 }
 
