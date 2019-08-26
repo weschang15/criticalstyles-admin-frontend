@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
+import ModalImage from "../../assets/create-page.svg";
 import {
   FieldLabel,
   Fields,
@@ -8,7 +9,6 @@ import {
   PrimaryModal,
   Spinner
 } from "../../Elements";
-import ModalImage from "../../images/create-page.svg";
 import { CREATE_PAGE } from "../../Mutations";
 import { ModalForm, ModalFormGroup, ModalHeader } from "./Modals";
 

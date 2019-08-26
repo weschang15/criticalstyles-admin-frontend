@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
+import { darken, transparentize } from "polished";
 import PropTypes from "prop-types";
+import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
-import Portal from "../Portal";
+import styled from "styled-components";
 import Icons from "../Icons";
-import { transparentize, darken } from "polished";
+import Portal from "../Portal";
 
 const DrawerWrapper = styled.aside`
   align-items: center;
@@ -61,9 +61,11 @@ function Drawer({ children, on, toggle }) {
     leave: { opacity: 0, transform: "translate3d(100%, 0, 0)" }
   });
 
+  const pointerEvents = on ? "all" : "none";
+
   const close = e => {
     // Allow user to click outside of modal to close it
-    if (e.target === card.current.parentNode) {
+    if (on && e.target === card.current.parentNode) {
       return toggle();
     }
   };
@@ -72,7 +74,7 @@ function Drawer({ children, on, toggle }) {
     ({ item, key, props: animation }) =>
       item && (
         <Portal key={key}>
-          <DrawerWrapper onClick={close}>
+          <DrawerWrapper onClick={close} style={{ pointerEvents }}>
             <DrawerInner
               animation={animation}
               close={toggle}

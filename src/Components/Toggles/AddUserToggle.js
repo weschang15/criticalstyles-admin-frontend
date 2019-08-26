@@ -1,6 +1,6 @@
 import React from "react";
+import AddUserImage from "../../assets/add-user.svg";
 import { Toggle } from "../../Elements";
-import AddUserImage from "../../images/add-user.svg";
 import AddUserModal from "../Modals/AddUserModal";
 import { QuickActionWrapper } from "./Toggles";
 

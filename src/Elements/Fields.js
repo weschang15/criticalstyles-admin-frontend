@@ -1,11 +1,11 @@
+import { darken, transparentize } from "polished";
 import React from "react";
 import styled from "styled-components";
-import UrlIcon from "../images/url-icon.svg";
-import ErrorIcon from "../images/error-icon.svg";
-import EmailIcon from "../images/email-icon.svg";
-import LockIcon from "../images/lock-icon.svg";
-import InformationIcon from "../images/information-icon.svg";
-import { transparentize, darken } from "polished";
+import EmailIcon from "../assets/email-icon.svg";
+import ErrorIcon from "../assets/error-icon.svg";
+import InformationIcon from "../assets/information-icon.svg";
+import LockIcon from "../assets/lock-icon.svg";
+import UrlIcon from "../assets/url-icon.svg";
 import { PrimaryButton } from "./Buttons";
 
 const Generic = styled.input`

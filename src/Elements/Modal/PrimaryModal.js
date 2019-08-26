@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
+import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
+import styled from "styled-components";
 import Portal from "../Portal";
 
 const ModalWrapper = styled.div`
@@ -44,7 +44,7 @@ function PrimaryModal({ children, on, toggle }) {
 
   const close = e => {
     // Allow user to click outside of modal to close it
-    if (e.target === card.current.parentNode) {
+    if (on && e.target === card.current.parentNode) {
       return toggle();
     }
   };
@@ -55,11 +55,13 @@ function PrimaryModal({ children, on, toggle }) {
     leave: { opacity: 0, transform: "translate3d(0, -40px, 0)" }
   });
 
+  const pointerEvents = on ? "all" : "none";
+
   return transitions.map(
     ({ item, key, props: animation }) =>
       item && (
         <Portal key={key}>
-          <ModalWrapper onClick={close}>
+          <ModalWrapper onClick={close} style={{ pointerEvents }}>
             <ModalCard animation={animation} close={toggle} forwardedRef={card}>
               {children}
             </ModalCard>

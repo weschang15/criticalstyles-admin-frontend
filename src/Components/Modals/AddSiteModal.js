@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useContext, useState } from "react";
+import ModalImage from "../../assets/create-site.svg";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
   FieldLabel,
@@ -8,7 +9,6 @@ import {
   PrimaryModal,
   Spinner
 } from "../../Elements";
-import ModalImage from "../../images/create-site.svg";
 import { CREATE_SITE } from "../../Mutations";
 import { ModalForm, ModalFormGroup, ModalHeader } from "./Modals";
 

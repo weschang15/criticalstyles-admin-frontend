@@ -1,6 +1,6 @@
 import React from "react";
+import CreateCodeImage from "../../assets/create-code.svg";
 import { Drawer, Toggle } from "../../Elements";
-import CreateCodeImage from "../../images/create-code.svg";
 import MoneyMaker from "../MoneyMaker/MoneyMaker";
 import { QuickActionWrapper } from "./Toggles";
 
