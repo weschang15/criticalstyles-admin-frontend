@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { ThemeProvider } from "styled-components";
+import { useQuery } from "react-apollo";
 import { BrowserRouter } from "react-router-dom";
-
+import { ThemeProvider } from "styled-components";
+import { IS_FETCHING, LOGIN_USER } from "./actions";
 import PublicRoutes from "./Components/routes/PublicRoutes";
 import theme from "./config/theme";
-import { useQuery } from "react-apollo";
 import { AuthDispatch } from "./contexts/AuthContext";
-import { LOGIN_USER, IS_FETCHING } from "./actions";
 import { AUTH } from "./Queries";
 
 function App() {

@@ -1,6 +1,6 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
 
 const ProtectedRoute = ({
   component: Component,
@@ -33,7 +33,7 @@ ProtectedRoute.defaultProps = {
 
 ProtectedRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  component: PropTypes.func.isRequired,
+  component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   redirect: PropTypes.string
 };
 

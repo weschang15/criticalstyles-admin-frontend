@@ -9,7 +9,7 @@ const Container = styled.div`
   padding: 1em 1em 1em calc(66px + 1em);
 `;
 
-function AdminRoutes({ match: { path }, location: { pathname } }) {
+function AdminRoutes({ match: { path } }) {
   return (
     <>
       <PrimaryNav />
