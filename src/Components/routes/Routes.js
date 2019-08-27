@@ -1,6 +1,7 @@
-import React, { lazy, Suspense, useContext, useEffect } from "react";
+import React, { lazy, Suspense, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import ProtectedRoute from "../../Elements/ProtectedRoute";
 import { Dashboard, Site, Sites } from "../../Pages";
 
 const NotFound = lazy(() => import("../../Pages/NotFound/NotFound"));
@@ -8,18 +9,28 @@ const NotFound = lazy(() => import("../../Pages/NotFound/NotFound"));
 function Routes() {
   const { authenticated, loading } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!authenticated && !loading) {
-      window.location.assign(process.env.REACT_APP_PUBLIC_URL);
-    }
-  });
-
   return (
     <Suspense fallback={null}>
       <Switch>
-        <Route path="/" component={Dashboard} exact />
-        <Route path="/sites" component={Sites} />
-        <Route path="/sites/:slug" component={Site} />
+        <ProtectedRoute
+          path="/"
+          component={Dashboard}
+          isAuthenticated={authenticated}
+          loading={loading}
+          exact
+        />
+        <ProtectedRoute
+          path="/sites"
+          component={Sites}
+          isAuthenticated={authenticated}
+          loading={loading}
+        />
+        <ProtectedRoute
+          path="/sites/:slug"
+          component={Site}
+          isAuthenticated={authenticated}
+          loading={loading}
+        />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

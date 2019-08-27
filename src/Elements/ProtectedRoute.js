@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 const ProtectedRoute = ({
   component: Component,
@@ -13,16 +13,14 @@ const ProtectedRoute = ({
     return null;
   }
 
+  if (!isAuthenticated) {
+    window.location.assign(process.env.REACT_APP_PUBLIC_URL);
+  }
+
   return (
     <Route
       {...rest}
-      render={props =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname, state: { from: props.location } }} />
-        )
-      }
+      render={props => (isAuthenticated ? <Component {...props} /> : null)}
     />
   );
 };
