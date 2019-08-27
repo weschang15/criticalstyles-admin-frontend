@@ -6,9 +6,13 @@ import { PublicLayout } from "../../Components/Layouts/Layouts";
 import { PrimaryButton } from "../../Elements";
 
 const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.purple};
   min-height: 400px;
   padding: 1em;
   text-align: center;
+  h2 {
+    color: ${({ theme }) => theme.white};
+  }
   p {
     color: ${({ theme }) => darken(0.5, theme.gray)};
   }
