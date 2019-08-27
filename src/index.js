@@ -1,34 +1,21 @@
-import React from "react";
-import { hydrate, render } from "react-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { apolloClient } from "./config/apolloClient";
-import * as serviceWorker from "./serviceWorker";
-import App from "./App";
-
 import "normalize.css";
-import "./index.css";
+import React from "react";
+import { render } from "react-dom";
+import App from "./App";
+import { apolloClient } from "./config/apolloClient";
 import { RootContext } from "./contexts/RootContext";
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
 
-const root = document.getElementById("root");
-if (root.hasChildNodes()) {
-  hydrate(
-    <ApolloProvider client={apolloClient}>
-      <RootContext>
-        <App />
-      </RootContext>
-    </ApolloProvider>,
-    root
-  );
-} else {
-  render(
-    <ApolloProvider client={apolloClient}>
-      <RootContext>
-        <App />
-      </RootContext>
-    </ApolloProvider>,
-    root
-  );
-}
+render(
+  <ApolloProvider client={apolloClient}>
+    <RootContext>
+      <App />
+    </RootContext>
+  </ApolloProvider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
