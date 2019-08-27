@@ -1,7 +1,7 @@
 import { darken } from "polished";
 import React from "react";
 import styled from "styled-components";
-import DemoVideoThumbnail from "../../assets/critical-styles-demo-thumbnail.png";
+import DemoVideoThumbnail from "../../assets/critical-styles-demo-thumbnail-v2.png";
 import DemoVideo from "../../assets/Critical_Styles_Demo.mp4";
 import { PublicLayout } from "../../Components/Layouts/Layouts";
 import { Icons, PageSection } from "../../Elements";
