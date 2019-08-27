@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import React, { useContext } from "react";
 import styled from "styled-components";
+import { AdminLayout } from "../../Components/Layouts/Layouts";
 import PageList from "../../Components/PageList/PageList";
 import { AuthContext } from "../../contexts/AuthContext";
 import { GET_PAGES } from "../../Queries";
@@ -62,7 +63,7 @@ function Site({ location: { state = {} } }) {
   const pages = data && data.pages ? data.pages.documents : [];
 
   return (
-    <>
+    <AdminLayout>
       <Section>
         <PageList
           loading={loading}
@@ -71,7 +72,7 @@ function Site({ location: { state = {} } }) {
           {...state}
         />
       </Section>
-    </>
+    </AdminLayout>
   );
 }
 

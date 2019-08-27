@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 import React, { useContext } from "react";
 import { useQuery } from "react-apollo";
 import styled from "styled-components";
+import { AdminLayout } from "../../Components/Layouts/Layouts";
 import SiteList from "../../Components/Sites/SiteList";
 import { AuthContext } from "../../contexts/AuthContext";
 import { GET_ACCOUNT } from "../../Queries";
@@ -60,7 +61,7 @@ function Sites({ location: { pathname } }) {
 
   const sites = getAccount ? getAccount.account.sites : [];
   return (
-    <>
+    <AdminLayout>
       <Section>
         <SiteList
           loading={loading}
@@ -69,7 +70,7 @@ function Sites({ location: { pathname } }) {
           subscribeToMore={subscribe}
         />
       </Section>
-    </>
+    </AdminLayout>
   );
 }
 

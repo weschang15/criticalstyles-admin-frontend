@@ -1,5 +1,5 @@
+import { darken, transparentize } from "polished";
 import styled from "styled-components";
-import { transparentize, darken } from "polished";
 
 const Breadcrumb = styled.li`
   color: ${({ theme }) => darken(0.25, theme.gray)};
@@ -16,7 +16,7 @@ const Breadcrumb = styled.li`
     }
   }
 
-  &:last-of-type {
+  &:not(:only-child):last-of-type {
     background-color: ${({ theme }) => transparentize(0.9, theme.blue)};
     border-radius: 12px;
     color: ${({ theme }) => theme.blue};

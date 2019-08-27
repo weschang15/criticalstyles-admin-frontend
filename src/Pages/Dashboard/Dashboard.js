@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { AdminLayout } from "../../Components/Layouts/Layouts";
 import AddUserToggle from "../../Components/Toggles/AddUserToggle";
 import ToggleServiceUtility from "../../Components/Toggles/ToggleServiceUtility";
 
@@ -11,12 +12,12 @@ const Section = styled.section`
 
 function Dashboard() {
   return (
-    <>
+    <AdminLayout>
       <Section>
         <AddUserToggle />
         <ToggleServiceUtility />
       </Section>
-    </>
+    </AdminLayout>
   );
 }
 

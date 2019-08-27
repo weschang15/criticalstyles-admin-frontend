@@ -1,24 +1,29 @@
-import React, { useContext, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { useMutation } from "react-apollo";
-import { LOGOUT } from "../../Mutations";
-import { AuthDispatch } from "../../contexts/AuthContext";
 import { LOGOUT_USER } from "../../actions";
+import { AuthDispatch } from "../../contexts/AuthContext";
+import { LOGOUT } from "../../Mutations";
 
 function Logout() {
   const dispatch = useContext(AuthDispatch);
-  const [logout] = useMutation(LOGOUT);
+  const [logout, { data, loading }] = useMutation(LOGOUT);
 
   useEffect(() => {
-    const logoutUser = async () => {
-      await logout();
-    };
-
-    logoutUser();
-    dispatch({ type: LOGOUT_USER });
+    logout();
   });
 
-  return <Redirect to="/" />;
+  if (loading) {
+    return null;
+  }
+
+  if (data && data.logout) {
+    const { ok } = data.logout;
+    if (ok) {
+      dispatch({ type: LOGOUT_USER });
+    }
+  }
+
+  return null;
 }
 
 export default Logout;

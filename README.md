@@ -1,1 +1,1 @@
-# Critical Styles Front-end
+# Critical Styles Admin Front-end

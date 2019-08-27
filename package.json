@@ -1,5 +1,5 @@
 {
-  "name": "criticalstyles-frontend",
+  "name": "criticalstyles-admin-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,8 +32,7 @@
     "use-previous": "^1.0.0"
   },
   "scripts": {
-    "postbuild": "react-snap",
-    "start": "react-scripts start",
+    "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
