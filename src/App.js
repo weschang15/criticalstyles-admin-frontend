@@ -3,6 +3,7 @@ import { useQuery } from "react-apollo";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { IS_FETCHING, LOGIN_USER } from "./actions";
+import { LoadingLayout } from "./Components/Layouts/Layouts";
 import Routes from "./Components/routes/Routes";
 import theme from "./config/theme";
 import { AuthDispatch } from "./contexts/AuthContext";
@@ -29,14 +30,17 @@ function App() {
 
   if (loading) {
     dispatch({ type: IS_FETCHING, payload: true });
-    return null;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      {loading ? (
+        <LoadingLayout />
+      ) : (
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      )}
     </ThemeProvider>
   );
 }

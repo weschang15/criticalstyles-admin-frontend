@@ -1,4 +1,3 @@
-import { transparentize } from "polished";
 import React, { useContext } from "react";
 import { useMutation } from "react-apollo";
 import { NavLink } from "react-router-dom";
@@ -7,6 +6,8 @@ import { LOGOUT_USER } from "../../actions";
 import { AuthDispatch } from "../../contexts/AuthContext";
 import { Icons } from "../../Elements";
 import { LOGOUT } from "../../Mutations";
+import NavItem from "./NavItem";
+import NavList from "./NavList";
 
 const Nav = styled.nav`
   background-color: ${({ theme }) => theme.black};
@@ -33,33 +34,6 @@ const Nav = styled.nav`
   }
 `;
 
-const List = styled.ul`
-  height: 100%;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
-
-const Item = styled.li`
-  display: block;
-  color: ${({ theme }) => theme.white};
-  text-align: center;
-  padding: 0.5em;
-
-  a,
-  span {
-    cursor: pointer;
-    display: block;
-    padding: 0.65em;
-    &.active {
-      box-shadow: inset 0 -2px 0 0 ${({ theme }) => transparentize(0.8, theme.white)};
-      svg {
-        fill: ${({ theme }) => theme.white};
-      }
-    }
-  }
-`;
-
 function PrimaryNav() {
   const dispatch = useContext(AuthDispatch);
   const [logout] = useMutation(LOGOUT);
@@ -69,23 +43,23 @@ function PrimaryNav() {
       <NavLink to="/" className="logo" exact>
         <Icons icon="logo" fill="currentColor" />
       </NavLink>
-      <List>
-        <Item>
+      <NavList>
+        <NavItem>
           <NavLink to="/" exact>
             <Icons fill="currentColor" />
           </NavLink>
-        </Item>
-        <Item>
+        </NavItem>
+        <NavItem>
           <NavLink to="/sites">
             <Icons icon="window" fill="currentColor" />
           </NavLink>
-        </Item>
-        <Item>
+        </NavItem>
+        <NavItem>
           <NavLink to="/trash" exact>
             <Icons icon="trash" fill="currentColor" />
           </NavLink>
-        </Item>
-        <Item>
+        </NavItem>
+        <NavItem>
           <span
             onClick={async () => {
               await logout();
@@ -94,8 +68,8 @@ function PrimaryNav() {
           >
             <Icons icon="power" fill="currentColor" />
           </span>
-        </Item>
-      </List>
+        </NavItem>
+      </NavList>
     </Nav>
   );
 }
