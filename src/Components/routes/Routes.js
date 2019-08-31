@@ -24,6 +24,7 @@ function Routes() {
           component={Sites}
           isAuthenticated={authenticated}
           loading={loading}
+          exact
         />
         <ProtectedRoute
           path="/sites/:slug"

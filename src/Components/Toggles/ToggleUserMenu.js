@@ -9,20 +9,26 @@ const User = styled.button`
   background: none;
   backface-visibility: hidden;
   border: 0;
+  border-radius: 12px;
   cursor: pointer;
   display: inline-block;
   margin-left: 1em;
+  outline: none;
   padding: 5px;
   position: relative;
-  outline: none;
 
   svg {
     fill: ${({ theme }) => theme.blue};
     display: block;
   }
 
-  &:focus {
-    outline: 1px dotted ${({ theme }) => theme.blue};
+  &:focus,
+  &:hover {
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.blue};
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => transparentize(0.9, theme.blue)};
   }
 
   &:active {
@@ -32,6 +38,7 @@ const User = styled.button`
 
 const Nav = styled.nav`
   background-color: #fff;
+  border: 1px solid ${({ theme }) => transparentize(0.75, theme.gray)};
   border-radius: 6px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   min-width: 160px;
