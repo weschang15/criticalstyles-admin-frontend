@@ -9,6 +9,7 @@ import {
 } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
 import TogglePageDetails from "../Toggles/TogglePageDetails";
+import NoPages from "./NoPages";
 
 function PageList({ loading, pages, subscribeToMore }) {
   useEffect(() => {
@@ -23,7 +24,22 @@ function PageList({ loading, pages, subscribeToMore }) {
     };
   });
 
-  return (
+  if (loading) {
+    return (
+      <Table>
+        <TableHeader>
+          <TableRow />
+          <TableRow />
+          <TableRow />
+        </TableHeader>
+        <TableBody>
+          <Skeleton />
+        </TableBody>
+      </Table>
+    );
+  }
+
+  return pages.length ? (
     <Table>
       <TableHeader>
         <TableRow>
@@ -33,21 +49,19 @@ function PageList({ loading, pages, subscribeToMore }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {loading ? (
-          <Skeleton />
-        ) : (
-          pages.map(page => (
-            <TableRow key={page._id}>
-              <TableCell>{page.name}</TableCell>
-              <TableCell>{new Date(page.createdAt).toLocaleString()}</TableCell>
-              <TableCell>
-                <TogglePageDetails {...page} />
-              </TableCell>
-            </TableRow>
-          ))
-        )}
+        {pages.map(page => (
+          <TableRow key={page._id}>
+            <TableCell>{page.name}</TableCell>
+            <TableCell>{new Date(page.createdAt).toLocaleString()}</TableCell>
+            <TableCell>
+              <TogglePageDetails {...page} />
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
+  ) : (
+    <NoPages />
   );
 }
 

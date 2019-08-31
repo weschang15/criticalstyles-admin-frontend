@@ -1,11 +1,12 @@
 import { transparentize } from "polished";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 export const QuickActionWrapper = styled.div`
   align-items: center;
   background-color: ${({ theme }) => transparentize(0.9, theme.blue)};
   border-radius: 6px;
-  cursor: pointer;
+  cursor: ${({ withActive }) => (withActive ? "pointer" : "auto")};
   display: inline-flex;
   padding: 1em;
   margin-top: 3em;
@@ -20,10 +21,14 @@ export const QuickActionWrapper = styled.div`
     }
   }
 
+  ${({ withActive }) =>
+    withActive
+      ? `
   &:active {
     backface-visibility: hidden;
     transform: perspective(1px) scale3d(0.97, 0.97, 0.97);
-  }
+  }`
+      : null}
 
   figure {
     flex: 1 0 140px;
@@ -37,9 +42,19 @@ export const QuickActionWrapper = styled.div`
   h5 {
     color: ${({ theme }) => theme.blue};
     line-height: 1;
-    margin: 0;
+    margin-top: 0;
   }
   p {
     display: block;
+    font-size: 16px;
+    margin: 0;
   }
 `;
+
+QuickActionWrapper.defaultProps = {
+  withActive: true
+};
+
+QuickActionWrapper.propTypes = {
+  withActive: PropTypes.bool.isRequired
+};
