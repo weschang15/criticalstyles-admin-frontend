@@ -6,3 +6,4 @@ export { default as CREATE_STYLESHEET } from "./CreateStylesheet";
 export { default as CREATE_USER } from "./CreateUser";
 export { default as LOGIN } from "./Login";
 export { default as LOGOUT } from "./Logout";
+export { default as SWITCH_ACCOUNT } from "./SwitchAccount";
