@@ -9,6 +9,7 @@ import {
   TableRow
 } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
+import NoSites from "./NoSites";
 
 function SiteList({ loading, sites, here, subscribeToMore }) {
   useEffect(() => {
@@ -23,7 +24,22 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
     };
   });
 
-  return (
+  if (loading) {
+    return (
+      <Table>
+        <TableHeader>
+          <TableRow />
+          <TableRow />
+          <TableRow />
+        </TableHeader>
+        <TableBody>
+          <Skeleton />
+        </TableBody>
+      </Table>
+    );
+  }
+
+  return sites.length ? (
     <Table>
       <TableHeader>
         <TableRow>
@@ -33,31 +49,29 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {loading ? (
-          <Skeleton />
-        ) : (
-          sites.map(({ createdAt, _id, name, slug }) => (
-            <TableRow key={_id} className="no-hover">
-              <TableCell>{name}</TableCell>
-              <TableCell>{new Date(createdAt).toLocaleString()}</TableCell>
-              <TableCell>
-                <Link
-                  to={{
-                    pathname: `${here}/${slug}`,
-                    state: {
-                      siteId: _id,
-                      isSingle: true
-                    }
-                  }}
-                >
-                  View
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))
-        )}
+        {sites.map(({ createdAt, _id, name, slug }) => (
+          <TableRow key={_id} className="no-hover">
+            <TableCell>{name}</TableCell>
+            <TableCell>{new Date(createdAt).toLocaleString()}</TableCell>
+            <TableCell>
+              <Link
+                to={{
+                  pathname: `${here}/${slug}`,
+                  state: {
+                    siteId: _id,
+                    isSingle: true
+                  }
+                }}
+              >
+                View
+              </Link>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
+  ) : (
+    <NoSites />
   );
 }
 

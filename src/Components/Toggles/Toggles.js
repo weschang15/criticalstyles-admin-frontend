@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 export const QuickActionWrapper = styled.div`
   align-items: center;
-  background-color: ${({ theme }) => transparentize(0.9, theme.blue)};
+  background-color: ${({ bgColor, theme }) =>
+    transparentize(0.9, theme[bgColor])};
   border-radius: 6px;
   cursor: ${({ withActive }) => (withActive ? "pointer" : "auto")};
   display: inline-flex;
@@ -40,7 +41,7 @@ export const QuickActionWrapper = styled.div`
     }
   }
   h5 {
-    color: ${({ theme }) => theme.blue};
+    color: ${({ bgColor, theme }) => theme[bgColor]};
     line-height: 1;
     margin-top: 0;
   }
@@ -52,9 +53,11 @@ export const QuickActionWrapper = styled.div`
 `;
 
 QuickActionWrapper.defaultProps = {
-  withActive: true
+  withActive: true,
+  bgColor: "blue"
 };
 
 QuickActionWrapper.propTypes = {
-  withActive: PropTypes.bool.isRequired
+  withActive: PropTypes.bool.isRequired,
+  bgColor: PropTypes.string
 };

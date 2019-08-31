@@ -61,7 +61,7 @@ function PageList({ loading, pages, subscribeToMore }) {
       </TableBody>
     </Table>
   ) : (
-    <NoPages />
+    <NoPages bgColor="teal" />
   );
 }
 
