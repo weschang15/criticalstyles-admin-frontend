@@ -1,9 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import AddSiteToggle from "../Toggles/AddSiteToggle";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import AddPageToggle from "../Toggles/AddPageToggle";
+import AddSiteToggle from "../Toggles/AddSiteToggle";
+import ToggleUserMenu from "../Toggles/ToggleUserMenu";
 
 const Container = styled.div`
   align-items: center;
@@ -12,13 +13,21 @@ const Container = styled.div`
   margin: 0 0 1em;
 `;
 
+const UserActions = styled.div`
+  align-items: center;
+  display: flex;
+  position: relative;
+`;
+
 function SecondaryNav({ location: { pathname, state = {} } }) {
   const { isSingle } = state;
-
   return (
     <Container>
       <Breadcrumbs here={pathname} />
-      {isSingle ? <AddPageToggle /> : <AddSiteToggle />}
+      <UserActions>
+        {isSingle ? <AddPageToggle /> : <AddSiteToggle />}
+        <ToggleUserMenu />
+      </UserActions>
     </Container>
   );
 }

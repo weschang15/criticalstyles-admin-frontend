@@ -1,7 +1,7 @@
+import { transparentize } from "polished";
 import React from "react";
 import styled from "styled-components";
-import { transparentize } from "polished";
-import { Toggle, Icons, PrimaryButton } from "../../Elements";
+import { Icons, PrimaryButton, Toggle } from "../../Elements";
 import AddSiteModal from "../Modals/AddSiteModal";
 
 const Button = styled(PrimaryButton)`

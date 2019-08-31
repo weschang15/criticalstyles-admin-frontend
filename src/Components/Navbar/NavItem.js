@@ -10,7 +10,7 @@ const NavItem = styled.li`
   a,
   span {
     cursor: pointer;
-    display: block;
+    display: inline-block;
     padding: 0.65em;
     &.active {
       box-shadow: inset 0 -2px 0 0 ${({ theme }) => transparentize(0.8, theme.white)};

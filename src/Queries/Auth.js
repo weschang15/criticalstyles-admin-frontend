@@ -18,6 +18,10 @@ export const AUTH = gql`
           firstName
           lastName
           email
+          accounts {
+            _id
+            name
+          }
         }
       }
     }
