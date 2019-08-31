@@ -84,7 +84,7 @@ function UserMenu({
   user: { firstName, lastName, accounts },
   currentAccount
 }) {
-  const [switchAccount, { data }] = useMutation(SWITCH_ACCOUNT);
+  const [switchAccount] = useMutation(SWITCH_ACCOUNT);
 
   const transitions = useTransition(on, null, {
     from: { opacity: 0, transform: "translate3d(0, -10px, 0)" },
