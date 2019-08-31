@@ -17,7 +17,9 @@ const INITIAL_FIELDS = {
 };
 
 function AddUserModal({ on, toggle }) {
-  const { accountId } = useContext(AuthContext);
+  const {
+    account: { _id }
+  } = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const [addUser, { loading }] = useMutation(ADD_ACCOUNT_USER);
@@ -29,7 +31,7 @@ function AddUserModal({ on, toggle }) {
     e.preventDefault();
     const { data } = await addUser({
       variables: {
-        input: { ...fields, accountId }
+        input: { ...fields, accountId: _id }
       }
     });
 

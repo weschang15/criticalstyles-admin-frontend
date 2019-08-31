@@ -29,7 +29,9 @@ const ON_PAGE_ADDED_SUBSCRIPTION = gql`
 
 function Site({ location: { state = {} } }) {
   const { siteId } = state;
-  const { accountId } = useContext(AuthContext);
+  const {
+    account: { _id }
+  } = useContext(AuthContext);
   const { data, loading, subscribeToMore } = useQuery(GET_PAGES, {
     variables: {
       input: {
@@ -41,7 +43,7 @@ function Site({ location: { state = {} } }) {
   const subscribe = () => {
     const unsubscribe = subscribeToMore({
       document: ON_PAGE_ADDED_SUBSCRIPTION,
-      variables: { input: { accountId, siteId } },
+      variables: { input: { accountId: _id, siteId } },
       updateQuery: (prevData, { subscriptionData }) => {
         if (!subscriptionData.data) {
           return prevData;

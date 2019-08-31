@@ -19,8 +19,7 @@ function App() {
       const payload = {
         user: auth.user,
         authenticated: ok,
-        accountId: auth.account._id,
-        accountName: auth.account.name
+        account: auth.account
       };
 
       dispatch({ type: LOGIN_USER, payload });

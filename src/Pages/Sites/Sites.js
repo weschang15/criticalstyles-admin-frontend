@@ -21,7 +21,9 @@ const ON_SITE_SUBSCRIPTION = gql`
 `;
 
 function Sites({ location: { pathname } }) {
-  const { accountId } = useContext(AuthContext);
+  const {
+    account: { _id }
+  } = useContext(AuthContext);
   const {
     data: { getAccount },
     loading,
@@ -29,7 +31,7 @@ function Sites({ location: { pathname } }) {
   } = useQuery(GET_ACCOUNT, {
     variables: {
       input: {
-        id: accountId
+        id: _id
       }
     }
   });
@@ -37,7 +39,7 @@ function Sites({ location: { pathname } }) {
   const subscribe = () => {
     const unsubscribe = subscribeToMore({
       document: ON_SITE_SUBSCRIPTION,
-      variables: { accountId },
+      variables: { accountId: _id },
       updateQuery: (prevData, { subscriptionData }) => {
         if (!subscriptionData.data) {
           return prevData;

@@ -1,10 +1,10 @@
+import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 import styled from "styled-components";
+import { AuthContext } from "../../contexts/AuthContext";
 import { getBreadcrumbs, removeLast } from "../../Utils";
 import Breadcrumb from "./Breadcrumb";
-import { AuthContext } from "../../contexts/AuthContext";
 import Separator from "./Separator";
 
 const BreadcrumbList = styled.ul`
@@ -16,10 +16,12 @@ const BreadcrumbList = styled.ul`
 `;
 
 function Breadcrumbs({ here }) {
-  const { accountName } = useContext(AuthContext);
+  const {
+    account: { name }
+  } = useContext(AuthContext);
   const breadcrumbs = getBreadcrumbs(here);
 
-  const crumbs = [{ to: null, page: accountName }, ...breadcrumbs]
+  const crumbs = [{ to: null, page: name }, ...breadcrumbs]
     .map(({ to, page }) => (
       <Breadcrumb key={page}>
         {to ? <NavLink to={to}>{page}</NavLink> : page}

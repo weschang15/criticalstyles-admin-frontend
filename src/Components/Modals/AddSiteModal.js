@@ -17,7 +17,9 @@ const INITIAL_FIELDS = {
 };
 
 function AddSiteModal({ on, toggle }) {
-  const { accountId } = useContext(AuthContext);
+  const {
+    account: { _id }
+  } = useContext(AuthContext);
   const [errors, setErrors] = useState([]);
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const [createSite, { loading }] = useMutation(CREATE_SITE);
@@ -29,7 +31,7 @@ function AddSiteModal({ on, toggle }) {
     e.preventDefault();
     const { data } = await createSite({
       variables: {
-        input: { ...fields, accountId }
+        input: { ...fields, accountId: _id }
       }
     });
 

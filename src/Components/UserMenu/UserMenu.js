@@ -105,7 +105,7 @@ function UserMenu({
               {accounts.map(({ _id, name }) => (
                 <Item
                   key={_id}
-                  className={currentAccount === _id && "active"}
+                  className={currentAccount._id === _id && "active"}
                   onClick={() => {
                     switchAccount({
                       variables: {

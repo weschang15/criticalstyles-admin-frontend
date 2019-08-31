@@ -37,12 +37,12 @@ const User = styled.button`
 `;
 
 function ToggleUserMenu() {
-  const { user, accountId } = useContext(AuthContext);
+  const { user, account } = useContext(AuthContext);
   return (
     <Toggle>
       {({ on, toggle }) => (
         <>
-          <UserMenu on={on} user={user} currentAccount={accountId} />
+          <UserMenu on={on} user={user} currentAccount={account} />
           <User onClick={toggle}>
             <Icons icon="user" size={30} />
           </User>
