@@ -113,7 +113,7 @@ function UserMenu({
                           accountId: _id
                         }
                       },
-                      refetchQueries: ["Auth"]
+                      refetchQueries: ["Auth", "GetAccount", "GetSites"]
                     });
                   }}
                 >

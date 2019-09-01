@@ -12,10 +12,6 @@ export const AUTH = gql`
         account {
           _id
           name
-          summary {
-            sites
-            users
-          }
         }
         user {
           _id

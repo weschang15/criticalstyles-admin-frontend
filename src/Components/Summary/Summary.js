@@ -1,8 +1,9 @@
 import pluralize from "pluralize";
-import React, { useContext } from "react";
+import React from "react";
+import { useQuery } from "react-apollo";
 import styled from "styled-components";
-import { AuthContext } from "../../contexts/AuthContext";
 import { GridSection } from "../../Elements";
+import { GET_ACCOUNT } from "../../Queries/GetAccount";
 import SummaryItem from "./SummaryItem";
 
 const Grid = styled.div`
@@ -14,8 +15,16 @@ const Grid = styled.div`
 
 function Summary() {
   const {
-    account: { summary }
-  } = useContext(AuthContext);
+    data: { getAccount },
+    loading
+  } = useQuery(GET_ACCOUNT);
+
+  const {
+    summary = {
+      sites: 0,
+      users: 0
+    }
+  } = getAccount ? getAccount.account : {};
 
   return (
     <GridSection>
@@ -23,10 +32,12 @@ function Summary() {
       <Grid>
         <SummaryItem
           subject={pluralize("Site", summary.sites)}
+          loading={loading}
           count={summary.sites}
         />
         <SummaryItem
           subject={pluralize("User", summary.users)}
+          loading={loading}
           count={summary.users}
         />
       </Grid>

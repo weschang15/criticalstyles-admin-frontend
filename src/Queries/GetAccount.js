@@ -1,16 +1,13 @@
 import gql from "graphql-tag";
 
 export const GET_ACCOUNT = gql`
-  query GetAccount($input: AccountInput!, $sf: Filter) {
-    getAccount(input: $input) {
+  query GetAccount {
+    getAccount {
       account {
-        sites(sf: $sf) {
-          _id
-          slug
-          name
-          createdAt
+        summary {
+          sites
+          users
         }
-        name
       }
     }
   }
