@@ -44,7 +44,7 @@ function Navbar({ location, ...rest }) {
   return (
     <Nav path={location.pathname}>
       <Link to="/" className="logo">
-        <Icons icon="logo" width="48px" height="48px" />
+        <Icons icon="logo" size={48} />
       </Link>
       <List>
         <li>
