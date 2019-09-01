@@ -1,8 +1,8 @@
 import React from "react";
-import { Toggle, LinkButton, Drawer } from "../../Elements";
-import Page from "../PageList/Page";
+import { Drawer, LinkButton, Toggle } from "../../Elements";
+import Page from "./Page";
 
-function TogglePageDetails(props = {}) {
+function PageDetails(props = {}) {
   return (
     <Toggle>
       {({ on, toggle }) => {
@@ -19,4 +19,4 @@ function TogglePageDetails(props = {}) {
   );
 }
 
-export default TogglePageDetails;
+export default PageDetails;

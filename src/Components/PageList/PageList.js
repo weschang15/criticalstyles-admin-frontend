@@ -8,8 +8,8 @@ import {
   TableRow
 } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
-import TogglePageDetails from "../Toggles/TogglePageDetails";
 import NoPages from "./NoPages";
+import PageDetails from "./PageDetails";
 
 function PageList({ loading, pages, subscribeToMore }) {
   useEffect(() => {
@@ -54,7 +54,7 @@ function PageList({ loading, pages, subscribeToMore }) {
             <TableCell>{page.name}</TableCell>
             <TableCell>{new Date(page.createdAt).toLocaleString()}</TableCell>
             <TableCell>
-              <TogglePageDetails {...page} />
+              <PageDetails {...page} />
             </TableCell>
           </TableRow>
         ))}
