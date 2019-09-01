@@ -54,7 +54,7 @@ const SkeletonSidebar = styled.nav`
 
   ${Square} {
     opacity: 0.5;
-    margin: 0.65em auto;
+    margin: 1em auto;
     padding: 0;
   }
 `;
@@ -71,9 +71,6 @@ export function LoadingLayout() {
           <Icons icon="logo" width="36" height="36" fill="currentColor" />
         </div>
         <NavList>
-          <NavItem>
-            <Square size={22} />
-          </NavItem>
           <NavItem>
             <Square size={22} />
           </NavItem>

@@ -55,11 +55,6 @@ function PrimaryNav() {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/trash" exact>
-            <Icons icon="trash" fill="currentColor" />
-          </NavLink>
-        </NavItem>
-        <NavItem>
           <span
             onClick={async () => {
               await logout();
