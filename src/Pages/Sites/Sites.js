@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
 import SiteList from "../../Components/Sites/SiteList";
 import { AuthContext } from "../../contexts/AuthContext";
-import { GET_ACCOUNT } from "../../Queries";
+import { GET_SITES } from "../../Queries";
 
 const Section = styled.section``;
 
@@ -24,17 +24,7 @@ function Sites({ location: { pathname } }) {
   const {
     account: { _id }
   } = useContext(AuthContext);
-  const {
-    data: { getAccount },
-    loading,
-    subscribeToMore
-  } = useQuery(GET_ACCOUNT, {
-    variables: {
-      input: {
-        id: _id
-      }
-    }
-  });
+  const { data, loading, subscribeToMore } = useQuery(GET_SITES);
 
   const subscribe = () => {
     const unsubscribe = subscribeToMore({
@@ -47,12 +37,9 @@ function Sites({ location: { pathname } }) {
         const newItem = subscriptionData.data.siteAdded;
         return {
           ...prevData,
-          getAccount: {
-            ...prevData.getAccount,
-            account: {
-              ...prevData.getAccount.account,
-              sites: [newItem, ...prevData.getAccount.account.sites]
-            }
+          sites: {
+            ...prevData.sites,
+            documents: [newItem, ...prevData.sites.documents]
           }
         };
       }
@@ -61,7 +48,8 @@ function Sites({ location: { pathname } }) {
     return unsubscribe;
   };
 
-  const sites = getAccount ? getAccount.account.sites : [];
+  const sites = data && data.sites ? data.sites.documents : [];
+
   return (
     <AdminLayout>
       <Section>
