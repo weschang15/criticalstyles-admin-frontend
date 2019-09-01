@@ -13,14 +13,16 @@ const ProtectedRoute = ({
     return null;
   }
 
-  if (!isAuthenticated) {
-    window.location.assign(process.env.REACT_APP_PUBLIC_URL);
-  }
-
   return (
     <Route
       {...rest}
-      render={props => (isAuthenticated ? <Component {...props} /> : null)}
+      render={props =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          window.location.assign(process.env.REACT_APP_PUBLIC_URL)
+        )
+      }
     />
   );
 };
