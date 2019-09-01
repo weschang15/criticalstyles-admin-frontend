@@ -32,7 +32,8 @@ function AddUserModal({ on, toggle }) {
     const { data } = await addUser({
       variables: {
         input: { ...fields, accountId: _id }
-      }
+      },
+      refetchQueries: ["Auth"]
     });
 
     if (data && data.addUser) {
