@@ -6,7 +6,7 @@ export const QuickActionWrapper = styled.div`
   align-items: center;
   background-color: ${({ bgColor, theme }) =>
     transparentize(0.9, theme[bgColor])};
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: ${({ withActive }) => (withActive ? "pointer" : "auto")};
   display: inline-flex;
   padding: 1em;
@@ -32,7 +32,6 @@ export const QuickActionWrapper = styled.div`
       : null}
 
   figure {
-    flex: 1 0 140px;
     margin: -3em 1em 0 0;
     max-width: 140px;
     transition: margin 300ms ease;
