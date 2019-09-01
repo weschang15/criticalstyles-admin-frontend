@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import AddPageToggle from "../Toggles/AddPageToggle";
 import AddSiteToggle from "../Toggles/AddSiteToggle";
-import ToggleUserMenu from "../Toggles/ToggleUserMenu";
+import ToggleUserMenu from "../UserMenu/ToggleUserMenu";
 
 const Container = styled.div`
   align-items: center;
