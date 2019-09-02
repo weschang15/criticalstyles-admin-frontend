@@ -1,17 +1,17 @@
 import React from "react";
 import NoDataImage from "../../assets/no-data.svg";
-import { QuickActionWrapper } from "../Toggles/Toggles";
+import QuickAction from "../QuickActions/QuickAction";
 
 function NoPages(props = {}) {
   return (
-    <QuickActionWrapper withActive={false} {...props}>
+    <QuickAction withActive={false} withHover={false} {...props}>
       <figure>
         <img src={NoDataImage} alt="Illustration for no data" />
       </figure>
       <div>
         <h5>Looks like you haven't created any pages!</h5>
       </div>
-    </QuickActionWrapper>
+    </QuickAction>
   );
 }
 

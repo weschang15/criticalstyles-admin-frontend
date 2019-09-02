@@ -1,17 +1,17 @@
 import React from "react";
 import NoDataImage from "../../assets/no-data.svg";
-import { QuickActionWrapper } from "../Toggles/Toggles";
+import QuickAction from "../QuickActions/QuickAction";
 
 function NoSites(props = {}) {
   return (
-    <QuickActionWrapper withActive={false}>
+    <QuickAction withActive={false} withHover={false}>
       <figure>
         <img src={NoDataImage} alt="Illustration for no data" />
       </figure>
       <div>
         <h5>Looks like you haven't created any sites!</h5>
       </div>
-    </QuickActionWrapper>
+    </QuickAction>
   );
 }
 
