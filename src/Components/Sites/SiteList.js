@@ -22,9 +22,11 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
     return (
       <Table>
         <TableHeader>
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          <TableRow>
+            <th>name</th>
+            <th>created at</th>
+            <th>actions</th>
+          </TableRow>
         </TableHeader>
         <TableBody>
           <Skeleton />
