@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { darken } from "polished";
+import styled from "styled-components";
 
 export const PrimaryButton = styled.button`
   background-color: ${({ bgColor, theme }) =>
@@ -39,11 +39,12 @@ export const PrimaryButton = styled.button`
 
 export const LinkButton = styled.button`
   background-color: transparent;
+  border: 0;
   color: ${({ textColor, theme }) =>
     textColor ? theme[textColor] : theme.black};
-  border: 0;
   cursor: pointer;
-  line-height: 1;
   display: inline-block;
+  line-height: 1;
+  padding: 0;
   text-decoration: underline;
 `;
