@@ -1,20 +1,20 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ScaryButton({ action, children, limit, messages }) {
   const [count, setCount] = useState(0);
 
-  const onPress = () => {
-    setCount(prevCount => prevCount + 1);
+  useEffect(() => {
     if (count === limit) {
       action();
       setCount(0);
     }
-  };
+  }, [count, limit, action]);
 
-  const message = messages[count];
-
-  return children({ message, onPress });
+  return children({
+    message: messages[count],
+    onPress: () => setCount(prevCount => prevCount + 1)
+  });
 }
 
 ScaryButton.defaultProps = {

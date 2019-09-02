@@ -1,15 +1,9 @@
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow
-} from "../../Elements";
+import { Table, TableBody, TableHeader, TableRow } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
 import NoSites from "./NoSites";
+import SiteListItem from "./SiteListItem";
 
 function SiteList({ loading, sites, here, subscribeToMore }) {
   useEffect(() => {
@@ -49,24 +43,8 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {sites.map(({ createdAt, _id, name, slug }) => (
-          <TableRow key={_id} className="no-hover">
-            <TableCell>{name}</TableCell>
-            <TableCell>{new Date(createdAt).toLocaleString()}</TableCell>
-            <TableCell>
-              <Link
-                to={{
-                  pathname: `${here}/${slug}`,
-                  state: {
-                    siteId: _id,
-                    isSingle: true
-                  }
-                }}
-              >
-                View
-              </Link>
-            </TableCell>
-          </TableRow>
+        {sites.map(site => (
+          <SiteListItem key={site._id} {...site} here={here} />
         ))}
       </TableBody>
     </Table>
