@@ -28,7 +28,8 @@ function AddSiteModal({ on, toggle }) {
     const { data } = await createSite({
       variables: {
         input: { ...fields }
-      }
+      },
+      refetchQueries: ["GetAccount"]
     });
 
     if (data && data.createSite) {
