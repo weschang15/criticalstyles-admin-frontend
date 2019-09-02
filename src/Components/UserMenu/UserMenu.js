@@ -1,6 +1,7 @@
 import { darken, transparentize } from "polished";
 import React from "react";
 import { useMutation } from "react-apollo";
+import { withRouter } from "react-router-dom";
 import { animated, useTransition } from "react-spring";
 import styled from "styled-components";
 import { SWITCH_ACCOUNT } from "../../Mutations";
@@ -82,7 +83,9 @@ const AnimatedNav = animated(Nav);
 function UserMenu({
   on,
   user: { firstName, lastName, accounts },
-  currentAccount
+  currentAccount,
+  history,
+  location: { pathname }
 }) {
   const [switchAccount] = useMutation(SWITCH_ACCOUNT);
 
@@ -115,6 +118,10 @@ function UserMenu({
                       },
                       refetchQueries: ["Auth", "GetAccount", "GetSites"]
                     });
+
+                    if (pathname !== "/") {
+                      history.push("/");
+                    }
                   }}
                 >
                   {name}
@@ -127,4 +134,4 @@ function UserMenu({
   );
 }
 
-export default UserMenu;
+export default withRouter(UserMenu);
