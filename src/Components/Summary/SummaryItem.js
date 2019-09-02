@@ -1,5 +1,6 @@
 import { darken } from "polished";
-import React from "react";
+import React, { useEffect } from "react";
+import { animated, config, useSpring } from "react-spring";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -23,9 +24,25 @@ const Card = styled.div`
 `;
 
 function SummaryItem({ count, subject }) {
+  const [style, set, stop] = useSpring(() => ({
+    transform: "translate3d(0, 0, 0)"
+  }));
+
+  useEffect(() => {
+    set({
+      from: { transform: "translate3d(0, -15px, 0)" },
+      to: { transform: "translate3d(0, 0, 0)" },
+      config: config.stiff,
+      reset: count > 0,
+      immediate: count === 0
+    });
+
+    return () => stop();
+  }, [count, set, stop]);
+
   return (
     <Card>
-      <h1>{count}</h1>
+      <animated.h1 style={style}>{count}</animated.h1>
       <p>{subject}</p>
     </Card>
   );
