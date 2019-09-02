@@ -17,7 +17,9 @@ function Summary() {
   const {
     data: { getAccount },
     loading
-  } = useQuery(GET_ACCOUNT);
+  } = useQuery(GET_ACCOUNT, {
+    fetchPolicy: "network-only"
+  });
 
   const {
     summary = {
