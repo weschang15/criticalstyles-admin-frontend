@@ -1,15 +1,9 @@
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow
-} from "../../Elements";
+import { Table, TableBody, TableHeader, TableRow } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
 import NoPages from "./NoPages";
-import PageDetails from "./PageDetails";
+import PageListItem from "./PageListItem";
 
 function PageList({ loading, pages, subscribeToMore }) {
   useEffect(() => {
@@ -50,13 +44,7 @@ function PageList({ loading, pages, subscribeToMore }) {
       </TableHeader>
       <TableBody>
         {pages.map(page => (
-          <TableRow key={page._id}>
-            <TableCell>{page.name}</TableCell>
-            <TableCell>{new Date(page.createdAt).toLocaleString()}</TableCell>
-            <TableCell>
-              <PageDetails {...page} />
-            </TableCell>
-          </TableRow>
+          <PageListItem key={page._id} page={page} />
         ))}
       </TableBody>
     </Table>
