@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { darken } from "polished";
+import styled from "styled-components";
 
 const TableHeader = styled.thead`
   background-color: ${({ theme }) => theme.gray};
