@@ -43,7 +43,9 @@ function MoneyMakerResults({ ccss }) {
         <FieldLabel htmlFor="css" onClick={() => toggle(!toggled)}>
           Critical CSS
         </FieldLabel>
-        <Sublabel>{stats.minifiedSize * 0.001}KB Minified</Sublabel>
+        <Sublabel>
+          {(stats.minifiedSize * 0.001).toPrecision(4)}KB Minified
+        </Sublabel>
       </Labels>
       <Accordion toggled={toggled}>
         <CollapsibleTextarea id="css" value={styles} readOnly />
