@@ -37,7 +37,8 @@ function Site({ location: { state = {} } }) {
       input: {
         siteId
       }
-    }
+    },
+    fetchPolicy: "network-only"
   });
 
   const subscribe = () => {
