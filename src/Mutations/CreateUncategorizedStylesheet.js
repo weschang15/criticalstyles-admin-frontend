@@ -1,8 +1,10 @@
 import gql from "graphql-tag";
 
 export default gql`
-  mutation CreateStylesheet($input: NewStylesheetInput!) {
-    createStylesheet(input: $input) {
+  mutation CreateUncategorizedStylesheet(
+    $input: NewUncategorizedStylesheetInput!
+  ) {
+    createUncategorizedStylesheet(input: $input) {
       ok
       stylesheet {
         styles
