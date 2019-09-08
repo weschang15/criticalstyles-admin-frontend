@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useMutation } from "react-apollo";
 import styled from "styled-components";
 import { FieldLabel, Fields, Icons, Spinner } from "../../Elements";
-import { CREATE_STYLESHEET } from "../../Mutations";
+import { CREATE_UNCATEGORIZED_STYLESHEET } from "../../Mutations";
+import Snackbar from "../Snackbar/Snackbar";
 import MoneyMakerHeader from "./MoneyMakerHeader";
 import MoneyMakerResults from "./MoneyMakerResults";
 
@@ -23,29 +24,38 @@ function MoneyMaker() {
   const [errors, setErrors] = useState([]);
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const [stylesheet, setStylesheet] = useState(null);
-  const [createStylesheet, { loading }] = useMutation(CREATE_STYLESHEET);
+  const [enqueued, setEnqueued] = useState(false);
+
+  const [createUncategorizedStylesheet, { loading }] = useMutation(
+    CREATE_UNCATEGORIZED_STYLESHEET
+  );
 
   const handleChange = e =>
     setFields({ ...fields, [e.target.name]: e.target.value });
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const { data } = await createStylesheet({
+    const { data } = await createUncategorizedStylesheet({
       variables: {
         input: { ...fields }
       }
     });
 
-    if (data && data.createStylesheet) {
+    if (data && data.createUncategorizedStylesheet) {
       const {
-        createStylesheet: { ok, errors, stylesheet }
+        createUncategorizedStylesheet: { ok, errors, stylesheet }
       } = data;
       if (!ok) {
         return setErrors(errors);
       }
 
       setFields(INITIAL_FIELDS);
-      setStylesheet(stylesheet);
+
+      if (stylesheet) {
+        setStylesheet(stylesheet);
+      } else {
+        setEnqueued(ok);
+      }
     }
   };
 
@@ -55,9 +65,18 @@ function MoneyMaker() {
         <h3>Generate CCSS</h3>
         <p>
           <Icons icon="information" width="17px" fill="currentColor" />
-          We'll only save your results for 30 seconds!
+          Results are cached for 30 seconds after you've viewed them for the
+          first time!
         </p>
       </MoneyMakerHeader>
+      {enqueued && !stylesheet && (
+        <>
+          <Snackbar
+            message="We've added your request to the queue, we'll let you know when
+              your CCSS is complete!"
+          />
+        </>
+      )}
       {errors.length > 0 && (
         <ul>
           {errors.map(({ message }, i) => (
@@ -78,7 +97,7 @@ function MoneyMaker() {
         />
         <Fields type="submit">{loading ? <Spinner /> : "Generate CCSS"}</Fields>
       </Form>
-      {stylesheet && (
+      {!enqueued && stylesheet && (
         <>
           <MoneyMakerHeader>
             <h4>Results</h4>
