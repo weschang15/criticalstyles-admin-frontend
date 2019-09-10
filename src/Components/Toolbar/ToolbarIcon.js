@@ -1,11 +1,7 @@
 import { transparentize } from "polished";
-import React, { useContext } from "react";
 import styled from "styled-components";
-import { AuthContext } from "../../contexts/AuthContext";
-import { Icons, Toggle } from "../../Elements";
-import UserMenu from "./UserMenu";
 
-const User = styled.button`
+const ToolbarIcon = styled.button`
   background: none;
   backface-visibility: hidden;
   border: 0;
@@ -36,20 +32,4 @@ const User = styled.button`
   }
 `;
 
-function ToggleUserMenu() {
-  const { user, account } = useContext(AuthContext);
-  return (
-    <Toggle>
-      {({ on, toggle }) => (
-        <>
-          <UserMenu on={on} user={user} currentAccount={account} />
-          <User onClick={toggle}>
-            <Icons icon="user" size={30} />
-          </User>
-        </>
-      )}
-    </Toggle>
-  );
-}
-
-export default ToggleUserMenu;
+export default ToolbarIcon;

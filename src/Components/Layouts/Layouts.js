@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Icons, Spinner } from "../../Elements";
 import Footer from "../../Elements/Footer/Footer";
-import Navbar from "../Navbar/Navbar";
-import NavItem from "../Navbar/NavItem";
-import NavList from "../Navbar/NavList";
-import PrimaryNav from "../Navbar/PrimaryNav";
-import SecondaryNav from "../Navbar/SecondaryNav";
+import StaticNav from "../Navbar/StaticNav";
+import VerticalNav from "../Navbar/VerticalNav";
 import { Pill } from "../Skeleton/Pill";
 import { Square } from "../Skeleton/Square";
+import Toolbar from "../Toolbar/Toolbar";
 
 const Main = styled.main`
   position: relative;
@@ -70,17 +68,6 @@ export function LoadingLayout() {
         <div className="logo">
           <Icons icon="logo" width="36" height="36" fill="currentColor" />
         </div>
-        <NavList>
-          <NavItem>
-            <Square size={22} />
-          </NavItem>
-          <NavItem>
-            <Square size={22} />
-          </NavItem>
-          <NavItem>
-            <Square size={22} />
-          </NavItem>
-        </NavList>
       </SkeletonSidebar>
       <AdminMain>
         <SkeletonNav>
@@ -98,7 +85,7 @@ export function LoadingLayout() {
 export function PublicLayout({ children, ...rest }) {
   return (
     <Main {...rest}>
-      <Navbar />
+      <StaticNav />
       {children}
       <Footer>
         Designed, Developed and Deployed by {` `}
@@ -112,9 +99,9 @@ export function PublicLayout({ children, ...rest }) {
 export function AdminLayout({ children, ...rest }) {
   return (
     <>
-      <PrimaryNav />
+      <VerticalNav />
       <AdminMain {...rest}>
-        <SecondaryNav />
+        <Toolbar />
         {children}
       </AdminMain>
     </>

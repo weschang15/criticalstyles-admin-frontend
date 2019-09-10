@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-const NavItem = styled.li`
+export const NavbarListItem = styled.li`
   display: block;
   color: ${({ theme }) => theme.white};
+  a {
+    text-decoration: none;
+  }
+`;
+
+export const NavListItem = styled(NavbarListItem)`
   text-align: center;
   padding: 0.5em 1em;
 
@@ -26,4 +32,3 @@ const NavItem = styled.li`
     margin: 0 auto;
   }
 `;
-export default NavItem;
