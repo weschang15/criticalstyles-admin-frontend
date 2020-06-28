@@ -20,6 +20,7 @@ export const Dropdown = styled.nav`
   position: absolute;
   right: 0;
   top: calc(100% + 0.5em);
+  z-index: 9;
 `;
 
 Dropdown.defaultProps = {

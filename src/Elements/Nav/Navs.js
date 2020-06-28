@@ -1,16 +1,6 @@
 import styled from "styled-components";
 
-export const Nav = styled.nav`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const ToolbarNav = styled(Nav)`
-  margin: 0 0 1em;
-`;
-
-export const VerticalNav = styled.nav`
+export const PrimaryNav = styled.nav`
   background-color: ${({ theme }) => theme.black};
   display: inline-block;
   overflow: hidden;
@@ -34,7 +24,18 @@ export const VerticalNav = styled.nav`
   }
 `;
 
+export const Nav = styled.nav`
+  align-items: center;
+  display: flex;
+`;
+
+export const SecondaryNav = styled(Nav)`
+  justify-content: flex-end;
+  margin: 0 0 1em;
+`;
+
 export const StaticNav = styled(Nav)`
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.purple};
   padding: 1em;
   .logo {

@@ -10,18 +10,18 @@ export const NavbarListItem = styled.li`
 
 export const NavListItem = styled(NavbarListItem)`
   text-align: center;
-  padding: 0.5em 1em;
 
   a,
   span {
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    padding: 1em 0;
+    padding: 1em;
 
     &.active {
-      box-shadow: inset 0 -2px 0 0 ${({ theme }) => theme.teal};
       svg {
+        box-shadow: 0px 4px 0 0 ${({ theme }) => theme.black},
+          0px 6px 0 0 ${({ theme }) => theme.teal};
         fill: ${({ theme }) => theme.white};
       }
     }
