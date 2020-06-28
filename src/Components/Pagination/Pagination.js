@@ -25,6 +25,10 @@ function Pagination({ totalPages, fetchMore }) {
 
   const isLastPage = currentPage === totalPages;
 
+  if (totalPages === 0) {
+    return null;
+  }
+
   return (
     <PaginationList>
       <PaginationPrev
