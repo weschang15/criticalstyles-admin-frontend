@@ -19,7 +19,7 @@ function App() {
       const payload = {
         user: auth.user,
         authenticated: ok,
-        account: auth.account
+        account: auth.account,
       };
 
       dispatch({ type: LOGIN_USER, payload });
@@ -33,13 +33,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {loading ? (
-        <LoadingLayout />
-      ) : (
+      <LoadingLayout loading={loading}>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
-      )}
+      </LoadingLayout>
     </ThemeProvider>
   );
 }
