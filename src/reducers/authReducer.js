@@ -2,14 +2,14 @@ import {
   IS_FETCHING,
   LOGIN_USER,
   LOGOUT_USER,
-  REGISTER_USER
+  REGISTER_USER,
 } from "../actions";
 
-export const INITIAL_STATE = {
+export const INITIAL_AUTH_STATE = {
   account: null,
   authenticated: false,
   user: null,
-  loading: false
+  loading: false,
 };
 
 export function authReducer(state, action = {}) {
@@ -23,11 +23,11 @@ export function authReducer(state, action = {}) {
         ...state,
         account: action.payload.account,
         authenticated: Boolean(action.payload.authenticated),
-        user: action.payload.user
+        user: action.payload.user,
       };
 
     case LOGOUT_USER:
-      return { ...INITIAL_STATE };
+      return { ...INITIAL_AUTH_STATE };
 
     default:
       throw new Error(`Could not dispatch action of type ${action.type}`);

@@ -1,12 +1,6 @@
-import React, { useReducer } from "react";
-import { AuthContextProvider, AuthDispatchProvider } from "./AuthContext";
-import { authReducer, INITIAL_STATE } from "../reducers";
+import React from "react";
+import { AuthProvider } from "./AuthContext";
 
 export function RootContext({ children }) {
-  const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
-  return (
-    <AuthDispatchProvider value={dispatch}>
-      <AuthContextProvider value={state}>{children}</AuthContextProvider>
-    </AuthDispatchProvider>
-  );
+  return <AuthProvider>{children}</AuthProvider>;
 }
