@@ -1,15 +1,17 @@
 import React from "react";
 import { useMutation } from "react-apollo";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LinkButton, Spinner, TableCell, TableRow } from "../../Elements";
 import { DELETE_SITE } from "../../Mutations";
 import ScaryButton from "../ScaryButton/ScaryButton";
 
-function SiteListItem({ createdAt, _id, name, slug, here }) {
+function SiteListItem({ createdAt, _id, name, slug }) {
   const [deleteSite, { loading }] = useMutation(DELETE_SITE, {
     variables: { input: { _id } },
-    refetchQueries: ["GetSites"]
+    refetchQueries: ["GetSites"],
   });
+
+  const { pathname } = useLocation();
 
   return (
     <TableRow>
@@ -18,11 +20,12 @@ function SiteListItem({ createdAt, _id, name, slug, here }) {
       <TableCell>
         <Link
           to={{
-            pathname: `${here}/${slug}`,
+            pathname: `${pathname}/${_id}`,
             state: {
+              siteName: name,
               siteId: _id,
-              isSingle: true
-            }
+              isSingle: true,
+            },
           }}
         >
           View
