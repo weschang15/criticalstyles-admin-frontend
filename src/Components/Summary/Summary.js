@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { GridSection } from "../../Elements";
 import { GET_ACCOUNT } from "../../Queries/GetAccount";
 import SummaryItem from "./SummaryItem";
+import SummarySkeleton from "./SummarySkeleton";
 
 const Grid = styled.div`
   display: grid;
@@ -14,33 +15,25 @@ const Grid = styled.div`
 `;
 
 function Summary() {
-  const {
-    data: { getAccount },
-    loading
-  } = useQuery(GET_ACCOUNT, {
-    fetchPolicy: "network-only"
-  });
+  const { data, loading } = useQuery(GET_ACCOUNT);
 
-  const {
-    summary = {
-      sites: 0,
-      users: 0
-    }
-  } = getAccount ? getAccount.account : {};
+  if (loading) {
+    return <SummarySkeleton />;
+  }
+
+  const { account } = data.getAccount;
 
   return (
     <GridSection>
       <h4>Workspace Overview</h4>
       <Grid>
         <SummaryItem
-          subject={pluralize("Site", summary.sites)}
-          loading={loading}
-          count={summary.sites}
+          subject={pluralize("Site", account.summary.sites)}
+          count={account.summary.sites}
         />
         <SummaryItem
-          subject={pluralize("User", summary.users)}
-          loading={loading}
-          count={summary.users}
+          subject={pluralize("User", account.summary.users)}
+          count={account.summary.users}
         />
       </Grid>
     </GridSection>
