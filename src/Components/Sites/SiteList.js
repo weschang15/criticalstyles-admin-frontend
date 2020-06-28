@@ -45,8 +45,8 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {sites.map(site => (
-          <SiteListItem key={site._id} {...site} here={here} />
+        {sites.map((site) => (
+          <SiteListItem key={site._id} {...site} />
         ))}
       </TableBody>
     </Table>
@@ -57,12 +57,12 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
 
 SiteList.propTypes = {
   loading: PropTypes.bool.isRequired,
-  sites: PropTypes.array.isRequired
+  sites: PropTypes.array.isRequired,
 };
 
 SiteList.defaultProps = {
   loading: false,
-  sites: []
+  sites: [],
 };
 
 export default SiteList;
