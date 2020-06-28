@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { animated, useTransition } from "react-spring";
 import { Dropdown } from "../../Elements";
 import { SWITCH_ACCOUNT } from "../../Mutations";
@@ -11,9 +11,9 @@ function UserMenu({
   on,
   user: { firstName, lastName, accounts },
   currentAccount,
-  history,
-  location: { pathname }
 }) {
+  const history = useHistory();
+  const { pathname } = useLocation();
   const [switchAccount] = useMutation(SWITCH_ACCOUNT);
   const transitions = useTransition(on, null, Dropdown.animation);
 
@@ -35,10 +35,10 @@ function UserMenu({
                     switchAccount({
                       variables: {
                         input: {
-                          accountId: _id
-                        }
+                          accountId: _id,
+                        },
                       },
-                      refetchQueries: ["Auth", "GetAccount", "GetSites"]
+                      refetchQueries: ["Auth", "GetAccount", "GetSites"],
                     });
 
                     if (pathname !== "/") {
@@ -56,4 +56,4 @@ function UserMenu({
   );
 }
 
-export default withRouter(UserMenu);
+export default UserMenu;
