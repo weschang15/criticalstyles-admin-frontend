@@ -1,42 +1,44 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import ModalImage from "../../assets/create-page.svg";
 import {
   FieldLabel,
   Fields,
   PrimaryButton,
   PrimaryModal,
-  Spinner
+  Spinner,
 } from "../../Elements";
 import { CREATE_PAGE } from "../../Mutations";
 import { ModalForm, ModalFormGroup, ModalHeader } from "./Modals";
 
 const INITIAL_FIELDS = {
   name: "",
-  url: ""
+  url: "",
 };
 
-function AddPageModal({ on, toggle, location: { state = {} } }) {
-  const { siteId } = state;
+function AddPageModal({ on, toggle }) {
+  const [createSite, { loading }] = useMutation(CREATE_PAGE);
   const [errors, setErrors] = useState([]);
   const [fields, setFields] = useState(INITIAL_FIELDS);
-  const [createSite, { loading }] = useMutation(CREATE_PAGE);
+  const {
+    params: { slug },
+  } = useRouteMatch();
 
-  const handleChange = e =>
+  const handleChange = (e) =>
     setFields({ ...fields, [e.target.name]: e.target.value });
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await createSite({
       variables: {
-        input: { ...fields, siteId }
-      }
+        input: { ...fields, siteId: slug },
+      },
     });
 
     if (data && data.createPage) {
       const {
-        createPage: { ok, errors }
+        createPage: { ok, errors },
       } = data;
       if (!ok) {
         return setErrors(errors);
@@ -47,7 +49,7 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
     }
   };
 
-  const cancel = e => {
+  const cancel = (e) => {
     e.preventDefault();
     setFields(INITIAL_FIELDS);
     toggle();
@@ -112,4 +114,4 @@ function AddPageModal({ on, toggle, location: { state = {} } }) {
   );
 }
 
-export default withRouter(AddPageModal);
+export default AddPageModal;
