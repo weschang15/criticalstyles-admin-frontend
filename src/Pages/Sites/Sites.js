@@ -8,7 +8,6 @@ import Pagination from "../../Components/Pagination/Pagination";
 import SiteList from "../../Components/Sites/SiteList";
 import AddSiteToggle from "../../Components/Toggles/AddSiteToggle";
 import { PAGINATION_LIMIT } from "../../config/pagination";
-import { AuthContext } from "../../contexts/AuthContext";
 import { useAuth } from "../../Hooks";
 import { GET_SITES } from "../../Queries";
 
@@ -25,10 +24,10 @@ const ON_SITE_SUBSCRIPTION = gql`
   }
 `;
 
-function Sites({ location: { pathname } }) {
+function Sites() {
   const {
     account: { _id },
-  } = useAuth(AuthContext);
+  } = useAuth();
 
   const { data, loading, subscribeToMore, fetchMore } = useQuery(GET_SITES);
 
