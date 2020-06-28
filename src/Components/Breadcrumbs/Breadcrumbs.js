@@ -1,11 +1,14 @@
-import PropTypes from "prop-types";
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuth } from "../../Hooks";
 import { getBreadcrumbs, removeLast } from "../../Utils";
 import Breadcrumb from "./Breadcrumb";
 import Separator from "./Separator";
+
+const BreadcrumbsWrap = styled.nav`
+  margin: 1em 0;
+`;
 
 const BreadcrumbList = styled.ul`
   align-items: center;
@@ -15,16 +18,32 @@ const BreadcrumbList = styled.ul`
   padding: 0;
 `;
 
-function Breadcrumbs({ here }) {
+function Breadcrumbs() {
   const {
-    account: { name }
-  } = useContext(AuthContext);
+    account: { name },
+  } = useAuth();
+  const { path } = useRouteMatch();
+  const { pathname, state } = useLocation();
+  const siteName = state && state.siteName;
+  const here = siteName ? path.replace(":siteId", siteName) : pathname;
   const breadcrumbs = getBreadcrumbs(here);
 
   const crumbs = [{ to: null, page: name }, ...breadcrumbs]
-    .map(({ to, page }) => (
-      <Breadcrumb key={page}>
-        {to ? <NavLink to={to}>{page}</NavLink> : page}
+    .filter(({ page }) => page !== "Page")
+    .map(({ to, page }, i, arr) => (
+      <Breadcrumb key={to}>
+        {to ? (
+          <NavLink
+            to={to}
+            style={{
+              pointerEvents: i === arr.length - 1 && "none",
+            }}
+          >
+            {page}
+          </NavLink>
+        ) : (
+          page
+        )}
       </Breadcrumb>
     ))
     .reduce((acc, curr, index) => {
@@ -32,14 +51,10 @@ function Breadcrumbs({ here }) {
     }, []);
 
   return (
-    <nav>
+    <BreadcrumbsWrap>
       <BreadcrumbList>{removeLast(crumbs)}</BreadcrumbList>
-    </nav>
+    </BreadcrumbsWrap>
   );
 }
-
-Breadcrumbs.propTypes = {
-  here: PropTypes.string.isRequired
-};
 
 export default Breadcrumbs;
