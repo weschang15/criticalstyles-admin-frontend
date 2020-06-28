@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { animated, useTransition } from "react-spring";
 import { Dropdown } from "../../Elements";
 
@@ -28,4 +27,4 @@ function NotificationMenu({ on, ...rest }) {
   );
 }
 
-export default withRouter(NotificationMenu);
+export default NotificationMenu;
