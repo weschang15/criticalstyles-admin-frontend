@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Icons, Spinner } from "../../Elements";
 import Footer from "../../Elements/Footer/Footer";
+import PrimaryNav from "../Navbar/PrimaryNav";
+import SecondaryNav from "../Navbar/SecondaryNav";
 import StaticNav from "../Navbar/StaticNav";
-import VerticalNav from "../Navbar/VerticalNav";
 import { Pill } from "../Skeleton/Pill";
 import { Square } from "../Skeleton/Square";
-import Toolbar from "../Toolbar/Toolbar";
 
 const Main = styled.main`
   position: relative;
@@ -61,8 +61,8 @@ const SkeletonSpinner = styled.div`
   padding: 15% 0;
 `;
 
-export function LoadingLayout() {
-  return (
+export function LoadingLayout({ loading, children }) {
+  return loading ? (
     <>
       <SkeletonSidebar>
         <div className="logo">
@@ -79,6 +79,8 @@ export function LoadingLayout() {
         </SkeletonSpinner>
       </AdminMain>
     </>
+  ) : (
+    children
   );
 }
 
@@ -99,9 +101,9 @@ export function PublicLayout({ children, ...rest }) {
 export function AdminLayout({ children, ...rest }) {
   return (
     <>
-      <VerticalNav />
+      <PrimaryNav />
       <AdminMain {...rest}>
-        <Toolbar />
+        <SecondaryNav />
         {children}
       </AdminMain>
     </>
