@@ -1,10 +1,14 @@
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
+import UtilityNav from "../../Components/Navbar/UtilityNav";
 import PageList from "../../Components/PageList/PageList";
-import { AuthContext } from "../../contexts/AuthContext";
+import Pagination from "../../Components/Pagination/Pagination";
+import AddPageToggle from "../../Components/Toggles/AddPageToggle";
+import { PAGINATION_LIMIT } from "../../config/pagination";
+import { useAuth } from "../../Hooks";
 import { GET_PAGES } from "../../Queries";
 
 const Section = styled.section``;
@@ -27,19 +31,25 @@ const ON_PAGE_ADDED_SUBSCRIPTION = gql`
   }
 `;
 
-function Site({ location: { state = {} } }) {
-  const { siteId } = state;
+function Site({ match }) {
   const {
-    account: { _id }
-  } = useContext(AuthContext);
-  const { data, loading, subscribeToMore } = useQuery(GET_PAGES, {
+    params: { siteId },
+  } = match;
+
+  const { data, loading, subscribeToMore, fetchMore } = useQuery(GET_PAGES, {
     variables: {
       input: {
-        siteId
-      }
+        siteId,
+        skip: 0,
+        limit: PAGINATION_LIMIT,
+      },
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   });
+
+  const {
+    account: { _id },
+  } = useAuth();
 
   const subscribe = () => {
     const unsubscribe = subscribeToMore({
@@ -54,26 +64,47 @@ function Site({ location: { state = {} } }) {
           ...prevData,
           pages: {
             ...prevData.pages,
-            documents: [newItem, ...prevData.pages.documents]
-          }
+            documents: [newItem, ...prevData.pages.documents],
+          },
         };
-      }
+      },
     });
 
     return unsubscribe;
   };
 
-  const pages = data && data.pages ? data.pages.documents : [];
+  const loadMore = (fn) => (skip) =>
+    fn({
+      variables: {
+        input: { siteId, skip, limit: PAGINATION_LIMIT },
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return {
+          ...prev,
+          pages: {
+            ...fetchMoreResult.pages,
+          },
+        };
+      },
+    });
+
+  const pages = ((data && data.pages) || {}).documents || [];
+  const queryInfo = ((data && data.pages) || {}).queryInfo || {};
 
   return (
     <AdminLayout>
+      <UtilityNav>
+        <AddPageToggle />
+      </UtilityNav>
       <Section>
-        <PageList
-          loading={loading}
-          pages={pages}
-          subscribeToMore={subscribe}
-          {...state}
-        />
+        <PageList loading={loading} pages={pages} subscribeToMore={subscribe} />
+        {!loading && (
+          <Pagination
+            totalPages={queryInfo.totalPages}
+            fetchMore={loadMore(fetchMore)}
+          />
+        )}
       </Section>
     </AdminLayout>
   );

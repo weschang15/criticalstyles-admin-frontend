@@ -1,10 +1,15 @@
 import gql from "graphql-tag";
-import React, { useContext } from "react";
+import React from "react";
 import { useQuery } from "react-apollo";
 import styled from "styled-components";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
+import UtilityNav from "../../Components/Navbar/UtilityNav";
+import Pagination from "../../Components/Pagination/Pagination";
 import SiteList from "../../Components/Sites/SiteList";
+import AddSiteToggle from "../../Components/Toggles/AddSiteToggle";
+import { PAGINATION_LIMIT } from "../../config/pagination";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useAuth } from "../../Hooks";
 import { GET_SITES } from "../../Queries";
 
 const Section = styled.section``;
@@ -22,9 +27,10 @@ const ON_SITE_SUBSCRIPTION = gql`
 
 function Sites({ location: { pathname } }) {
   const {
-    account: { _id }
-  } = useContext(AuthContext);
-  const { data, loading, subscribeToMore } = useQuery(GET_SITES);
+    account: { _id },
+  } = useAuth(AuthContext);
+
+  const { data, loading, subscribeToMore, fetchMore } = useQuery(GET_SITES);
 
   const subscribe = () => {
     const unsubscribe = subscribeToMore({
@@ -39,26 +45,47 @@ function Sites({ location: { pathname } }) {
           ...prevData,
           sites: {
             ...prevData.sites,
-            documents: [newItem, ...prevData.sites.documents]
-          }
+            documents: [newItem, ...prevData.sites.documents],
+          },
         };
-      }
+      },
     });
 
     return unsubscribe;
   };
 
-  const sites = data && data.sites ? data.sites.documents : [];
+  const loadMore = (fn) => (skip) =>
+    fn({
+      variables: {
+        input: { skip, limit: PAGINATION_LIMIT },
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return {
+          ...prev,
+          sites: {
+            ...fetchMoreResult.sites,
+          },
+        };
+      },
+    });
+
+  const sites = ((data && data.sites) || {}).documents || [];
+  const queryInfo = ((data && data.sites) || {}).queryInfo || {};
 
   return (
     <AdminLayout>
+      <UtilityNav>
+        <AddSiteToggle />
+      </UtilityNav>
       <Section>
-        <SiteList
-          loading={loading}
-          sites={sites}
-          here={pathname}
-          subscribeToMore={subscribe}
-        />
+        <SiteList loading={loading} sites={sites} subscribeToMore={subscribe} />
+        {!loading && (
+          <Pagination
+            totalPages={queryInfo.totalPages}
+            fetchMore={loadMore(fetchMore)}
+          />
+        )}
       </Section>
     </AdminLayout>
   );
