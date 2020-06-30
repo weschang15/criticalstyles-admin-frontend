@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import ProtectedRoute from "../../Elements/ProtectedRoute";
 import { useAuth } from "../../Hooks";
-import { Dashboard, Site, Sites } from "../../Pages";
+import { Account, Dashboard, Site, Sites } from "../../Pages";
 
 const NotFound = lazy(() => import("../../Pages/NotFound/NotFound"));
 
@@ -30,6 +30,12 @@ function Routes() {
         <ProtectedRoute
           path="/sites/:siteId"
           component={Site}
+          isAuthenticated={authenticated}
+          loading={loading}
+        />
+        <ProtectedRoute
+          path="/accounts/:accountId"
+          component={Account}
           isAuthenticated={authenticated}
           loading={loading}
         />
