@@ -21,7 +21,7 @@ function Copier({ copyText, bgColor, textColor }) {
   return (
     <ButtonWwrapper>
       <CopyToClipboard text={copyText} onCopy={() => copy(true)}>
-        <PrimaryButton bgColor={bgColor} textColor={textColor}>
+        <PrimaryButton bgColor={bgColor} textColor={textColor} type="button">
           <Icons
             icon="clipboard"
             width="18px"
@@ -36,7 +36,7 @@ function Copier({ copyText, bgColor, textColor }) {
 }
 
 Copier.propTypes = {
-  copyText: PropTypes.string.isRequired
+  copyText: PropTypes.string.isRequired,
 };
 
 export default Copier;
