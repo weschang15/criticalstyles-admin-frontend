@@ -29,7 +29,14 @@ function Sites() {
     account: { _id },
   } = useAuth();
 
-  const { data, loading, subscribeToMore, fetchMore } = useQuery(GET_SITES);
+  const { data, loading, subscribeToMore, fetchMore } = useQuery(GET_SITES, {
+    variables: {
+      input: {
+        skip: 0,
+        limit: PAGINATION_LIMIT,
+      },
+    },
+  });
 
   const subscribe = () => {
     const unsubscribe = subscribeToMore({

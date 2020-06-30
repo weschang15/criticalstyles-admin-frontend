@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const GET_SITES = gql`
-  query GetSites($filter: Filter) {
-    sites(filter: $filter) {
+  query GetSites($input: Filter!) {
+    sites(input: $input) {
       ok
       errors {
         path
