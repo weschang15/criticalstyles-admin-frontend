@@ -25,7 +25,7 @@ function UserMenu({
             <p>{`${firstName} ${lastName}`}</p>
           </Dropdown.ProfileSection>
           <Dropdown.Section>
-            <p>Accounts</p>
+            <p>Switch to account</p>
             <Dropdown.DropdownList>
               {accounts.map(({ _id, name }) => (
                 <Dropdown.DropdownListItem
@@ -38,7 +38,12 @@ function UserMenu({
                           accountId: _id,
                         },
                       },
-                      refetchQueries: ["Auth", "GetAccount", "GetSites"],
+                      refetchQueries: [
+                        "Auth",
+                        "GetAccount",
+                        "GetSites",
+                        "GetTokens",
+                      ],
                     });
 
                     if (pathname !== "/") {
