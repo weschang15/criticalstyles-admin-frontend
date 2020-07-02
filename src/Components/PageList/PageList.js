@@ -19,21 +19,14 @@ function PageList({ loading, pages, subscribeToMore }) {
   });
 
   if (loading) {
-    return (
-      <Table>
-        <TableHeader>
-          <TableRow />
-          <TableRow />
-          <TableRow />
-        </TableHeader>
-        <TableBody>
-          <Skeleton />
-        </TableBody>
-      </Table>
-    );
+    return <Skeleton labels={["name", "created at", "actions"]} />;
   }
 
-  return pages.length ? (
+  if (!pages.length) {
+    return <NoPages bgColor="teal" />;
+  }
+
+  return (
     <Table>
       <TableHeader>
         <TableRow>
@@ -43,24 +36,22 @@ function PageList({ loading, pages, subscribeToMore }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {pages.map(page => (
+        {pages.map((page) => (
           <PageListItem key={page._id} page={page} />
         ))}
       </TableBody>
     </Table>
-  ) : (
-    <NoPages bgColor="teal" />
   );
 }
 
 PageList.propTypes = {
   loading: PropTypes.bool.isRequired,
-  pages: PropTypes.array.isRequired
+  pages: PropTypes.array.isRequired,
 };
 
 PageList.defaultProps = {
   loading: false,
-  pages: []
+  pages: [],
 };
 
 export default PageList;

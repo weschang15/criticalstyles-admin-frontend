@@ -5,7 +5,7 @@ import Skeleton from "../Skeleton/Skeleton";
 import NoSites from "./NoSites";
 import SiteListItem from "./SiteListItem";
 
-function SiteList({ loading, sites, here, subscribeToMore }) {
+function SiteList({ loading, sites, subscribeToMore }) {
   useEffect(() => {
     let unsub = null;
     if (!loading) {
@@ -19,23 +19,14 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
   });
 
   if (loading) {
-    return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <th>name</th>
-            <th>created at</th>
-            <th>actions</th>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <Skeleton />
-        </TableBody>
-      </Table>
-    );
+    return <Skeleton labels={["name", "created at", "actions"]} />;
   }
 
-  return sites.length ? (
+  if (!sites.length) {
+    return <NoSites />;
+  }
+
+  return (
     <Table>
       <TableHeader>
         <TableRow>
@@ -50,8 +41,6 @@ function SiteList({ loading, sites, here, subscribeToMore }) {
         ))}
       </TableBody>
     </Table>
-  ) : (
-    <NoSites />
   );
 }
 
