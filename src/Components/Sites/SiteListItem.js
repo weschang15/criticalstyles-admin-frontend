@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { useMutation } from "react-apollo";
 import { Link, useLocation } from "react-router-dom";
@@ -5,13 +6,23 @@ import { LinkButton, Spinner, TableCell, TableRow } from "../../Elements";
 import { DELETE_SITE } from "../../Mutations";
 import ScaryButton from "../ScaryButton/ScaryButton";
 
-function SiteListItem({ createdAt, _id, name, slug }) {
-  const [deleteSite, { loading }] = useMutation(DELETE_SITE, {
-    variables: { input: { _id } },
-    refetchQueries: ["GetSites"],
-  });
-
+function SiteListItem({ createdAt, _id, name, onError }) {
+  const [deleteSite, { loading }] = useMutation(DELETE_SITE);
   const { pathname } = useLocation();
+
+  const handleDelete = async () => {
+    const { data } = await deleteSite({
+      variables: { input: { _id } },
+      refetchQueries: ["GetSites"],
+    });
+
+    const ok = (data.deleteSite || {}).ok || false;
+    const errors = (data.deleteSite || {}).errors || [];
+
+    if (!ok) {
+      onError(errors);
+    }
+  };
 
   return (
     <TableRow>
@@ -30,7 +41,7 @@ function SiteListItem({ createdAt, _id, name, slug }) {
         >
           View
         </Link>
-        <ScaryButton action={deleteSite}>
+        <ScaryButton action={handleDelete}>
           {({ message, onPress }) => (
             <LinkButton onClick={onPress}>
               {loading ? <Spinner bgColor="teal" /> : message}
@@ -41,5 +52,13 @@ function SiteListItem({ createdAt, _id, name, slug }) {
     </TableRow>
   );
 }
+
+SiteListItem.defaultProps = {
+  onError: () => null,
+};
+
+SiteListItem.propTypes = {
+  onError: PropTypes.func.isRequired,
+};
 
 export default SiteListItem;

@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, TableBody, TableHeader, TableRow } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
 import NoSites from "./NoSites";
 import SiteListItem from "./SiteListItem";
 
 function SiteList({ loading, sites, subscribeToMore }) {
+  const [errors, setErrors] = useState(null);
+
   useEffect(() => {
     let unsub = null;
     if (!loading) {
@@ -27,20 +29,31 @@ function SiteList({ loading, sites, subscribeToMore }) {
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <th>name</th>
-          <th>created at</th>
-          <th>actions</th>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sites.map((site) => (
-          <SiteListItem key={site._id} {...site} />
-        ))}
-      </TableBody>
-    </Table>
+    <>
+      {errors && (
+        <Snackbar type="error">
+          <ul>
+            {errors.map(({ message }, i) => (
+              <li key={i}>{message}</li>
+            ))}
+          </ul>
+        </Snackbar>
+      )}
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <th>name</th>
+            <th>created at</th>
+            <th>actions</th>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {sites.map((site) => (
+            <SiteListItem key={site._id} onError={setErrors} {...site} />
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 }
 
