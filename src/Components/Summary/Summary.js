@@ -2,7 +2,7 @@ import pluralize from "pluralize";
 import React from "react";
 import { useQuery } from "react-apollo";
 import styled from "styled-components";
-import { GridSection } from "../../Elements";
+import { GridSection, SectionTitle } from "../../Elements";
 import { GET_ACCOUNT } from "../../Queries/GetAccount";
 import SummaryItem from "./SummaryItem";
 import SummarySkeleton from "./SummarySkeleton";
@@ -25,7 +25,7 @@ function Summary() {
 
   return (
     <GridSection>
-      <h4>Workspace Overview</h4>
+      <SectionTitle>Overview</SectionTitle>
       <Grid>
         <SummaryItem
           subject={pluralize("Site", account.summary.sites)}

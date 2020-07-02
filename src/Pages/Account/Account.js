@@ -1,15 +1,13 @@
 import React from "react";
 import { useQuery } from "react-apollo";
-import styled from "styled-components";
 import ApiKeyList from "../../Components/ApiKeyList/ApiKeyList";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
 import UtilityNav from "../../Components/Navbar/UtilityNav";
 import Pagination from "../../Components/Pagination/Pagination";
 import AddApiKey from "../../Components/Toggles/AddApiKey";
 import { PAGINATION_LIMIT } from "../../config/pagination";
+import { Section, SectionTitle } from "../../Elements";
 import { GET_TOKENS } from "../../Queries";
-
-const Section = styled.section``;
 
 function Account() {
   const { data, loading, fetchMore } = useQuery(GET_TOKENS, {
@@ -46,6 +44,7 @@ function Account() {
         <AddApiKey />
       </UtilityNav>
       <Section>
+        <SectionTitle>API Keys</SectionTitle>
         <ApiKeyList loading={loading} tokens={tokens} />
         {!loading && (
           <Pagination

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AddUserImage from "../../assets/add-user.svg";
 import CreateCodeImage from "../../assets/create-code.svg";
-import { Drawer, GridSection, Toggle } from "../../Elements";
+import { Drawer, GridSection, SectionTitle, Toggle } from "../../Elements";
 import AddUserModal from "../Modals/AddUserModal";
 import MoneyMaker from "../MoneyMaker/MoneyMaker";
 import QuickAction from "./QuickAction";
@@ -17,7 +17,7 @@ const Grid = styled.div`
 function QuickActions() {
   return (
     <GridSection>
-      <h4>Quick Actions</h4>
+      <SectionTitle>Quick actions</SectionTitle>
       <Grid>
         <Toggle>
           {({ on, toggle }) => {

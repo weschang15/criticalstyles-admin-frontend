@@ -1,17 +1,15 @@
 import gql from "graphql-tag";
 import React from "react";
 import { useQuery } from "react-apollo";
-import styled from "styled-components";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
 import UtilityNav from "../../Components/Navbar/UtilityNav";
 import Pagination from "../../Components/Pagination/Pagination";
 import SiteList from "../../Components/Sites/SiteList";
 import AddSiteToggle from "../../Components/Toggles/AddSiteToggle";
 import { PAGINATION_LIMIT } from "../../config/pagination";
+import { Section, SectionTitle } from "../../Elements";
 import { useAuth } from "../../Hooks";
 import { GET_SITES } from "../../Queries";
-
-const Section = styled.section``;
 
 const ON_SITE_SUBSCRIPTION = gql`
   subscription OnSiteUpdated($accountId: String!) {
@@ -85,6 +83,7 @@ function Sites() {
         <AddSiteToggle />
       </UtilityNav>
       <Section>
+        <SectionTitle>All sites</SectionTitle>
         <SiteList loading={loading} sites={sites} subscribeToMore={subscribe} />
         {!loading && (
           <Pagination

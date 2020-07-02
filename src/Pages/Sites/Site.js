@@ -1,17 +1,15 @@
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import React from "react";
-import styled from "styled-components";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
 import UtilityNav from "../../Components/Navbar/UtilityNav";
 import PageList from "../../Components/PageList/PageList";
 import Pagination from "../../Components/Pagination/Pagination";
 import AddPageToggle from "../../Components/Toggles/AddPageToggle";
 import { PAGINATION_LIMIT } from "../../config/pagination";
+import { Section, SectionTitle } from "../../Elements";
 import { useAuth } from "../../Hooks";
 import { GET_PAGES } from "../../Queries";
-
-const Section = styled.section``;
 
 const ON_PAGE_ADDED_SUBSCRIPTION = gql`
   subscription OnPageAdded($input: PageAddedInput!) {
@@ -98,6 +96,7 @@ function Site({ match }) {
         <AddPageToggle />
       </UtilityNav>
       <Section>
+        <SectionTitle>All pages</SectionTitle>
         <PageList loading={loading} pages={pages} subscribeToMore={subscribe} />
         {!loading && (
           <Pagination
