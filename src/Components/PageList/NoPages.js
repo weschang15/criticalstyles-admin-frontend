@@ -4,7 +4,7 @@ import QuickAction from "../QuickActions/QuickAction";
 
 function NoPages(props = {}) {
   return (
-    <QuickAction withActive={false} withHover={false} {...props}>
+    <QuickAction withActive={false} withHover={false} bgColor="teal" fullWidth>
       <figure>
         <img src={NoDataImage} alt="Illustration for no data" />
       </figure>

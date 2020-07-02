@@ -23,7 +23,7 @@ function PageList({ loading, pages, subscribeToMore }) {
   }
 
   if (!pages.length) {
-    return <NoPages bgColor="teal" />;
+    return <NoPages />;
   }
 
   return (
