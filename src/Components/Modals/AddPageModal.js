@@ -7,7 +7,7 @@ import {
   Fields,
   PrimaryButton,
   PrimaryModal,
-  Spinner,
+  Spinner
 } from "../../Elements";
 import { CREATE_PAGE } from "../../Mutations";
 import { ModalForm, ModalFormGroup, ModalHeader } from "./Modals";
@@ -18,11 +18,11 @@ const INITIAL_FIELDS = {
 };
 
 function AddPageModal({ on, toggle }) {
-  const [createSite, { loading }] = useMutation(CREATE_PAGE);
+  const [createPage, { loading }] = useMutation(CREATE_PAGE);
   const [errors, setErrors] = useState([]);
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const {
-    params: { slug },
+    params: { siteId },
   } = useRouteMatch();
 
   const handleChange = (e) =>
@@ -30,9 +30,9 @@ function AddPageModal({ on, toggle }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await createSite({
+    const { data } = await createPage({
       variables: {
-        input: { ...fields, siteId: slug },
+        input: { ...fields, siteId },
       },
     });
 

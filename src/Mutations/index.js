@@ -5,6 +5,7 @@ export { default as CREATE_SITE } from "./CreateSite";
 export { default as CREATE_TOKEN } from "./CreateToken";
 export { default as CREATE_UNCATEGORIZED_STYLESHEET } from "./CreateUncategorizedStylesheet";
 export { default as CREATE_USER } from "./CreateUser";
+export { default as DELETE_PAGE } from "./DeletePage";
 export { default as DELETE_SITE } from "./DeleteSite";
 export { default as DELETE_TOKEN } from "./DeleteToken";
 export { default as LOGIN } from "./Login";

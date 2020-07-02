@@ -1,7 +1,10 @@
 import gql from "graphql-tag";
+import PropTypes from "prop-types";
 import React from "react";
-import { useSubscription } from "react-apollo";
-import { Spinner, TableCell, TableRow } from "../../Elements";
+import { useMutation, useSubscription } from "react-apollo";
+import { LinkButton, Spinner, TableCell, TableRow } from "../../Elements";
+import { DELETE_PAGE } from "../../Mutations";
+import ScaryButton from "../ScaryButton/ScaryButton";
 import PageDetails from "./PageDetails";
 
 const ON_PAGE_UPDATED = gql`
@@ -22,24 +25,47 @@ const ON_PAGE_UPDATED = gql`
   }
 `;
 
-function PageListItem({ page }) {
-  const { createdAt, name, stylesheet } = page;
-
+function PageListItem({ createdAt, name, stylesheet, url, _id, onError }) {
   useSubscription(ON_PAGE_UPDATED, {
     variables: {
       input: {
-        pageId: page._id
-      }
-    }
+        pageId: _id,
+      },
+    },
   });
 
+  const [deletePage, { loading }] = useMutation(DELETE_PAGE);
+
+  const handleDelete = async () => {
+    const { data } = await deletePage({
+      variables: { input: { _id } },
+      refetchQueries: ["GetPages"],
+    });
+
+    const ok = (data.deletePage || {}).ok || false;
+    const errors = (data.deletePage || {}).errors || [];
+
+    if (!ok) {
+      onError(errors);
+    }
+  };
+
   return (
-    <TableRow>
+    <TableRow className={stylesheet.styles ? "" : "no-hover"}>
       <TableCell>{name}</TableCell>
       <TableCell>{new Date(createdAt).toLocaleString()}</TableCell>
       <TableCell>
         {stylesheet.styles ? (
-          <PageDetails {...page} />
+          <>
+            <PageDetails name={name} stylesheet={stylesheet} url={url} />
+            <ScaryButton action={handleDelete}>
+              {({ message, onPress }) => (
+                <LinkButton onClick={onPress}>
+                  {loading ? <Spinner bgColor="teal" /> : message}
+                </LinkButton>
+              )}
+            </ScaryButton>
+          </>
         ) : (
           <Spinner bgColor="teal" />
         )}
@@ -47,5 +73,13 @@ function PageListItem({ page }) {
     </TableRow>
   );
 }
+
+PageListItem.defaultProps = {
+  onError: () => null,
+};
+
+PageListItem.propTypes = {
+  onError: PropTypes.func.isRequired,
+};
 
 export default PageListItem;
