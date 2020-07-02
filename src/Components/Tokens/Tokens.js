@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Table, TableBody, TableHeader, TableRow } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
-import ApiKeyListItem from "./ApiKeyListItem";
-import NoApiKeys from "./NoApiKeys";
+import NoTokens from "./NoTokens";
+import Token from "./Token";
 
-function ApiKeyList({ loading, tokens }) {
+function Tokens({ loading, tokens }) {
   if (loading) {
     return (
       <Table>
@@ -34,23 +34,23 @@ function ApiKeyList({ loading, tokens }) {
       </TableHeader>
       <TableBody>
         {tokens.map((token) => (
-          <ApiKeyListItem key={token._id} {...token} />
+          <Token key={token._id} {...token} />
         ))}
       </TableBody>
     </Table>
   ) : (
-    <NoApiKeys />
+    <NoTokens />
   );
 }
 
-ApiKeyList.propTypes = {
+Tokens.propTypes = {
   loading: PropTypes.bool.isRequired,
   tokens: PropTypes.array.isRequired,
 };
 
-ApiKeyList.defaultProps = {
+Tokens.defaultProps = {
   loading: false,
   tokens: [],
 };
 
-export default ApiKeyList;
+export default Tokens;

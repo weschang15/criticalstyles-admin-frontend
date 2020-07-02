@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "react-apollo";
-import ApiKeyList from "../../Components/ApiKeyList/ApiKeyList";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
 import UtilityNav from "../../Components/Navbar/UtilityNav";
 import Pagination from "../../Components/Pagination/Pagination";
 import AddApiKey from "../../Components/Toggles/AddApiKey";
+import Tokens from "../../Components/Tokens/Tokens";
 import { PAGINATION_LIMIT } from "../../config/pagination";
 import { Section, SectionTitle } from "../../Elements";
 import { GET_TOKENS } from "../../Queries";
@@ -45,7 +45,7 @@ function Account() {
       </UtilityNav>
       <Section>
         <SectionTitle>API Keys</SectionTitle>
-        <ApiKeyList loading={loading} tokens={tokens} />
+        <Tokens loading={loading} tokens={tokens} />
         {!loading && (
           <Pagination
             totalPages={queryInfo.totalPages}

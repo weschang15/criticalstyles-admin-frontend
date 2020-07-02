@@ -2,7 +2,7 @@ import React from "react";
 import NoDataImage from "../../assets/no-data.svg";
 import QuickAction from "../QuickActions/QuickAction";
 
-function NoApiKeys(props = {}) {
+function NoTokens(props = {}) {
   return (
     <QuickAction withActive={false} withHover={false}>
       <figure>
@@ -15,4 +15,4 @@ function NoApiKeys(props = {}) {
   );
 }
 
-export default NoApiKeys;
+export default NoTokens;

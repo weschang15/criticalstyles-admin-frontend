@@ -4,7 +4,7 @@ import { LinkButton, Spinner, TableCell, TableRow } from "../../Elements";
 import { DELETE_TOKEN } from "../../Mutations";
 import ScaryButton from "../ScaryButton/ScaryButton";
 
-function ApiKeyListItem({ createdAt, _id, secret }) {
+function Token({ createdAt, _id, secret }) {
   const [deleteToken, { loading }] = useMutation(DELETE_TOKEN, {
     variables: { input: { _id } },
     refetchQueries: ["GetTokens"],
@@ -27,4 +27,4 @@ function ApiKeyListItem({ createdAt, _id, secret }) {
   );
 }
 
-export default ApiKeyListItem;
+export default Token;
