@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "react-apollo";
-import { useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { animated, useTransition } from "react-spring";
 import { Dropdown } from "../../Elements";
 import { SWITCH_ACCOUNT } from "../../Mutations";
@@ -25,7 +25,19 @@ function UserMenu({
             <p>{`${firstName} ${lastName}`}</p>
           </Dropdown.ProfileSection>
           <Dropdown.Section>
-            <p>Switch to account</p>
+            <Dropdown.DropdownList>
+              <Dropdown.DropdownListItem>
+                <Link
+                  to={`/accounts/${currentAccount._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  Edit account
+                </Link>
+              </Dropdown.DropdownListItem>
+            </Dropdown.DropdownList>
+          </Dropdown.Section>
+          <Dropdown.Section>
+            <p>Switch to</p>
             <Dropdown.DropdownList>
               {accounts.map(({ _id, name }) => (
                 <Dropdown.DropdownListItem
