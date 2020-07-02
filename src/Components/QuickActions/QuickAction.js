@@ -19,17 +19,23 @@ const HOVER_STATE = `
 }
 `;
 
+const FULL_WIDTH = `
+  display: flex;
+  justify-content: center;
+`;
+
 const QuickAction = styled.div`
   align-items: center;
   background-color: ${({ bgColor, theme }) =>
     transparentize(0.9, theme[bgColor])};
   border-radius: 16px;
   cursor: ${({ withActive }) => withActive && "pointer"};
-  display: inline-flex;
   padding: 1em;
   margin-top: ${({ withHover }) => withHover && `3em`};
   transition: transform 200ms ease, margin 300ms ease;
   user-select: none;
+
+  ${({ fullWidth }) => (fullWidth ? FULL_WIDTH : "display: inline-flex")};
 
   ${({ withHover }) => withHover && HOVER_STATE};
 
@@ -58,13 +64,14 @@ const QuickAction = styled.div`
 QuickAction.defaultProps = {
   withActive: true,
   withHover: true,
-  bgColor: "blue"
+  bgColor: "blue",
 };
 
 QuickAction.propTypes = {
   withActive: PropTypes.bool.isRequired,
   withHover: PropTypes.bool.isRequired,
-  bgColor: PropTypes.string
+  bgColor: PropTypes.string,
+  fullWidth: PropTypes.bool,
 };
 
 export default QuickAction;
