@@ -13,21 +13,20 @@ const SnackbarWrapper = styled.div`
   border-radius: 4px;
 `;
 
-function Snackbar({ message, ...rest }) {
+function Snackbar({ children, ...rest }) {
   return (
     <SnackbarWrapper theme={notificationTheme} {...rest}>
-      {message}
+      {children}
     </SnackbarWrapper>
   );
 }
 
 Snackbar.defaultProps = {
-  type: "success"
+  type: "success",
 };
 
 Snackbar.propTypes = {
   type: PropTypes.oneOf(["error", "success"]).isRequired,
-  message: PropTypes.string.isRequired
 };
 
 export default Snackbar;
