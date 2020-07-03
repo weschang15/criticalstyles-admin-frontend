@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Table, TableBody, TableHeader, TableRow } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
+import Snackbar from "../Snackbar/Snackbar";
 import NoSites from "./NoSites";
 import SiteListItem from "./SiteListItem";
 
