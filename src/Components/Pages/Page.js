@@ -26,15 +26,7 @@ const ON_PAGE_UPDATED = gql`
   }
 `;
 
-function PageListItem({
-  createdAt,
-  updatedAt,
-  name,
-  stylesheet,
-  url,
-  _id,
-  onError,
-}) {
+function Page({ createdAt, updatedAt, name, stylesheet, url, _id, onError }) {
   useSubscription(ON_PAGE_UPDATED, {
     variables: {
       input: {
@@ -68,12 +60,12 @@ function PageListItem({
   );
 }
 
-PageListItem.defaultProps = {
+Page.defaultProps = {
   onError: () => null,
 };
 
-PageListItem.propTypes = {
+Page.propTypes = {
   onError: PropTypes.func.isRequired,
 };
 
-export default PageListItem;
+export default Page;

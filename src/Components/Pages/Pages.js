@@ -4,9 +4,9 @@ import { Table, TableBody, TableHeader, TableRow } from "../../Elements";
 import Skeleton from "../Skeleton/Skeleton";
 import Snackbar from "../Snackbar/Snackbar";
 import NoPages from "./NoPages";
-import PageListItem from "./PageListItem";
+import Page from "./Page";
 
-function PageList({ loading, pages, subscribeToMore }) {
+function Pages({ loading, pages, subscribeToMore }) {
   const [errors, setErrors] = useState(null);
   useEffect(() => {
     let unsub = null;
@@ -56,7 +56,7 @@ function PageList({ loading, pages, subscribeToMore }) {
         </TableHeader>
         <TableBody>
           {pages.map((page) => (
-            <PageListItem key={page._id} onError={setErrors} {...page} />
+            <Page key={page._id} onError={setErrors} {...page} />
           ))}
         </TableBody>
       </Table>
@@ -64,14 +64,14 @@ function PageList({ loading, pages, subscribeToMore }) {
   );
 }
 
-PageList.propTypes = {
+Pages.propTypes = {
   loading: PropTypes.bool.isRequired,
   pages: PropTypes.array.isRequired,
 };
 
-PageList.defaultProps = {
+Pages.defaultProps = {
   loading: false,
   pages: [],
 };
 
-export default PageList;
+export default Pages;

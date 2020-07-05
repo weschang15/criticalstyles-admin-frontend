@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import React from "react";
 import { AdminLayout } from "../../Components/Layouts/Layouts";
 import UtilityNav from "../../Components/Navbar/UtilityNav";
-import PageList from "../../Components/PageList/PageList";
+import Pages from "../../Components/Pages/Pages";
 import Pagination from "../../Components/Pagination/Pagination";
 import AddPageToggle from "../../Components/Toggles/AddPageToggle";
 import { PAGINATION_LIMIT } from "../../config/pagination";
@@ -97,7 +97,7 @@ function Site({ match }) {
       </UtilityNav>
       <Section>
         <SectionTitle>All pages</SectionTitle>
-        <PageList loading={loading} pages={pages} subscribeToMore={subscribe} />
+        <Pages loading={loading} pages={pages} subscribeToMore={subscribe} />
         {!loading && (
           <Pagination
             totalPages={queryInfo.totalPages}
