@@ -1,11 +1,11 @@
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React from "react";
-import { useMutation, useSubscription } from "react-apollo";
-import { LinkButton, Spinner, TableCell, TableRow } from "../../Elements";
-import { DELETE_PAGE } from "../../Mutations";
-import ScaryButton from "../ScaryButton/ScaryButton";
-import PageDetails from "./PageDetails";
+import { useSubscription } from "react-apollo";
+import { Spinner, TableCell, TableRow } from "../../Elements";
+import DeleteButton from "./DeleteButton";
+import RefreshButton from "./RefreshButton";
+import ViewButton from "./ViewButton";
 
 const ON_PAGE_UPDATED = gql`
   subscription OnPageUpdated($input: PageUpdatedInput!) {
@@ -14,6 +14,7 @@ const ON_PAGE_UPDATED = gql`
       name
       url
       createdAt
+      updatedAt
       stylesheet {
         styles
         stats {
@@ -25,7 +26,15 @@ const ON_PAGE_UPDATED = gql`
   }
 `;
 
-function PageListItem({ createdAt, name, stylesheet, url, _id, onError }) {
+function PageListItem({
+  createdAt,
+  updatedAt,
+  name,
+  stylesheet,
+  url,
+  _id,
+  onError,
+}) {
   useSubscription(ON_PAGE_UPDATED, {
     variables: {
       input: {
@@ -34,37 +43,22 @@ function PageListItem({ createdAt, name, stylesheet, url, _id, onError }) {
     },
   });
 
-  const [deletePage, { loading }] = useMutation(DELETE_PAGE);
-
-  const handleDelete = async () => {
-    const { data } = await deletePage({
-      variables: { input: { _id } },
-      refetchQueries: ["GetPages"],
-    });
-
-    const ok = (data.deletePage || {}).ok || false;
-    const errors = (data.deletePage || {}).errors || [];
-
-    if (!ok) {
-      onError(errors);
-    }
-  };
-
   return (
     <TableRow className={stylesheet.styles ? "" : "no-hover"}>
       <TableCell>{name}</TableCell>
+      <TableCell>{url}</TableCell>
       <TableCell>{new Date(createdAt).toLocaleString()}</TableCell>
+      <TableCell>{new Date(updatedAt).toLocaleString()}</TableCell>
       <TableCell>
         {stylesheet.styles ? (
           <>
-            <PageDetails name={name} stylesheet={stylesheet} url={url} />
-            <ScaryButton action={handleDelete}>
-              {({ message, onPress }) => (
-                <LinkButton onClick={onPress}>
-                  {loading ? <Spinner bgColor="teal" /> : message}
-                </LinkButton>
-              )}
-            </ScaryButton>
+            <ViewButton name={name} stylesheet={stylesheet} url={url} />
+            <DeleteButton setContainerErrors={onError} pageId={_id} />
+            <RefreshButton
+              setContainerErrors={onError}
+              pageId={_id}
+              pageUrl={url}
+            />
           </>
         ) : (
           <Spinner bgColor="teal" />

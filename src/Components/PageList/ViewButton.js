@@ -1,10 +1,11 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Drawer, LinkButton, Toggle } from "../../Elements";
 import Icons from "../../Elements/Icons";
 import MoneyMakerHeader from "../MoneyMaker/MoneyMakerHeader";
 import MoneyMakerResults from "../MoneyMaker/MoneyMakerResults";
 
-function PageDetails({ name, stylesheet, url }) {
+function ViewButton({ name, stylesheet, url }) {
   return (
     <Toggle>
       {({ on, toggle }) => {
@@ -29,5 +30,9 @@ function PageDetails({ name, stylesheet, url }) {
     </Toggle>
   );
 }
-
-export default PageDetails;
+ViewButton.propTypes = {
+  name: PropTypes.string.isRequired,
+  stylesheet: PropTypes.object.isRequired,
+  url: PropTypes.string.isRequired,
+};
+export default ViewButton;
