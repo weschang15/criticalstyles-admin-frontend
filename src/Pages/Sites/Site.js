@@ -18,6 +18,7 @@ const ON_PAGE_ADDED_SUBSCRIPTION = gql`
       name
       url
       createdAt
+      updatedAt
       stylesheet {
         styles
         stats {
