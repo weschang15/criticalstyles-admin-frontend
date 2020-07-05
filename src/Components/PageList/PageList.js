@@ -21,7 +21,12 @@ function PageList({ loading, pages, subscribeToMore }) {
   });
 
   if (loading) {
-    return <Skeleton labels={["name", "created at", "actions"]} />;
+    return (
+      <Skeleton
+        labels={["name", "url", "created at", "updated at", "actions"]}
+        colCount={5}
+      />
+    );
   }
 
   if (!pages.length) {
@@ -43,7 +48,9 @@ function PageList({ loading, pages, subscribeToMore }) {
         <TableHeader>
           <TableRow>
             <th>name</th>
+            <th>url</th>
             <th>created at</th>
+            <th>updated at</th>
             <th>actions</th>
           </TableRow>
         </TableHeader>

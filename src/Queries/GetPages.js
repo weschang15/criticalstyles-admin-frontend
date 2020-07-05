@@ -18,6 +18,7 @@ export const GET_PAGES = gql`
         name
         url
         createdAt
+        updatedAt
         stylesheet {
           styles
           stats {

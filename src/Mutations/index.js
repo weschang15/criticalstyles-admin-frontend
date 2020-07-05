@@ -10,4 +10,5 @@ export { default as DELETE_SITE } from "./DeleteSite";
 export { default as DELETE_TOKEN } from "./DeleteToken";
 export { default as LOGIN } from "./Login";
 export { default as LOGOUT } from "./Logout";
+export { default as REFRESH_PAGE } from "./RefreshPage";
 export { default as SWITCH_ACCOUNT } from "./SwitchAccount";
